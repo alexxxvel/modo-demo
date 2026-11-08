@@ -472,6 +472,23 @@ html{background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 [aria-checked="true"] .rub{color:#5E656D}
 .rub{margin-left:.22em;color:var(--steel)}   /* знак отделён зазором и сталью: «30Б» читалось как «305» (АД круг 9); рост — с цифру, как решил разработчик */
 
+/* ===== правки разработчика 08.11 (вечер) ===== */
+/* дни: конкретное время — первое свободное крупно, сколько всего часов — подписью; без сокращения «ч» */
+.days__count small{font-size:13px;color:var(--steel)}
+.days button[aria-checked="true"] .days__count small{color:#4B525A}
+.days button.is-full .days__count b{font-size:15px;color:var(--steel)}
+/* подписи фото бокса: не серая строка под кадром, а надпись на самом кадре — трубка-лампа, название, одна строка о деле */
+.box figure{position:relative}
+.box__img::before{content:"";position:absolute;inset:auto 0 0;height:58%;z-index:1;pointer-events:none;background:linear-gradient(0deg,rgba(18,20,23,.92) 0%,rgba(18,20,23,.6) 45%,rgba(18,20,23,0) 100%)}
+.box .box__cap{position:absolute;left:clamp(20px,2.2vw,36px);right:clamp(20px,2.2vw,36px);bottom:clamp(20px,2.2vw,32px);z-index:2;display:grid;grid-template-columns:3px minmax(0,1fr);column-gap:16px;row-gap:6px;align-items:center;font-size:15px;color:#C9CFD5}
+.box__cap b{font-weight:600;font-variation-settings:var(--wide-mid);font-size:20px;line-height:1.15;color:var(--lamp)}
+.box__cap span{grid-column:2;line-height:1.4;text-wrap:balance}
+.box__tube{grid-row:1/span 2;align-self:stretch;width:3px;border-radius:2px;background:linear-gradient(180deg,#fff,#D3DBE1);box-shadow:0 0 14px rgba(238,243,246,.55),0 0 2px #fff}
+@media (hover:hover) and (pointer:fine){
+  .box__tube{transition:box-shadow .3s cubic-bezier(.23,1,.32,1)}
+  .box figure:hover .box__tube{box-shadow:0 0 22px rgba(238,243,246,.85),0 0 3px #fff}
+}
+
 /* планшет */
 @media (max-width:1080px){
   .bar__nav{display:none}
@@ -554,7 +571,8 @@ html{background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
   .box__lead{font-size:16px}
   .box__pair{grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px 0}
   .box__pair img{height:auto;aspect-ratio:1/1}
-  .box figcaption{font-size:13px}
+  .box .box__cap{font-size:14px}
+  .box__cap b{font-size:17px}
   .price{padding:56px 16px}
   .price__head{margin-bottom:24px}
   .price__tabs{display:grid;margin-bottom:8px}

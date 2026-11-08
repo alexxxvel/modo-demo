@@ -38,3 +38,13 @@
   .card:not(.is-form):not(.is-done) .card__line b { font-size: 14px; }
   .card:not(.is-form):not(.is-done) .card__line span { font-size: 13px; }
 }
+
+/* правки разработчика 08.11 (вечер): плитка дня «свободно с 09:00» и подписи фото бокса — по мерке телефона */
+@media (max-width: 760px) {
+  .days button { min-width: 96px; }
+  .days__count small { white-space: nowrap; }
+  .box .box__cap { left: 14px; right: 14px; bottom: 14px; column-gap: 10px; row-gap: 4px; font-size: 13px; }
+  .box__cap b { font-size: 15px; }
+  .box__cap span { display: none; }   /* фото на телефоне шириной ~170 px: описание закрывало кадр, остаётся название */
+  .box__img::before { height: 50%; }
+}

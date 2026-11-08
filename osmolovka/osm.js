@@ -149,18 +149,20 @@
   function renderDays() {
     var html = "", s = svcByKey(state.svc), len = hoursOf(s ? s[2] : 60);
     for (var d = 0; d < 7; d++) {
-      var dt = dateOf(d), free = 0;
+      var dt = dateOf(d), free = 0, first = -1, day8 = -1;
       for (var h = 0; h < 24; h++) {
         var past = abs(d, h) <= nowHour, ok = !past && canStart(d, h, len);
-        if (ok) free++;
+        if (ok) { free++; if (first < 0) first = h; if (day8 < 0 && h >= 8) day8 = h; }
       }
+      // на плитке — конкретное время: с какого часа свободно (у будущих дней — с утра, ночные часы видны лампами)
+      var from = d === 0 || day8 < 0 ? first : day8;
       var top = d === 0 ? "Сегодня" : d === 1 ? "Завтра" : cap(DAY_NAMES[dt.getDay()]);
       var on = state.slot ? state.slot.d === d : d === state.day;
       var left = d === 0 ? 23 - nowHour : 24;   // сегодня считаем только до полуночи
       var freeTxt = free ? free + " " + plural(free, "час", "часа", "часов") : "мест нет";
-      html += '<button type="button" role="radio" aria-checked="' + on + '" data-day="' + d + '" aria-label="' + top + ", " + dt.getDate() + " " + MONTHS[dt.getMonth()] + ", свободно " + freeTxt + (d === 0 ? " до полуночи" : "") + '"' + (free ? "" : ' class="is-full"') + ">" +
+      html += '<button type="button" role="radio" aria-checked="' + on + '" data-day="' + d + '" aria-label="' + top + ", " + dt.getDate() + " " + MONTHS[dt.getMonth()] + ", " + (free ? "свободно с " + hhmm(from) + ", всего " + freeTxt : "мест нет") + '"' + (free ? "" : ' class="is-full"') + ">" +
         "<b>" + top + "</b><span>" + dt.getDate() + " " + MONTHS[dt.getMonth()].slice(0, 3) + "</span>" +
-        '<span class="days__count" aria-hidden="true"><b class="num">' + free + " ч</b><span>" + (d === 0 ? "до 00:00" : "свободно") + "</span>" + "</span>" +
+        '<span class="days__count" aria-hidden="true">' + (free ? '<small>свободно с</small><b class="num">' + hhmm(from) + "</b>" : "<b>мест нет</b>") + "</span>" +
         '<span class="days__fill" aria-hidden="true" style="--f:' + (left > 0 ? Math.round(free / left * 100) : 0) + '%"></span></button>';
     }
     document.querySelector("[data-days]").innerHTML = html;
