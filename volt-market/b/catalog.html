@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Электроскутеры с доставкой по Беларуси: ВОЛЬТ МАРКЕТ (макет Б)</title>
+<meta name="description" content="Электроскутеры, велосипеды, самокаты, мотоциклы и квадроциклы с доставкой по Беларуси: подбор по задаче. Макет направления Б.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../shared/fonts/fonts.css">
+<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="b.css">
+</head>
+<body data-v="b">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <g id="m2"><circle cx="40" cy="40" r="31" fill="none" stroke="var(--ring,currentColor)" stroke-opacity=".22" stroke-width="8"/><path d="M40 9 A31 31 0 1 1 13.2 55.5" fill="none" stroke="var(--bolt,currentColor)" stroke-width="8"/><polygon points="44,17 27,44 39,44 35,63 54,34 42,34" fill="currentColor"/></g>
+</defs></svg>
+
+<header class="hd">
+  <a class="logo" href="index.html" aria-label="ВОЛЬТ МАРКЕТ, на главную"><svg viewBox="0 0 80 80" width="38" height="38" style="--bolt:var(--lime-d);--ring:#fff"><use href="#m2"/></svg><span>ВОЛЬТ МАРКЕТ</span></a>
+  <nav class="hd-nav" aria-label="Категории">
+    <a href="catalog.html">Скутеры</a><a href="catalog.html">Велосипеды</a><a href="catalog.html">Самокаты</a><a href="catalog.html">Мотоциклы</a><a href="catalog.html">Квадроциклы</a><a href="catalog.html">Аксессуары</a>
+  </nav>
+  <form class="hd-search" role="search" action="catalog.html"><label class="vh" for="q">Поиск по каталогу</label><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="q" name="q" type="search" placeholder="Поиск"></form>
+  <a class="hd-cart" href="#" aria-label="Корзина"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><path d="M3 4h2.4l2 10.2h9.4L19 7H6.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.5" cy="18" r="1.4" fill="currentColor"/><circle cx="15.5" cy="18" r="1.4" fill="currentColor"/></svg><span>Корзина</span><i data-cart-n hidden></i></a>
+</header>
+
+<main class="ctl" data-catalog="scooter">
+  <div class="ctl-top" data-dark>
+    <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span>/</span><a href="#">Каталог</a><span>/</span><span aria-current="page">Электроскутеры</span></nav>
+    <div class="ctl-h"><h1>Электроскутеры</h1><p class="bar-n" data-found></p></div>
+    <p class="mk-note">Макет: 14 моделей из 226 поставщика. Цены взяты из розницы поставщика на 08.11.2026 для примера.</p>
+  </div>
+  <div class="ctl-body">
+    <aside class="flt" aria-label="Фильтры">
+      <div class="flt-top"><h2>Фильтры</h2><button type="button" class="flt-x" data-sheet-close>Готово</button></div>
+      <form data-filters onsubmit="return false"></form>
+      <button type="button" class="flt-reset" data-reset>Сбросить всё</button>
+    </aside>
+    <section aria-label="Модели">
+      <div class="fbar">
+        <button type="button" class="fbar-open" data-sheet-open>Фильтры <i data-active-n hidden></i></button>
+        <label class="bar-s"><span class="vh">Сортировка</span><select name="sort"><option value="order">Как в каталоге</option><option value="cheap">Сначала дешевле</option><option value="dear">Сначала дороже</option><option value="km">Дальше проедут</option></select></label>
+      </div>
+      <div class="rows" data-grid></div>
+    </section>
+  </div>
+  <div class="cmpbar" data-cmpbar hidden>
+    <ul data-cmplist></ul>
+    <button type="button" class="cmp-clear" data-cmpclear>Очистить</button>
+    <a class="btn btn-main" href="#">Сравнить</a>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="ft-top"><a class="logo" href="index.html"><svg viewBox="0 0 80 80" width="44" height="44" style="--bolt:var(--lime-d);--ring:#fff"><use href="#m2"/></svg><span>ВОЛЬТ МАРКЕТ</span></a><a class="btn btn-main" href="#">Задать вопрос</a></div>
+  <div class="ft-cols">
+    <div><h3>Каталог</h3><a href="catalog.html">Электроскутеры</a><a href="catalog.html">Электровелосипеды</a><a href="catalog.html">Электросамокаты</a><a href="catalog.html">Электромотоциклы</a><a href="catalog.html">Квадроциклы</a></div>
+    <div><h3>Покупателям</h3><a href="#">Доставка</a><a href="#">Оплата</a><a href="#">Гарантия</a><a href="#">Возврат и&nbsp;обмен</a><a href="#">Сравнение моделей</a></div>
+    <div><h3>Связаться</h3><span class="todo">телефон и&nbsp;часы: от&nbsp;заказчика</span></div>
+    <div><h3>Продавец</h3><span class="todo">наименование, УНП, адрес: от&nbsp;заказчика</span><a href="#">Условия продажи (публичная оферта)</a><a href="#">Политика обработки данных</a></div>
+  </div>
+  <p class="ft-low">Макет. Название рабочее. Данные о&nbsp;товарах с&nbsp;сайта поставщика на&nbsp;08.11.2026. Тексты оферты и&nbsp;возврата заполнит заказчик.</p>
+</footer>
+
+<script src="../shared/data.js"></script>
+<script src="../shared/app.js"></script>
+<script src="../shared/catalog.js"></script>
+</body>
+</html>

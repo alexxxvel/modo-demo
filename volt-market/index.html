@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Магазин электротранспорта: два направления макета</title>
+<meta name="description" content="Два направления макета магазина электротранспорта: главная и каталог, компьютер и телефон.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="shared/fonts/fonts.css">
+<link rel="stylesheet" href="shared/base.css">
+<style>
+/* Развилка показа: два направления рядом, снимок первого экрана и одна ссылка на каждое */
+body { font-family: 'Roboto Flex', system-ui, sans-serif; background: var(--g); color: #fff; }
+.pk { min-height: 100svh; display: grid; align-content: start; gap: clamp(24px, 4vh, 40px); padding: clamp(28px, 5vh, 56px) var(--gx); }
+.pk-h { display: grid; gap: 10px; max-width: 60em; }
+.pk-h h1 { font-size: clamp(30px, 3.4vw, 52px); line-height: 1.03; font-weight: 740; font-stretch: 118%; letter-spacing: -.01em; }
+.pk-h p { color: #C9CDD1; font-size: 17px; max-width: 46em; }
+.pk-l { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.pk-d { display: grid; grid-template-rows: auto 1fr; border-radius: var(--r1); overflow: hidden; background: #fff; color: var(--t); text-decoration: none; position: relative; }
+.pk-im { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--s); }
+.pk-im img { width: 100%; height: 100%; object-fit: cover; object-position: top left; transition: transform 600ms var(--ease-cinema); }
+.pk-im .pk-m { position: absolute; right: 14px; bottom: 14px; width: 22%; height: auto; aspect-ratio: 390 / 844; object-fit: cover; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+@media (hover: hover) and (pointer: fine) { .pk-d:hover .pk-im > img:first-child { transform: scale(1.02); } }
+.pk-b { display: grid; gap: 8px; padding: 18px 20px 20px; align-content: start; }
+.pk-k { font-size: 15px; color: var(--t2); }
+.pk-b h2 { font-size: 26px; font-weight: 720; font-stretch: 118%; line-height: 1.1; }
+.pk-b p { color: var(--t2); font-size: 16px; }
+.pk-go { margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: var(--r2); background: var(--g); color: #fff; font-weight: 650; justify-self: start; }
+.pk-n { color: #C9CDD1; font-size: 15px; max-width: 70em; }
+@media (max-width: 820px) { .pk-l { grid-template-columns: 1fr; } .pk-im .pk-m { width: 26%; } }
+</style>
+</head>
+<body>
+<main class="pk">
+  <div class="pk-h">
+    <h1>Магазин электротранспорта: два направления</h1>
+    <p>Главная страница и каталог электроскутеров, на компьютере и телефоне. Откройте оба и напишите, какое ближе. Товары и фото взяты с сайта поставщика, цены в макете приведены для примера.</p>
+  </div>
+  <div class="pk-l">
+    <a class="pk-d" href="a/">
+      <span class="pk-im"><img src="assets/show/a-1.jpg" alt="Направление А, первый экран" width="1200" height="750"><img class="pk-m" src="assets/show/a-m.jpg" alt="" width="390" height="844"></span>
+      <span class="pk-b"><span class="pk-k">Направление А</span><h2>Витрина по виду техники</h2><p>Светлый каталог сразу на первом экране, у каждой категории видно, сколько проезжает техника.</p><span class="pk-go">Открыть А</span></span>
+    </a>
+    <a class="pk-d" href="b/">
+      <span class="pk-im"><img src="assets/show/b-1.jpg" alt="Направление Б, первый экран" width="1200" height="750"><img class="pk-m" src="assets/show/b-m.jpg" alt="" width="390" height="844"></span>
+      <span class="pk-b"><span class="pk-k">Направление Б</span><h2>Подбор по задаче</h2><p>Отвечаете «для чего», и машина с прибором запаса хода меняются вместе с ответом.</p><span class="pk-go">Открыть Б</span></span>
+    </a>
+  </div>
+  <p class="pk-n">Это макет: кнопки корзины и сравнения работают внутри страницы, заказ никуда не отправляется. Название «ВОЛЬТ МАРКЕТ» рабочее.</p>
+</main>
+</body>
+</html>
