@@ -483,11 +483,24 @@ html{background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 .box .box__cap{position:absolute;left:clamp(20px,2.2vw,36px);right:clamp(20px,2.2vw,36px);bottom:clamp(20px,2.2vw,32px);z-index:2;display:grid;grid-template-columns:3px minmax(0,1fr);column-gap:16px;row-gap:6px;align-items:center;font-size:15px;color:#C9CFD5}
 .box__cap b{font-weight:600;font-variation-settings:var(--wide-mid);font-size:20px;line-height:1.15;color:var(--lamp)}
 .box__cap span{grid-column:2;line-height:1.4;text-wrap:balance}
+.box__side--b .box__img::before{height:62%;background:linear-gradient(0deg,rgba(18,20,23,.96) 0%,rgba(18,20,23,.88) 34%,rgba(18,20,23,0) 100%)}   /* холл — самый светлый кадр: подпись была ≈3:1 (АД круг 10) */
 .box__tube{grid-row:1/span 2;align-self:stretch;width:3px;border-radius:2px;background:linear-gradient(180deg,#fff,#D3DBE1);box-shadow:0 0 14px rgba(238,243,246,.55),0 0 2px #fff}
 @media (hover:hover) and (pointer:fine){
   .box__tube{transition:box-shadow .3s cubic-bezier(.23,1,.32,1)}
   .box figure:hover .box__tube{box-shadow:0 0 22px rgba(238,243,246,.85),0 0 3px #fff}
 }
+
+/* ===== знак «Бокс» (выбор разработчика 08.11.2026): проём бокса, свет под потолком, пол ===== */
+.box-door{fill:none;stroke:currentColor;stroke-width:9;stroke-linecap:butt}   /* ножки проёма стоят на полу, не торчат ниже */
+.box-floor{fill:none;stroke:var(--steel);stroke-width:4;stroke-linecap:round}
+.box-lamp{fill:#fff;filter:drop-shadow(0 0 3px rgba(238,243,246,.85))}
+.mark__box{display:inline-block;width:1.4em;height:1.4em;margin-right:.16em;vertical-align:-.32em;overflow:visible}
+.mark__box .box-door{stroke-width:10}.mark__box .box-lamp{filter:none}   /* в шапке ~26 px: без ореола (муть), рамка толще — АД круг 10 */
+.mark__box .box-lamp{transition:filter .3s cubic-bezier(.23,1,.32,1)}
+.bar__name:hover .mark__box .box-lamp{filter:drop-shadow(0 0 6px rgba(238,243,246,1)) drop-shadow(0 0 2px #fff)}
+.mo .mark__box .box-lamp{animation:strikeOn .6s steps(1,end) .35s both}   /* свет в боксе загорается при входе, один раз */
+.done__box{width:34px;height:34px;flex:none;overflow:visible}
+.mo .done:not([hidden]) .done__box .box-lamp{animation:strikeOn .5s steps(1,end)}
 
 /* планшет */
 @media (max-width:1080px){

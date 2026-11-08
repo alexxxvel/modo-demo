@@ -35,6 +35,14 @@
 /* 404: сутки погашены, горит одна лампа — она ведёт в запись */
 .lost { display: grid; align-content: center; justify-items: start; gap: 18px; padding: clamp(48px, 10vh, 120px) var(--gut); }
 .lost__code { font-size: clamp(88px, 16vw, 220px); line-height: .85; color: #2A2E34; letter-spacing: -.02em; }
+/* в 404 свет в боксе не горит: тот же знак, лампа погашена */
+.lost__code { display: flex; align-items: flex-end; gap: .12em; }
+.lost__box { width: .9em; height: .9em; flex: none; color: #2A2E34; overflow: visible; }
+.lost__box .box-floor { stroke: #2A2E34; }
+.lost__box .box-lamp { fill: #3A4047; filter: none; }
+.mo .lost__box .box-lamp, .lost__box .box-lamp { animation: lostFail 1.4s steps(1, end) .3s both; }
+@keyframes lostFail { 0% { fill: #3A4047 } 20% { fill: #C9CFD5 } 30% { fill: #3A4047 } 45% { fill: #C9CFD5 } 52%, 100% { fill: #3A4047 } }
+@media (prefers-reduced-motion: reduce) { .lost__box .box-lamp { animation: none; } }
 .lost__title { font-weight: 650; font-variation-settings: var(--wide), "opsz" 72; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.04; }
 .lost__lead { max-width: 34em; color: #C9CFD5; font-size: 17px; }
 .lost__lamps { display: block; width: min(100%, 720px); margin-top: 10px; padding: 8px 0; }
