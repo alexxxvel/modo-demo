@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Osmolovka Car Spa: ручная мойка в центре Минска, круглосуточно</title>
+<meta name="description" content="Ручная мойка и детейлинг на Чичерина, 21 в Минске. Круглосуточно. Цены для седана, кроссовера и внедорожника, запись на свободное время онлайн.">
+<meta name="theme-color" content="#121417">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/roboto-flex-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="osm.css">
+</head>
+<body>
+
+<header class="bar" data-bar>
+  <a class="bar__name" href="#top" aria-label="Osmolovka Car Spa, наверх"><span class="mark" aria-hidden="true">Osmo<i class="mark__l"></i>ovka</span> <span class="bar__sub" aria-hidden="true">Car Spa</span></a>
+  <nav class="bar__nav" aria-label="Разделы">
+    <a href="#zapis">Запись</a>
+    <a href="#ceny">Цены</a>
+    <a href="#boks">Бокс</a>
+    <a href="#kak-najti">Как найти</a>
+  </nav>
+  <a class="bar__phone" href="tel:+375291910007">+375 29 191-00-07</a>
+  <a class="btn btn--line bar__call" href="tel:+375291910007">Позвонить</a>
+  <a class="btn btn--light bar__cta" href="#zapis">Выбрать время</a>
+</header>
+
+<main id="top">
+
+  <section class="hero" data-m="hero" aria-labelledby="hero-title">
+    <picture>
+      <source media="(max-width: 760px)" srcset="img/bay-white-dark.jpg" width="1280" height="960">
+      <img class="hero__photo" src="img/bmw-matte.jpg" alt="Чёрный BMW после мойки в боксе Osmolovka Car Spa, по стенам белые лампы" width="1000" height="964" fetchpriority="high">
+    </picture>
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__body">
+      <h1 id="hero-title" class="hero__title"><span class="ln"><span>Чистая машина</span></span> <span class="ln"><span>в любой час</span></span></h1>
+      <p class="hero__lead" data-rise>Ручная мойка и детейлинг на Чичерина, 21. Круглосуточно и без выходных: выберите время, бокс будет готов.</p>
+      <div class="hero__acts" data-rise>
+        <a class="btn btn--red" data-m-part="cta" href="#zapis">Выбрать время</a>
+        <a class="link" href="#ceny">Посмотреть цены</a>
+      </div>
+    </div>
+    <a class="day" href="#zapis" aria-label="Свободное время на ближайшие сутки, перейти к записи">
+      <span class="day__head">
+        <span class="day__free"><b data-free-count>14</b>&nbsp;<span data-free-word>часов</span> свободно за&nbsp;сутки</span>
+        <span class="day__next">Ближайшее свободное: <b data-next>22:00</b></span>
+      </span>
+      <span class="lamps lamps--hero" data-lamps="hero" aria-hidden="true"></span>
+      <span class="day__scale" data-day-scale aria-hidden="true"></span>
+    </a>
+  </section>
+
+  <section class="book" id="zapis" aria-labelledby="book-title" data-phone-long>
+    <div class="book__intro">
+      <h2 id="book-title" class="h2" data-words>Запишитесь за&nbsp;минуту</h2>
+      <p class="soft">Кузов, услуга и время. Цена считается сразу, без звонка администратору.</p>
+    </div>
+
+    <div class="prog" aria-live="polite">
+      <p class="prog__t" data-prog-t>Шаг 1 из 4. <b>Выберите кузов</b></p>
+      <span class="prog__bar" data-prog-bar aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </div>
+
+    <div class="book__grid">
+      <div class="book__col">
+        <fieldset class="pick" data-step="1">
+          <legend class="pick__q"><span class="pick__n" data-n>1</span>Кузов</legend>
+          <div class="seg" data-body-seg role="radiogroup">
+            <button type="button" role="radio" aria-checked="false" data-body="sedan">Седан</button>
+            <button type="button" role="radio" aria-checked="false" data-body="cross">Кроссовер</button>
+            <button type="button" role="radio" aria-checked="false" data-body="suv">Внедорожник</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="pick" data-step="2">
+          <legend class="pick__q"><span class="pick__n" data-n>2</span>Мойка</legend>
+          <div class="svc" data-svc-list role="radiogroup"></div>
+          <button type="button" class="svc__more link" data-svc-more aria-expanded="false">Ещё: химчистка и полировка кузова</button>
+        </fieldset>
+
+        <fieldset class="pick" data-step="3">
+          <legend class="pick__q"><span class="pick__n" data-n>3</span>День</legend>
+          <div class="days" data-days role="radiogroup"></div>
+        </fieldset>
+
+        <fieldset class="pick" data-step="4">
+          <legend class="pick__q"><span class="pick__n" data-n>4</span>Время</legend>
+          <div class="hours" data-hours role="radiogroup" aria-label="Время начала"></div>
+          <div class="slot__foot">
+            <p class="legend" aria-hidden="true"><span><i class="legend__free"></i>свободно</span><span><i class="legend__busy"></i>занято</span></p>
+            <p class="slot__note" data-slot-note>Нажмите на белую лампу: это свободный час.</p>
+          </div>
+        </fieldset>
+      </div>
+
+      <aside class="card" data-sum aria-label="Ваша запись">
+        <p class="card__t">Ваша запись</p>
+        <p class="card__line" data-card-line>Пройдите шаги 1–4</p>
+        <dl class="card__rows">
+          <div><dt>Кузов</dt><dd data-r="body">не выбран</dd></div>
+          <div><dt>Мойка</dt><dd data-r="svc">не выбрана</dd></div>
+          <div><dt>День</dt><dd data-r="day">не выбран</dd></div>
+          <div><dt>Время</dt><dd data-r="time">не выбрано</dd></div>
+        </dl>
+        <p class="card__price sum__price" hidden><span class="num" data-sum-price>45</span> <span class="byn">BYN</span></p>
+        <button type="button" class="btn btn--red card__go" data-go disabled>Записаться</button>
+        <p class="card__terms">Опоздали до 15 минут: подождём. Отменить или перенести можно звонком или в Telegram. <a class="link" href="#zapis">Условия&nbsp;записи</a></p>
+        <form class="confirm" data-confirm hidden novalidate>
+          <div class="confirm__fields">
+            <label class="field"><span>Имя</span><input name="name" autocomplete="given-name" required></label>
+            <label class="field"><span>Телефон</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 29 000-00-00" required></label>
+          </div>
+          <p class="confirm__err" data-err hidden>Нужны имя и телефон: по нему подтвердим запись.</p>
+          <div class="confirm__acts">
+            <button class="btn btn--red" type="submit">Подтвердить запись</button>
+            <a class="link" href="#zapis" data-tg>Записаться через Telegram</a>
+          </div>
+          <p class="confirm__law">Нажимая «Подтвердить запись», вы соглашаетесь с <a class="link" href="#top">политикой обработки персональных данных</a>.</p>
+        </form>
+        <div class="done" data-done hidden role="status">
+          <p class="done__title">Записали</p>
+          <p class="done__when" data-done-when></p>
+          <p class="soft">Напомним за час. Перенести или отменить можно по ссылке из сообщения.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="box" id="boks" aria-labelledby="box-title">
+    <div class="box__stage">
+      <figure class="box__main" data-clip>
+        <img src="img/foam.jpg" alt="Мойщик наносит пену на белый кроссовер" width="1280" height="960" loading="lazy">
+      </figure>
+      <div class="box__over">
+        <h2 id="box-title" class="h2 box__title" data-words>Моем руками, в&nbsp;закрытом боксе</h2>
+        <p class="box__lead">Пена, ручная мойка, сушка. Без щёток и автоматов.</p>
+      </div>
+    </div>
+    <div class="box__pair">
+      <figure class="box__side box__side--a">
+        <div class="box__img" data-clip><img src="img/tunnel.jpg" alt="Пандус въезда в подземный бокс со светом вдоль стены" width="1280" height="964" loading="lazy"></div>
+        <figcaption>Въезд в бокс</figcaption>
+      </figure>
+      <figure class="box__side box__side--b">
+        <div class="box__img" data-clip><img src="img/lounge.jpg" alt="Зона ожидания: красный диван, кулер с водой, стойка администратора" width="960" height="1280" loading="lazy"></div>
+        <figcaption>Пока моем: диван и вода</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="price" id="ceny" aria-labelledby="price-title">
+    <div class="price__head">
+      <h2 id="price-title" class="h2" data-words>Цены</h2>
+      <div class="seg seg--small" data-body-seg role="radiogroup" aria-label="Кузов">
+        <button type="button" role="radio" aria-checked="true" data-body="sedan">Седан</button>
+        <button type="button" role="radio" aria-checked="false" data-body="cross">Кроссовер</button>
+        <button type="button" role="radio" aria-checked="false" data-body="suv">Внедорожник</button>
+      </div>
+    </div>
+    <div class="seg price__tabs" data-price-tabs role="tablist" aria-label="Группа услуг"></div>
+    <div class="price__groups" data-price></div>
+  </section>
+
+  <section class="find" id="kak-najti" aria-labelledby="find-title">
+    <figure class="find__photo" data-clip>
+      <img src="img/entrance.jpg" alt="Ворота мойки во дворе, над ними вывеска «Автомойка 24/7»" width="1280" height="720" loading="lazy">
+      <figcaption class="find__open"><i aria-hidden="true"></i>Открыто круглосуточно</figcaption>
+    </figure>
+    <div class="find__row">
+      <h2 id="find-title" class="h2" data-words>Въезд со&nbsp;двора</h2>
+      <div class="find__text">
+        <p class="find__addr">Минск, ул. Чичерина, 21, корпус&nbsp;2</p>
+        <p class="soft">Заезжайте во двор и ищите ворота с вывеской «Автомойка 24/7». Бокс открыт круглые сутки.</p>
+      </div>
+      <div class="find__acts">
+        <a class="btn btn--line" href="https://yandex.by/maps/org/osmolovka_car_spa/172242024426/" target="_blank" rel="noopener">Маршрут в Яндекс Картах</a>
+        <a class="link" href="tel:+375291910007">+375 29 191-00-07</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__legal">
+    <span>Osmolovka Car Spa, Минск. Круглосуточно</span>
+    <nav class="foot__nav" aria-label="Разделы внизу"><a href="#zapis">Запись</a><a href="#ceny">Цены</a><a href="#boks">Бокс</a><a href="#kak-najti">Как найти</a></nav>
+    <a href="#top">Политика конфиденциальности</a>
+    <a href="#top">Наверх</a>
+  </div>
+</footer>
+
+<div class="mock" role="note">Макет для согласования: цены и занятость условные</div>
+
+<script src="osm.js"></script>
+</body>
+</html>
