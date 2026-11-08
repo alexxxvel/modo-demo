@@ -76,13 +76,16 @@
 
   /* лампы первого экрана: ближайшие 24 часа от «сейчас»; белая — свободно, красная — занято */
   function dayLamps() {
-    var free = 0, next = null, html = "", scale = "";
+    var free = 0, next = null, nextD = 0, html = "", scale = "";
     for (var i = 0; i < 24; i++) {
       var h = (nowHour + i) % 24, d = nowHour + i > 23 ? 1 : 0;
       var isNow = i === 0, ok = !isNow && !busy(d, h);
-      if (ok) { free++; if (next === null) next = h; }
+      if (ok) { free++; if (next === null) { next = h; nextD = d; } }
       var real = !busy(d, h);   // «сейчас» показываем по настоящему состоянию, с белой чертой под ней
-      html += '<span class="lamp' + ((isNow ? real : ok) ? " is-free" : " is-busy") + (isNow ? " is-now" : "") + '" style="--i:' + i + '"></span>';
+      var tip = '<span class="lamp__tip" aria-hidden="true">' + hhmm(h) + (isNow ? " · сейчас" : ok ? " · свободно" : " · занято") + "</span>";
+      html += ok
+        ? '<button type="button" class="lamp is-free" style="--i:' + i + '" data-pre-d="' + d + '" data-pre-h="' + h + '" aria-label="' + dayLabel(d) + " " + hhmm(h) + ', свободно — записаться">' + tip + "</button>"
+        : '<span class="lamp' + (isNow && real ? " is-free" : " is-busy") + (isNow ? " is-now" : "") + '" style="--i:' + i + '">' + tip + "</span>";
       scale += "<i>" + (isNow ? "сейчас" : i % 4 === 0 ? hhmm(h) : "") + "</i>";
     }
     document.querySelector('[data-lamps="hero"]').innerHTML = html;
@@ -90,6 +93,8 @@
     document.querySelectorAll("[data-free-count]").forEach(function (el) { el.textContent = free; });
     document.querySelectorAll("[data-free-word]").forEach(function (el) { el.textContent = plural(free, "час", "часа", "часов"); });
     document.querySelector("[data-next]").textContent = next === null ? "завтра" : hhmm(next);
+    var nb = document.querySelector("[data-next-btn]");
+    if (next !== null) { nb.setAttribute("data-pre-d", nextD); nb.setAttribute("data-pre-h", next); } else nb.hidden = true;
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
       var hero = document.querySelector('[data-lamps="hero"]');
       hero.classList.add("is-starting");
@@ -125,18 +130,27 @@
     var b = bi();
     document.querySelector("[data-svc-list]").innerHTML = SERVICES.map(function (s) {
       return '<button type="button" role="radio"' + (s[4] ? "" : ' class="is-more"') + ' aria-checked="' + (s[0] === state.svc) + '" data-svc="' + s[0] + '">' +
-        '<span><span class="svc__name">' + s[1] + '</span><br><span class="svc__dur">' + dur(s[2]) + "</span></span>" +
+        '<span><span class="svc__name">' + s[1] + '</span><br><span class="svc__dur">' + dur(s[2]) + "</span>" +
+        '<span class="svc__tube" aria-hidden="true" style="--w:' + Math.round(Math.min(1, s[2] / 90) * 100) + '%"></span></span>' +
         '<span class="svc__price"><small>от</small>' + s[3][b] + "</span></button>";
     }).join("");
   }
 
   function renderDays() {
-    var html = "";
+    var html = "", s = svcByKey(state.svc), len = hoursOf(s ? s[2] : 60);
     for (var d = 0; d < 7; d++) {
-      var dt = dateOf(d);
+      var dt = dateOf(d), ticks = "", free = 0;
+      for (var h = 0; h < 24; h++) {
+        var past = abs(d, h) <= nowHour, ok = !past && canStart(d, h, len);
+        if (ok) free++;
+        ticks += '<i class="' + (past ? "p" : ok ? "f" : "b") + '"></i>';
+      }
       var top = d === 0 ? "Сегодня" : d === 1 ? "Завтра" : cap(DAY_NAMES[dt.getDay()]);
       var on = state.slot ? state.slot.d === d : d === state.day;
-      html += '<button type="button" role="radio" aria-checked="' + on + '" data-day="' + d + '"><b>' + top + "</b><span>" + dt.getDate() + " " + MONTHS[dt.getMonth()].slice(0, 3) + "</span></button>";
+      var freeTxt = free ? free + " " + plural(free, "час", "часа", "часов") : "мест нет";
+      html += '<button type="button" role="radio" aria-checked="' + on + '" data-day="' + d + '" aria-label="' + top + ", " + dt.getDate() + " " + MONTHS[dt.getMonth()] + ", свободно " + freeTxt + '"' + (free ? "" : ' class="is-full"') + ">" +
+        "<b>" + top + "</b><span>" + dt.getDate() + " " + MONTHS[dt.getMonth()].slice(0, 3) + "</span>" +
+        '<span class="days__strip" aria-hidden="true">' + ticks + '</span><span class="days__n" aria-hidden="true">' + freeTxt + "</span></button>";
     }
     document.querySelector("[data-days]").innerHTML = html;
   }
@@ -152,7 +166,8 @@
   function renderHours(keepScroll) {
     var s = svcByKey(state.svc), min = s ? s[2] : 60, len = hoursOf(min);
     var box = document.querySelector("[data-hours]"), html = "", first = null, count = 0;
-    if (state.slot && !canStart(state.slot.d, state.slot.h, len)) state.slot = null;
+    var lost = null;
+    if (state.slot && !canStart(state.slot.d, state.slot.h, len)) { lost = state.slot; state.slot = null; }
     var pickA = state.slot ? abs(state.slot.d, state.slot.h) : -1;
     laneHours().forEach(function (x) {
       var a = abs(x.d, x.h), ok = canStart(x.d, x.h, len), midnight = x.h === 0 && x.i > 0;
@@ -175,7 +190,9 @@
         box.scrollLeft = el ? Math.max(0, el.offsetLeft - 16 - 50) : 0;
       }
     }
-    document.querySelector("[data-slot-note]").textContent = first === null
+    document.querySelector("[data-slot-note]").textContent = lost && s
+      ? s[1] + " длится " + dur(s[2]) + ", с " + hhmm(lost.h) + " не помещается. Выберите другую белую лампу."
+      : first === null
       ? "В эти сутки свободного времени нет. Выберите другой день."
       : state.slot ? "Бокс ваш " + dayLabel(state.slot.d) + " с " + hhmm(state.slot.h) + " до " + endOf(state.slot.h, min) + "."
       : "Нажмите на белую лампу: свободно " + count + " " + plural(count, "час", "часа", "часов") + (s ? ", где помещается " + s[1].toLowerCase() : "") + ".";
@@ -196,6 +213,16 @@
     if (s) line.push(line.length ? s[1].toLowerCase() : s[1]);
     if (state.slot) line.push(dayLabel(state.slot.d) + " с " + hhmm(state.slot.h) + " до " + endOf(state.slot.h, s ? s[2] : 60));
     document.querySelector("[data-card-line]").textContent = line.length ? line.join(", ") : "Пройдите шаги 1–4";
+    var lane = document.querySelector("[data-card-lane]");
+    lane.hidden = !state.slot;
+    if (state.slot) {
+      var lenS = hoursOf(s ? s[2] : 60), pick = abs(state.slot.d, state.slot.h), lh = "";
+      laneHours().forEach(function (x) {
+        var a = abs(x.d, x.h);
+        lh += '<i class="' + (a >= pick && a < pick + lenS ? "on" : canStart(x.d, x.h, 1) ? "f" : "b") + '"></i>';
+      });
+      lane.innerHTML = lh;
+    }
     var price = document.querySelector(".sum__price");
     price.hidden = !(s && state.body);
     if (s && state.body) {
@@ -237,12 +264,21 @@
   function hideFlow() {
     document.querySelector("[data-confirm]").hidden = true;
     document.querySelector("[data-done]").hidden = true;
+    document.querySelector("[data-sum]").classList.remove("is-done");
   }
   function renderBooking(keepScroll) { renderSteps(); renderBody(); renderServices(); renderDays(); renderHours(keepScroll); renderSum(); }
 
   document.addEventListener("click", function (e) {
-    var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick]");
+    var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick],[data-pre-h]");
     if (!t) return;
+    if (t.hasAttribute("data-pre-h")) {
+      var pd = +t.getAttribute("data-pre-d"), ph = +t.getAttribute("data-pre-h");
+      state.day = pd; state.slot = { d: pd, h: ph };
+      hideFlow(); renderBooking();
+      var reduceP = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.querySelector("#zapis").scrollIntoView({ behavior: reduceP ? "auto" : "smooth" });
+      return;
+    }
     if (t.hasAttribute("data-body")) {
       if (t.closest(".price")) { state.pbody = t.getAttribute("data-body"); renderPrices(); return; }
       state.body = t.getAttribute("data-body"); state.pbody = state.body; hideFlow(); renderBooking(); renderPrices(); bringNext(); return;
@@ -279,8 +315,10 @@
     if (!ok) return;
     f.hidden = true;
     var s = svcByKey(state.svc);
-    document.querySelector("[data-done-when]").textContent = s[1] + ", " + dayLabel(state.slot.d) + " с " + hhmm(state.slot.h) + " до " + endOf(state.slot.h, s[2]) + ". Ул. Чичерина, 21, въезд со двора.";
+    document.querySelector("[data-done-time]").textContent = cap(dayLabel(state.slot.d)) + ", " + hhmm(state.slot.h) + "–" + endOf(state.slot.h, s[2]);
+    document.querySelector("[data-done-when]").textContent = s[1] + ", " + BODIES[state.body] + ". Ул. Чичерина, 21, въезд со двора.";
     document.querySelector("[data-done]").hidden = false;
+    document.querySelector("[data-sum]").classList.add("is-done");   // записано: в карточке итог, без кнопки и условий
   });
 
   /* шапка: сплошная после первого экрана; «Выбрать время» прячется, пока на экране сама запись */
