@@ -446,6 +446,11 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .day__legend .f{background:var(--lamp);box-shadow:0 0 6px rgba(238,243,246,.5)}
 .day__legend .b{width:2px;background:var(--busy)}
 
+/* знак белорусского рубля вместо «BYN»: рисунок движка (site-stays/byn.svg), высота как у цифр, цвет цифры */
+.rub{display:inline-block;width:.56em;height:.7em;margin-left:.16em;background:currentColor;-webkit-mask:url(img/byn.svg) center/contain no-repeat;mask:url(img/byn.svg) center/contain no-repeat}
+.card__price{gap:0}
+.card__price .rub{font-size:clamp(32px,3.6vw,52px)}   /* знак — ростом с итог, а не с мелкий текст карточки */
+
 /* планшет */
 @media (max-width:1080px){
   .bar__nav{display:none}

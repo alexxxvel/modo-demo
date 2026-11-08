@@ -4,6 +4,8 @@
   // движение включается классом до первой отрисовки; без него всё видно сразу
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("mo");
 
+  // знак белорусского рубля (Нацбанк, постановление № 25 от 27.01.2026): рисунок img/byn.svg, красится цветом цифры
+  var RUB = '<span class="rub" role="img" aria-label="белорусских рублей"></span>';
   var BODIES = { sedan: "седан", cross: "кроссовер", suv: "внедорожник" };
   // [ключ, название, минуты, цены седан/кроссовер/внедорожник, частая услуга]
   var SERVICES = [
@@ -132,7 +134,7 @@
       return '<button type="button" role="radio"' + (s[4] ? "" : ' class="is-more"') + ' aria-checked="' + (s[0] === state.svc) + '" data-svc="' + s[0] + '">' +
         '<span><span class="svc__name">' + s[1] + '</span><br><span class="svc__dur">' + dur(s[2]) + "</span>" +
         '<span class="svc__tube" aria-hidden="true" style="--w:' + Math.round(Math.min(1, s[2] / 90) * 100) + '%"></span></span>' +
-        '<span class="svc__price"><small>от</small>' + s[3][b] + "</span></button>";
+        '<span class="svc__price"><small>от</small>' + s[3][b] + RUB + "</span></button>";
     }).join("");
   }
 
@@ -257,7 +259,7 @@
     document.querySelector("[data-price]").innerHTML = PRICE_GROUPS.map(function (g, i) {
       return '<div class="pg' + (i === state.ptab ? " is-on" : "") + '"><p class="pg__h">' + g[0] + "</p>" + g[1].map(function (r) {
         var sv = SERVICES.filter(function (x) { return x[1] === r[0]; })[0];
-        return '<a class="pg__row" href="#zapis" data-pick="' + (sv ? sv[0] : "") + '" style="--k:' + (k++) + '"><span class="pg__n">' + r[0] + '</span><span class="pg__p is-flash"><small>от</small>' + r[1][b] + '<span class="pg__c">BYN</span></span></a>';
+        return '<a class="pg__row" href="#zapis" data-pick="' + (sv ? sv[0] : "") + '" style="--k:' + (k++) + '"><span class="pg__n">' + r[0] + '</span><span class="pg__p is-flash"><small>от</small>' + r[1][b] + RUB + '</span></a>';
       }).join("") + (i === PRICE_GROUPS.length - 1 ? '<p class="pg__note pg__note--desk">' + NOTE + "</p>" : "") + "</div>";
     }).join("") + '<p class="pg__note pg__note--phone">' + NOTE + "</p>";
     document.querySelectorAll(".price [data-body-seg] button").forEach(function (btn) {
