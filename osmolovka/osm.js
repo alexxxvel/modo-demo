@@ -16,6 +16,8 @@
     ["dry", "Химчистка салона", 300, [180, 220, 260], false],
     ["polish", "Полировка кузова", 480, [300, 350, 420], false]
   ];
+  // короткие имена для липкой строки на телефоне: полное «Экспресс-мойка кузова» обрезалось многоточием (АД круг 9)
+  var SHORT = { express: "Экспресс", complex: "Комплекс", inside: "Салон", engine: "Двигатель", dry: "Химчистка", polish: "Полировка" };
   var PRICE_GROUPS = [
     ["Мойка", [["Экспресс-мойка кузова", [25, 30, 35]], ["Комплексная мойка", [45, 55, 65]], ["Пенная галерея", [30, 35, 40]], ["Мойка двигателя", [35, 40, 45]], ["Чернение резины", [8, 8, 10]]]],
     ["Салон", [["Уборка салона", [35, 40, 50]], ["Химчистка салона", [180, 220, 260]], ["Уход за кожей", [60, 70, 80]], ["Полировка пластика", [30, 35, 40]], ["Ароматизация", [10, 10, 10]]]],
@@ -95,6 +97,12 @@
     document.querySelectorAll("[data-free-count]").forEach(function (el) { el.textContent = free; });
     document.querySelectorAll("[data-free-word]").forEach(function (el) { el.textContent = plural(free, "час", "часа", "часов"); });
     document.querySelector("[data-next]").textContent = next === null ? "завтра" : hhmm(next);
+    var firstLamp = document.querySelector(".lamps--hero button.lamp");
+    if (firstLamp) {
+      firstLamp.querySelector(".lamp__tip").textContent += ", нажмите";
+      setTimeout(function () { firstLamp.classList.add("is-hint"); }, 1200);
+      setTimeout(function () { firstLamp.classList.remove("is-hint"); }, 4700);
+    }
     var nb = document.querySelector("[data-next-btn]");
     if (next !== null) { nb.setAttribute("data-pre-d", nextD); nb.setAttribute("data-pre-h", next); } else nb.hidden = true;
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -141,18 +149,19 @@
   function renderDays() {
     var html = "", s = svcByKey(state.svc), len = hoursOf(s ? s[2] : 60);
     for (var d = 0; d < 7; d++) {
-      var dt = dateOf(d), ticks = "", free = 0;
+      var dt = dateOf(d), free = 0;
       for (var h = 0; h < 24; h++) {
         var past = abs(d, h) <= nowHour, ok = !past && canStart(d, h, len);
         if (ok) free++;
-        ticks += '<i class="' + (past ? "p" : ok ? "f" : "b") + '"></i>';
       }
       var top = d === 0 ? "Сегодня" : d === 1 ? "Завтра" : cap(DAY_NAMES[dt.getDay()]);
       var on = state.slot ? state.slot.d === d : d === state.day;
+      var left = d === 0 ? 23 - nowHour : 24;   // сегодня считаем только до полуночи
       var freeTxt = free ? free + " " + plural(free, "час", "часа", "часов") : "мест нет";
-      html += '<button type="button" role="radio" aria-checked="' + on + '" data-day="' + d + '" aria-label="' + top + ", " + dt.getDate() + " " + MONTHS[dt.getMonth()] + ", свободно " + freeTxt + '"' + (free ? "" : ' class="is-full"') + ">" +
+      html += '<button type="button" role="radio" aria-checked="' + on + '" data-day="' + d + '" aria-label="' + top + ", " + dt.getDate() + " " + MONTHS[dt.getMonth()] + ", свободно " + freeTxt + (d === 0 ? " до полуночи" : "") + '"' + (free ? "" : ' class="is-full"') + ">" +
         "<b>" + top + "</b><span>" + dt.getDate() + " " + MONTHS[dt.getMonth()].slice(0, 3) + "</span>" +
-        '<span class="days__strip" aria-hidden="true">' + ticks + '</span><span class="days__n" aria-hidden="true">' + freeTxt + "</span></button>";
+        '<span class="days__count" aria-hidden="true"><b class="num">' + free + " ч</b><span>" + (d === 0 ? "до 00:00" : "свободно") + "</span>" + "</span>" +
+        '<span class="days__fill" aria-hidden="true" style="--f:' + (left > 0 ? Math.round(free / left * 100) : 0) + '%"></span></button>';
     }
     document.querySelector("[data-days]").innerHTML = html;
   }
@@ -214,7 +223,11 @@
     if (state.body) line.push(cap(BODIES[state.body]));
     if (s) line.push(line.length ? s[1].toLowerCase() : s[1]);
     if (state.slot) line.push(dayLabel(state.slot.d) + " с " + hhmm(state.slot.h) + " до " + endOf(state.slot.h, s ? s[2] : 60));
-    document.querySelector("[data-card-line]").textContent = line.length ? line.join(", ") : "Пройдите шаги 1–4";
+    // строка итога (липкая снизу на телефоне и планшете): время — первой строкой, выбранное — второй
+    var la = document.querySelector("[data-line-a]"), lb = document.querySelector("[data-line-b]");
+    la.textContent = state.slot ? cap(dayLabel(state.slot.d)) + " " + hhmm(state.slot.h) + "–" + endOf(state.slot.h, s ? s[2] : 60)
+      : "Шаг " + Math.min(step(), 4) + " из 4: " + ["кузов", "мойка", "день", "время"][Math.min(step(), 4) - 1];
+    lb.textContent = [state.body ? cap(BODIES[state.body]) : "", s ? SHORT[s[0]] : ""].filter(Boolean).join(" · ");
     var lane = document.querySelector("[data-card-lane]");
     lane.hidden = !state.slot;
     if (state.slot) {
@@ -232,6 +245,9 @@
       if (num.textContent !== v || price.dataset.shown !== "1") { num.textContent = v; num.classList.remove("is-roll"); void num.offsetWidth; num.classList.add("is-roll"); }
     }
     price.dataset.shown = s && state.body ? "1" : "0";
+    var gs = document.querySelector("[data-go-sum]");
+    gs.hidden = !(s && state.body);
+    if (s && state.body) gs.innerHTML = "· " + s[3][bi()] + RUB;
     document.querySelector("[data-go]").disabled = !done;
   }
 
@@ -239,7 +255,9 @@
      низ — над краем окна, верх — не под шапкой; дальше конца раздела записи не крутим, чтобы фото следующего раздела не заглядывало. */
   function reveal(el) {
     if (!el) return;
-    var r = el.getBoundingClientRect(), top = document.querySelector(".bar").getBoundingClientRect().bottom + 16, bottom = innerHeight - 24, d = 0;
+    // на телефоне снизу липкая строка записи — её высоту не считаем окном
+    var sum = document.querySelector("[data-sum]"), cs = sum && getComputedStyle(sum), barH = cs && cs.position === "sticky" && cs.bottom !== "auto" && sum !== el ? sum.offsetHeight : 0;
+    var r = el.getBoundingClientRect(), top = document.querySelector(".bar").getBoundingClientRect().bottom + 16, bottom = innerHeight - 24 - barH, d = 0;
     if (r.bottom > bottom) d = r.bottom - bottom;
     if (r.top - d < top) d = r.top - top;
     if (d > 0) d = Math.min(d, Math.max(0, document.querySelector("#zapis").getBoundingClientRect().bottom - innerHeight));

@@ -14,7 +14,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--night);color:var(--lamp);font:400 17px/1.55 "Roboto Flex",system-ui,sans-serif;font-variation-settings:"wdth" 100,"opsz" 17;-webkit-font-smoothing:antialiased}
+body{background:transparent;color:var(--lamp);font:400 17px/1.55 "Roboto Flex",system-ui,sans-serif;font-variation-settings:"wdth" 100,"opsz" 17;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
 button{font:inherit;color:inherit}
@@ -247,8 +247,8 @@ button{font:inherit;color:inherit}
 /* как найти: кадр ворот во всю ширину в ночной коррекции, метка «Открыто» лампой; текст строкой под ним */
 .find{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,4vw,72px);align-items:end;padding:clamp(64px,10vh,120px) var(--gut)}
 .find__photo{position:relative;margin:0;overflow:hidden;border-radius:var(--r-m)}
-.find__photo img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:70% 62%;filter:saturate(.3) brightness(.56) contrast(1.16)}
-.find__photo::after{content:"";position:absolute;inset:0;background:radial-gradient(22% 30% at 62% 64%,rgba(238,243,246,.16),rgba(238,243,246,0) 70%),radial-gradient(90% 80% at 62% 62%,rgba(18,20,23,0) 40%,rgba(18,20,23,.7)),linear-gradient(0deg,rgba(18,20,23,.6),rgba(18,20,23,0) 35%);pointer-events:none}
+.find__photo img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:70% 62%;filter:saturate(.3) brightness(.48) contrast(1.18)}
+.find__photo::after{content:"";position:absolute;inset:0;background:radial-gradient(22% 30% at 62% 64%,rgba(238,243,246,.22),rgba(238,243,246,0) 70%),radial-gradient(90% 80% at 62% 62%,rgba(18,20,23,0) 40%,rgba(18,20,23,.7)),linear-gradient(0deg,rgba(18,20,23,.6),rgba(18,20,23,0) 35%);pointer-events:none}
 .find__open{position:absolute;left:24px;bottom:22px;z-index:1;display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;color:var(--lamp)}
 .find__open i{width:6px;height:22px;border-radius:3px;background:linear-gradient(90deg,#D3DBE1,#fff 50%,#D3DBE1);box-shadow:0 0 14px rgba(238,243,246,.6)}
 .find__row{display:grid;gap:28px;align-content:end}
@@ -272,7 +272,7 @@ button{font:inherit;color:inherit}
 ::selection{background:var(--lamp);color:var(--night)}
 html{scrollbar-color:#3A4047 var(--night);caret-color:var(--red)}
 /* зерно 5 %: убирает «цифровую» плоскость графита */
-body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+html{background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E") repeat}   /* зерно фоном всей страницы: слой на окне давал ровный шов на снимке всей страницы и в PDF (АД круг 8) */
 
 /* одна кнопка светится: красная — только главное действие; заливка снизу при наведении */
 .btn--red{position:relative;overflow:hidden;isolation:isolate;box-shadow:0 12px 32px -14px rgba(217,37,43,.75)}
@@ -450,6 +450,27 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .rub{display:inline-block;width:.56em;height:.7em;margin-left:.16em;background:currentColor;-webkit-mask:url(img/byn.svg) center/contain no-repeat;mask:url(img/byn.svg) center/contain no-repeat}
 .card__price{gap:0}
 .card__price .rub{font-size:clamp(32px,3.6vw,52px)}   /* знак — ростом с итог, а не с мелкий текст карточки */
+
+/* ===== круг 8 арт-директора ===== */
+/* дни: число свободных часов широким начертанием и одна трубка-доля вместо 24 штрихов */
+.days__count{display:grid;align-content:start;gap:3px;margin-top:8px;font-size:13px;line-height:1.25;color:var(--steel)}
+.days__count b{font-size:20px;line-height:1;color:var(--lamp)}
+.days button{grid-template-rows:auto auto 1fr auto}   /* трубки-доли всех дней на одной линии, даже если подпись в три строки */
+.days__fill{display:block;align-self:end;width:100%;height:4px;margin-top:6px;border-radius:2px;background:linear-gradient(90deg,#D3DBE1 var(--f),#2C3137 var(--f))}
+.days button[aria-checked="true"] .days__count{color:#4B525A}
+.days button[aria-checked="true"] .days__count b{color:var(--night)}
+.days button[aria-checked="true"] .days__fill{background:linear-gradient(90deg,var(--night) var(--f),#C9CFD5 var(--f))}
+/* строка итога: время первой строкой, выбранное второй */
+.card__line b{display:block;font-weight:600;color:var(--lamp)}
+.card__line span{display:block;font-weight:400;color:var(--steel)}
+.card__line span:empty{display:none}
+.card__gosum{display:none;margin-left:.35em}
+/* подсказка первой свободной лампы — сама, один раз */
+.lamps--hero .lamp.is-hint .lamp__tip{opacity:1;transform:translate(-50%,0)}
+.lamps--hero .lamp.is-hint .lamp__tip{bottom:auto;top:50%;left:calc(100% + 10px);transform:translate(0,-50%)}   /* сама подсказка — справа от лампы: сверху закрывала число, снизу подпись «сейчас» (АД круги 8–9) */
+.btn .rub{color:inherit}
+[aria-checked="true"] .rub{color:#5E656D}
+.rub{margin-left:.22em;color:var(--steel)}   /* знак отделён зазором и сталью: «30Б» читалось как «305» (АД круг 9); рост — с цифру, как решил разработчик */
 
 /* планшет */
 @media (max-width:1080px){

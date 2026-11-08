@@ -1,0 +1,40 @@
+/* Osmolovka — телефон переводом, а не столбиком (скилл /telefon, engine/design/ТЕЛЕФОН-ПЕРЕНОС.md). Подключается последним.
+   Компьютер: карточка «Ваша запись» липкая справа → телефон: липкая строка снизу (выбранное, цена, «Записаться»), пока человек в записи;
+   форма имени и телефона — на месте карточки в конце раздела (клавиатура ничего не закрывает). */
+/* планшет и телефон (≤ 1080 px): карточка «Ваша запись» стоит одна в конце раздела — переводим в липкую строку снизу */
+@media (max-width: 1080px) {
+  .card:not(.is-form):not(.is-done) {
+    position: sticky; bottom: 0; z-index: 5;
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 12px;
+    margin: 0 calc(var(--gut) * -1); padding: 12px var(--gut) calc(12px + env(safe-area-inset-bottom));
+    border-radius: 14px 14px 0 0; background: var(--wall);
+    box-shadow: 0 -1px 0 var(--line), 0 -16px 32px rgba(10, 11, 13, .55);
+  }
+  .card:not(.is-form):not(.is-done) .card__line { grid-column: 1; grid-row: 1; line-height: 1.35; min-width: 0; }
+  .card:not(.is-form):not(.is-done) .card__line b,
+  .card:not(.is-form):not(.is-done) .card__line span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card:not(.is-form):not(.is-done) .card__price { display: none; }
+  .card:not(.is-form):not(.is-done) .card__gosum:not([hidden]) { display: inline; white-space: nowrap; }
+  .card:not(.is-form):not(.is-done) .card__line b { font-size: 15px; }
+  .card:not(.is-form):not(.is-done) .card__line span { font-size: 14px; }
+  .card:not(.is-form):not(.is-done) [data-go] { grid-column: 2; grid-row: 1; width: auto; min-height: 48px; padding: 0 18px; }
+  .card:not(.is-form):not(.is-done) .card__lane,
+  .card:not(.is-form):not(.is-done) .card__terms,
+  .card:not(.is-form):not(.is-done) .card__t,
+  .card:not(.is-form):not(.is-done) .card__rows { display: none; }
+  /* форма и «Записали» — обычной карточкой в конце раздела, на всю ширину */
+  .card.is-form, .card.is-done { margin: 0 -4px; }
+  .card.is-form .card__price .num, .card.is-form .card__price .rub,
+  .card.is-done .card__price .num, .card.is-done .card__price .rub { font-size: 32px; }
+}
+@media (max-width: 760px) {
+  .card:not(.is-form):not(.is-done) { margin: 0 -16px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
+}
+
+/* самые узкие телефоны (360): время и кнопка с ценой в одну полосу без многоточия (робот простоты, 08.11) */
+@media (max-width: 380px) {
+  .card:not(.is-form):not(.is-done) { column-gap: 10px; }
+  .card:not(.is-form):not(.is-done) [data-go] { padding: 0 14px; font-size: 15px; }
+  .card:not(.is-form):not(.is-done) .card__line b { font-size: 14px; }
+  .card:not(.is-form):not(.is-done) .card__line span { font-size: 13px; }
+}
