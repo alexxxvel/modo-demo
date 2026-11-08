@@ -233,15 +233,19 @@
     document.querySelector("[data-go]").disabled = !done;
   }
 
-  // после выбора доводим следующий шаг в окно, если он ушёл вниз
+  /* Показать элемент целиком минимальным сдвигом (находка разработчика 08.11: «экран очень сильно прыгает»):
+     низ — над краем окна, верх — не под шапкой; дальше конца раздела записи не крутим, чтобы фото следующего раздела не заглядывало. */
+  function reveal(el) {
+    if (!el) return;
+    var r = el.getBoundingClientRect(), top = document.querySelector(".bar").getBoundingClientRect().bottom + 16, bottom = innerHeight - 24, d = 0;
+    if (r.bottom > bottom) d = r.bottom - bottom;
+    if (r.top - d < top) d = r.top - top;
+    if (d > 0) d = Math.min(d, Math.max(0, document.querySelector("#zapis").getBoundingClientRect().bottom - innerHeight));
+    if (Math.abs(d) < 6) return;
+    scrollBy({ top: d, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
   function bringNext() {
-    var cur = document.querySelector(".pick.is-now");
-    if (!cur) return;
-    var r = cur.getBoundingClientRect();
-    if (r.top > innerHeight * 0.62 || r.top < 70) {
-      var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      scrollTo({ top: r.top + scrollY - 120, behavior: reduce ? "auto" : "smooth" });
-    }
+    reveal(document.querySelector(".pick.is-now") || (step() === 5 && innerWidth <= 760 ? document.querySelector("[data-sum]") : null));
   }
 
   /* цены: на компьютере три колонки, на телефоне вкладки «Мойка / Салон / Кузов» */
@@ -264,7 +268,7 @@
   function hideFlow() {
     document.querySelector("[data-confirm]").hidden = true;
     document.querySelector("[data-done]").hidden = true;
-    document.querySelector("[data-sum]").classList.remove("is-done");
+    document.querySelector("[data-sum]").classList.remove("is-done", "is-form");
   }
   function renderBooking(keepScroll) { renderSteps(); renderBody(); renderServices(); renderDays(); renderHours(keepScroll); renderSum(); }
 
@@ -289,7 +293,7 @@
     if (t.hasAttribute("data-hour")) {
       state.slot = { d: +t.getAttribute("data-d"), h: +t.getAttribute("data-hour") };
       if (state.day === null) state.day = 0;
-      hideFlow(); renderBooking(true); return;
+      hideFlow(); renderBooking(true); bringNext(); return;
     }
     // строка цены ведёт в запись: кузов из вкладки цен, услуга — если её можно записать онлайн
     if (t.hasAttribute("data-pick")) {
@@ -301,24 +305,62 @@
     if (t.hasAttribute("data-ptab")) { state.ptab = +t.getAttribute("data-ptab"); renderPrices(); return; }
     if (t.hasAttribute("data-go")) {
       var f = document.querySelector("[data-confirm]");
-      f.hidden = false; f.querySelector("input").focus({ preventScroll: true });
-      f.scrollIntoView({ behavior: "smooth", block: "center" });
+      f.hidden = false;
+      document.querySelector("[data-sum]").classList.add("is-form");   // на время формы «Записаться» уходит: одна главная кнопка
+      f.querySelector("input").focus({ preventScroll: true });
+      reveal(f);
       return;
     }
     if (t.hasAttribute("data-tg")) { e.preventDefault(); }
   });
 
-  document.querySelector("[data-confirm]").addEventListener("submit", function (e) {
+  /* форма: телефон оформляется сам (+375 29 123-45-67, можно начать с 8029 или 29), трубка под полем горит белым, когда верно, и красным с подсказкой, когда нет */
+  function phoneDigits(v) {
+    var d = v.replace(/\D/g, "");
+    if (!d) return "";
+    if (d.indexOf("80") === 0) d = "375" + d.slice(2);
+    else if (d.indexOf("375") !== 0) d = "375" + d;
+    return d.slice(0, 12);
+  }
+  function phoneText(d) {
+    if (!d) return "";
+    var r = "+" + d.slice(0, 3);
+    if (d.length > 3) r += " " + d.slice(3, 5);
+    if (d.length > 5) r += " " + d.slice(5, 8);
+    if (d.length > 8) r += "-" + d.slice(8, 10);
+    if (d.length > 10) r += "-" + d.slice(10, 12);
+    return r;
+  }
+  var form = document.querySelector("[data-confirm]");
+  function lineState(name, bad) {
+    var line = form.querySelector('[data-line="' + name + '"]'), v = form[name].value.trim();
+    var ok = name === "name" ? v.length >= 2 : phoneDigits(v).length === 12;
+    line.classList.toggle("is-ok", ok);
+    line.classList.toggle("is-bad", !!bad && !ok);
+    return ok;
+  }
+  form.name.addEventListener("input", function () { lineState("name"); });
+  form.phone.addEventListener("input", function (e) {
+    if (!(e.inputType || "").startsWith("delete")) form.phone.value = phoneText(phoneDigits(form.phone.value));
+    lineState("phone");
+  });
+  form.phone.addEventListener("blur", function () { if (form.phone.value) form.phone.value = phoneText(phoneDigits(form.phone.value)); });
+  form.name.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); form.phone.focus(); } });
+
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var f = e.currentTarget, ok = f.name.value.trim() && f.phone.value.replace(/\D/g, "").length >= 9;
-    f.querySelector("[data-err]").hidden = !!ok;
-    if (!ok) return;
+    var f = e.currentTarget, okN = lineState("name", true), okP = lineState("phone", true), err = f.querySelector("[data-err]");
+    err.hidden = okN && okP;
+    err.textContent = !okN ? "Как к вам обращаться? Имя нужно, чтобы администратор узнал вас." : "Проверьте телефон: нужно 9 цифр после +375, по нему подтвердим запись.";
+    if (!okN) { f.name.focus(); return; }
+    if (!okP) { f.phone.focus(); return; }
     f.hidden = true;
     var s = svcByKey(state.svc);
     document.querySelector("[data-done-time]").textContent = cap(dayLabel(state.slot.d)) + ", " + hhmm(state.slot.h) + "–" + endOf(state.slot.h, s[2]);
     document.querySelector("[data-done-when]").textContent = s[1] + ", " + BODIES[state.body] + ". Ул. Чичерина, 21, въезд со двора.";
     document.querySelector("[data-done]").hidden = false;
     document.querySelector("[data-sum]").classList.add("is-done");   // записано: в карточке итог, без кнопки и условий
+    document.querySelector("[data-sum]").classList.remove("is-form");
   });
 
   /* шапка: сплошная после первого экрана; «Выбрать время» прячется, пока на экране сама запись */

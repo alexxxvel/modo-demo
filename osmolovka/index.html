@@ -45,6 +45,7 @@
     <div class="day" role="group" aria-label="Свободное время на ближайшие сутки: нажмите на белую лампу, чтобы записаться на этот час">
       <div class="day__head">
         <span class="day__free"><b data-free-count>14</b>&nbsp;<span data-free-word>часов</span> свободно за&nbsp;сутки</span>
+        <span class="day__legend" aria-hidden="true"><span><i class="f"></i>свободно, нажмите</span><span><i class="b"></i>занято</span></span>
         <button type="button" class="day__next" data-next-btn>Ближайшее свободное: <b data-next>22:00</b><span class="day__go">записаться</span></button>
       </div>
       <div class="lamps lamps--hero" data-lamps="hero"></div>
@@ -107,17 +108,18 @@
         <div class="card__lane" data-card-lane hidden aria-hidden="true"></div>
         <p class="card__price sum__price" hidden><span class="num" data-sum-price>45</span> <span class="byn">BYN</span></p>
         <button type="button" class="btn btn--red card__go" data-go disabled>Записаться</button>
-        <p class="card__terms">Опоздали до 15 минут: подождём. Отменить или перенести можно звонком или в Telegram. <a class="link" href="#zapis">Условия&nbsp;записи</a></p>
+        <div class="card__terms"><p>Опоздали до 15 минут: подождём. Отменить или перенести можно звонком или в Telegram.</p><a class="link card__rules" href="#zapis">Условия записи</a></div>
         <form class="confirm" data-confirm hidden novalidate>
-          <div class="confirm__fields">
-            <label class="field"><span>Имя</span><input name="name" autocomplete="given-name" required></label>
-            <label class="field"><span>Телефон</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 29 000-00-00" required></label>
-          </div>
-          <p class="confirm__err" data-err hidden>Нужны имя и телефон: по нему подтвердим запись.</p>
-          <div class="confirm__acts">
-            <button class="btn btn--red" type="submit">Подтвердить запись</button>
-            <a class="link" href="#zapis" data-tg>Записаться через Telegram</a>
-          </div>
+          <p class="confirm__t">Последний шаг: как с вами связаться</p>
+          <label class="line" data-line="name"><span class="line__l">Имя</span>
+            <input name="name" autocomplete="given-name" placeholder="Как к вам обращаться" maxlength="60" required enterkeyhint="next">
+            <i class="line__tube" aria-hidden="true"></i></label>
+          <label class="line" data-line="phone"><span class="line__l">Телефон</span>
+            <input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 29 123-45-67" maxlength="17" required enterkeyhint="done">
+            <i class="line__tube" aria-hidden="true"></i></label>
+          <p class="confirm__err" data-err hidden role="alert"></p>
+          <button class="btn btn--red confirm__go" type="submit">Подтвердить запись</button>
+          <p class="confirm__alt">Удобнее в Telegram? <a class="link" href="#zapis" data-tg>Запишитесь через бота</a>, там же напомним о записи.</p>
           <p class="confirm__law">Нажимая «Подтвердить запись», вы соглашаетесь с <a class="link" href="#top">политикой обработки персональных данных</a>.</p>
         </form>
         <div class="done" data-done hidden role="status">

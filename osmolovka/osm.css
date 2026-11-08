@@ -407,6 +407,45 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .done__time{margin-top:10px;font-size:28px;line-height:1.1}
 .done__when{margin:8px 0 10px;font-size:17px;color:#C9CFD5}
 
+/* ===== простота 08.11: форма связи линиями-трубками, ссылки под палец ===== */
+.card.is-form [data-go],.card.is-form .card__terms{display:none}
+.card__terms{display:grid;gap:4px}
+.card__terms p{font-size:14px;color:var(--steel)}
+.card__rules{display:inline-flex;align-items:center;min-height:44px;justify-self:start;font-size:14px;color:#C9CFD5}
+.svc__more{display:inline-flex;align-items:center;min-height:44px;margin-top:8px}
+.card .confirm{display:grid;gap:14px}
+.confirm__t{font-size:17px;font-weight:600}
+.line{position:relative;display:grid;gap:2px;padding-bottom:2px}
+.line__l{font-size:14px;color:var(--steel);transition:color .2s}
+.line:focus-within .line__l,.line.is-ok .line__l{color:#C9CFD5}
+.line input{height:48px;padding:0;border:0;border-radius:0;background:transparent;color:var(--lamp);font:inherit;font-size:20px;font-weight:500;font-variation-settings:var(--wide-mid);font-feature-settings:"tnum";caret-color:var(--red)}
+.line input::placeholder{color:#5A616A;font-weight:400;font-variation-settings:"wdth" 100}
+.line input:focus,.line input:focus-visible{outline:none}
+.line::after{content:"";height:2px;border-radius:1px;background:#3A4047}
+.line__tube{position:absolute;left:0;right:0;bottom:2px;height:2px;border-radius:1px;background:var(--lamp);box-shadow:0 0 10px rgba(238,243,246,.55);transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .22s cubic-bezier(.23,1,.32,1),background-color .2s,box-shadow .2s;pointer-events:none}
+.line__tube{transition:transform .22s cubic-bezier(.23,1,.32,1),opacity .2s,background-color .2s,box-shadow .2s}
+.line:focus-within .line__tube{transform:scaleX(1);opacity:.4;box-shadow:none}
+.line.is-ok .line__tube{transform:scaleX(1);opacity:1;box-shadow:0 0 10px rgba(238,243,246,.55)}
+.line.is-bad .line__tube{transform:scaleX(1);opacity:1;background:#FF6B70;box-shadow:0 0 10px rgba(255,107,112,.35)}
+.line.is-bad .line__l{color:#FF8A8D}
+.confirm__err{margin:0;font-size:14px;color:#FF8A8D}
+.confirm__go{width:100%}
+.confirm__alt{font-size:14px;color:var(--steel)}
+.confirm__alt .link{color:#C9CFD5}
+.confirm__law{margin:0;font-size:13px}
+
+/* низкое окно ноутбука: пока открыта форма, выбранное — одной строкой, чтобы форма и кнопка помещались */
+@media (max-height:760px) and (min-width:761px){
+  .card.is-form .card__rows,.card.is-form .card__t{display:none}
+  .card.is-form .card__line{display:block;font-size:15px;font-weight:600}
+}
+/* первый экран: легенда, как у записи — человеку с телефона подпись по наведению недоступна */
+.day__legend{display:flex;gap:16px;font-size:13px;color:var(--steel)}
+.day__legend i{display:inline-block;width:5px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.day__legend .f{background:var(--lamp);box-shadow:0 0 6px rgba(238,243,246,.5)}
+.day__legend .b{width:2px;background:var(--busy)}
+
 /* планшет */
 @media (max-width:1080px){
   .bar__nav{display:none}
