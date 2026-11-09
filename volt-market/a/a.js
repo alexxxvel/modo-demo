@@ -1,4 +1,4 @@
-/* А: шкала «сколько проезжать» и вкладки «под задачу» */
+/* А: шкала «сколько проезжать», лента «с чего начать» с вкладками задач, сцена «модель с приборами» */
 (function () {
   'use strict';
   var VM = window.VM; if (!VM) return;
@@ -20,10 +20,30 @@
   if (tl) {
     var show = function (t) {
       document.querySelectorAll('[data-task]').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.task === t); });
-      tl.innerHTML = VM.pick('task:' + t + ':4').map(VM.card).join('');
+      tl.innerHTML = (t === 'pop' ? VM.pick('ids:' + tl.dataset.pop) : VM.pick('task:' + t + ':4')).map(VM.card).join('');
       VM.watch(tl); document.dispatchEvent(new Event('vm:sync'));
     };
-    document.addEventListener('click', function (e) { var b = e.target.closest('[data-task]'); if (b) show(b.dataset.task); });
-    show('city');
+    document.addEventListener('click', function (e) { var b = e.target.closest('[data-task]'); if (b && b.getAttribute('aria-selected') !== 'true') { tl.classList.remove('swap'); void tl.offsetWidth; show(b.dataset.task); tl.classList.add('swap'); } });
+    show('pop');
+  }
+  /* сцена «модель с приборами» (приём VELOS, site-scenes/velos): точки на батарее, колесе, сиденье и моторе, линии к приборам, досчёт цифр один раз */
+  var pb = document.querySelector('[data-probe]');
+  if (pb) {
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var run = function () {
+      pb.classList.add('on');
+      pb.querySelectorAll('.chg.anim').forEach(function (c) { c.classList.add('on'); });
+      if (still) return;
+      pb.querySelectorAll('[data-to]').forEach(function (b, i) {
+        var to = +b.dataset.to, t0 = 0, d = 900, delay = 520 + i * 110;
+        b.textContent = '0';
+        var step = function (t) { if (!t0) t0 = t; var k = Math.min(Math.max((t - t0 - delay) / d, 0), 1); b.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+        requestAnimationFrame(step);
+      });
+    };
+    if ('IntersectionObserver' in window) {
+      var po = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { run(); po.disconnect(); } }, { threshold: 0.35 });
+      po.observe(pb);
+    } else run();
   }
 })();

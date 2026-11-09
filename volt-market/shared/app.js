@@ -30,11 +30,11 @@
   var STS = { our: 'В наличии', supplier: 'У поставщика', order: 'Под заказ', none: 'Нет', check: 'Уточняется' };
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function money(v) { return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function money(v) { return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); } // разряды неразрывным пробелом: узкого (U+2009) в подмножестве Roboto Flex нет, цены сливались в «2290»
   function price(it) { return it.price ? '<b class="pr">' + money(it.price) + '<i class="byn" aria-label="руб."></i></b>' : '<b class="pr pr-ask">Уточнить цену</b>'; }
   function km(it) { return it.range ? Math.round(it.range) : null; }
   function v(k) { return Math.min(k / MAXKM, 1).toFixed(3); }
-  function bar(k, cls) { return '<div class="chg anim ' + (cls || '') + '" style="--v:' + v(k) + '" role="img" aria-label="Заявленный запас хода ' + k + ' км из шкалы 150"><i></i></div>'; }
+  function bar(k, cls) { return '<div class="chg anim ' + (cls || '') + '" style="--v:' + v(k) + '" role="meter" aria-valuemin="0" aria-valuemax="150" aria-valuenow="' + Math.min(k, 150) + '" aria-label="Заявленный запас хода ' + k + ' км из шкалы 150"><i></i></div>'; }
   function charge(it) {
     var k = km(it);
     if (!k) return '<p class="kmv kmv-none">Запас хода: нет данных</p>';
@@ -44,7 +44,7 @@
   function specs(it) {
     var out = [];
     if (it.speed) out.push(Math.round(it.speed) + ' км/ч');
-    if (it.load) out.push(Math.round(it.load) + ' кг');
+    if (it.load) out.push('до ' + Math.round(it.load) + ' кг');
     if (it.power) out.push(Math.round(it.power) + ' Вт');
     return out.slice(0, 3);
   }
@@ -56,6 +56,8 @@
       : '<a class="btn btn-quiet btn-sm" href="#">Узнать</a>';
   }
   function cmp(it, cls) { return '<button class="' + (cls || 'card-cmp') + '" type="button" data-cmp="' + it.id + '" aria-pressed="false" title="Сравнить">' + CMP_ICON + '<span class="vh">Сравнить</span></button>'; }
+  /* А: сравнение строкой с флажком под характеристиками, а не значком на фото (критика 09.11.2026) */
+  function cmpRow(it) { return '<button class="card-cmpl" type="button" data-cmp="' + it.id + '" aria-pressed="false"><i aria-hidden="true"></i>Сравнить</button>'; }
 
   /* ---- корзина и сравнение ---- */
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch (e) { return []; } }
@@ -94,10 +96,11 @@
   /* ---- А: карточка ---- */
   function cardA(it) {
     var sp = specs(it);
-    return '<article class="card" data-id="' + it.id + '">' +
-      '<div class="card-ph"><img src="' + ROOT + it.cut + '" alt="" loading="lazy" width="600" height="420"></div>' + cmp(it) +
+    var form = it.c === 'kick' || it.c === 'bike' ? 'tall' : (it.sub && it.sub !== 'Двухколёсные') || it.c === 'quad' ? 'wide' : 'mid'; // высота фото по виду: самокат выше, трицикл ниже
+    return '<article class="card" data-id="' + it.id + '" data-form="' + form + '">' +
+      '<div class="card-ph"><img src="' + ROOT + it.cut + '" alt="" loading="lazy" width="600" height="420"></div>' +
       '<div class="card-b"><h3 class="card-t"><a href="#"><span class="card-brand">' + esc(it.brand || '') + '</span>' + esc(it.model) + '</a></h3>' +
-      charge(it) + (sp.length ? '<p class="card-sp">' + '<span>' + sp.join('</span><i aria-hidden="true"></i><span>') + '</span>' + '</p>' : '') +
+      charge(it) + (sp.length ? '<p class="card-sp">' + '<span>' + sp.join('</span><i aria-hidden="true"></i><span>') + '</span>' + '</p>' : '') + (it.c === 'acc' ? '' : cmpRow(it)) +
       '<div class="card-f"><div class="card-pr">' + price(it) + st(it) + '</div>' + buy(it) + '</div></div></article>';
   }
   /* ---- Б: строка (каталог) ---- */
@@ -167,7 +170,12 @@
   document.querySelectorAll('[data-range]').forEach(function (el) {
     var c = CATS.filter(function (x) { return x.id === el.dataset.range; })[0], r = c && D.ranges && D.ranges[c.name];
     if (!r) { el.hidden = true; return; }
-    el.innerHTML = '<span class="cr-v"><b>' + r[0] + '–' + r[1] + '</b> км</span><span class="chg span" style="--from:' + v(r[0]) + ';--v:' + v(r[1]) + '" role="img" aria-label="Заявленный запас хода моделей раздела от ' + r[0] + ' до ' + r[1] + ' км"><i></i></span>';
+    el.innerHTML = '<span class="cr-v">до&nbsp;<b>' + r[1] + '</b> км</span><span class="chg" style="--v:' + v(r[1]) + '" role="meter" aria-valuemin="0" aria-valuemax="150" aria-valuenow="' + Math.min(r[1], 150) + '" aria-label="Заявленный запас хода в разделе до ' + r[1] + ' км из шкалы 150"><i></i></span>';
+  }); // шкала от нуля, как у карточек: плавающий отрезок читался хуже (критика 09.11.2026)
+  document.querySelectorAll('[data-from]').forEach(function (el) {
+    var c = CATS.filter(function (x) { return x.id === el.dataset.from; })[0], m = c && D.pmin && D.pmin[c.name];
+    if (!m) { el.hidden = true; return; }
+    el.innerHTML = 'от&nbsp;' + money(m) + '<i class="byn" aria-label="руб."></i>';
   });
   document.addEventListener('vm:sync', function () { syncBadges(); bsl(); });
   watch(); bsl(); syncBadges();

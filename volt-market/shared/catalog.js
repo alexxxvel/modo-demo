@@ -42,6 +42,13 @@
     var pm = form.querySelector('select[name=pmax]'); if (pm) pm.value = s.pmax || '';
     var so = document.querySelector('select[name=sort]'); if (so) so.value = s.sort;
     document.querySelectorAll('[data-active-n]').forEach(function (el) { var n = s.sub.length + s.st.length + s.brand.length + (s.km ? 1 : 0) + (s.pmax ? 1 : 0); el.textContent = n; el.hidden = !n; });
+    // метки выбранных фильтров над сеткой: видно, что включено, и снимается одним касанием (критика 09.11.2026)
+    var ch = document.querySelector('[data-chips]');
+    if (ch) {
+      var chip = function (k, v, label) { return '<button type="button" data-unset="' + k + '" data-v="' + VM.esc(v) + '" aria-label="Убрать фильтр: ' + VM.esc(label) + '">' + VM.esc(label) + '</button>'; };
+      ch.innerHTML = s.sub.map(function (v) { return chip('sub', v, v); }).join('') + s.st.map(function (v) { return chip('st', v, VM.ST[v]); }).join('') + s.brand.map(function (v) { return chip('brand', v, v); }).join('') +
+        (s.km ? chip('km', '', 'от ' + s.km + ' км') : '') + (s.pmax ? chip('pmax', '', 'до ' + VM.money(s.pmax) + ' руб.') : '');
+    }
   }
   function read() {
     var s = state();
@@ -76,6 +83,8 @@
   root.addEventListener('input', function (e) { if (e.target.name === 'km') read(); });
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-reset]')) { history.replaceState(null, '', location.pathname); apply(); }
+    var u = e.target.closest('[data-unset]');
+    if (u) { var s = state(), k = u.dataset.unset; if (k === 'km' || k === 'pmax') s[k] = 0; else s[k] = s[k].filter(function (x) { return x !== u.dataset.v; }); write(s); apply(); }
     var t = e.target.closest('[data-sheet-open]'); if (t) { document.body.classList.add('sheet-on'); }
     if (e.target.closest('[data-sheet-close]')) document.body.classList.remove('sheet-on');
   });

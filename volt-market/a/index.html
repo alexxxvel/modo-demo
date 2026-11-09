@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ВОЛЬТ МАРКЕТ: электротранспорт с доставкой по Беларуси (макет А)</title>
+<title>ВОЛЬТ МАРКЕТ: электротранспорт с доставкой по Беларуси (макет А)</title>
 <meta name="description" content="Электроскутеры, электровелосипеды, электросамокаты, электромотоциклы и квадроциклы с доставкой по Беларуси. Макет направления А.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C1E20">
 <link rel="icon" href="../shared/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../shared/fonts/fonts.css">
 <link rel="stylesheet" href="../shared/base.css">
@@ -22,7 +23,7 @@
     <a href="catalog.html">Скутеры</a><a href="catalog.html">Велосипеды</a><a href="catalog.html">Самокаты</a><a href="catalog.html">Мотоциклы</a><a href="catalog.html">Квадроциклы</a><a href="catalog.html">Аксессуары</a>
   </nav>
   <button class="hd-cat" type="button" aria-label="Каталог"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Каталог</span></button>
-  <form class="hd-search" role="search" action="catalog.html"><label class="vh" for="q">Поиск по каталогу</label><input id="q" name="q" type="search" placeholder="Модель или бренд"><button type="submit" aria-label="Найти"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></form>
+  <form class="hd-search" role="search" action="catalog.html"><label class="vh" for="q">Поиск по каталогу</label><input id="q" name="q" type="search" placeholder="Найти модель"><button type="submit" aria-label="Найти"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></form>
   <a class="hd-ic" href="#" aria-label="Сравнение"><svg viewBox="0 0 20 20" width="22" height="22" aria-hidden="true"><path d="M5 3v14M15 3v14M2 7h6M12 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><i data-cmp-n hidden></i></a>
   <a class="hd-ic" href="#" aria-label="Корзина"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><path d="M3 4h2.4l2 10.2h9.4L19 7H6.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.5" cy="18" r="1.4" fill="currentColor"/><circle cx="15.5" cy="18" r="1.4" fill="currentColor"/></svg><i data-cart-n hidden></i></a>
 </header>
@@ -31,23 +32,31 @@
   <section class="hero" data-m="hero">
     <div class="hero-t">
       <div class="hero-top"><h1>Электротранспорт с&nbsp;доставкой</h1>
-      <p>Скутеры, велосипеды, самокаты, мотоциклы и&nbsp;квадроциклы по&nbsp;всей Беларуси. У&nbsp;каждой модели видно, сколько она проедет и&nbsp;есть&nbsp;ли она на&nbsp;самом деле.</p>
+      <p>У&nbsp;каждой модели видно, сколько она проедет и&nbsp;есть&nbsp;ли она в&nbsp;наличии.</p>
       <a class="btn btn-main" href="catalog.html" data-m-part="cta">Открыть каталог</a></div>
-      <p class="legend"><span class="chg" style="--v:.4" aria-hidden="true"><i></i></span><span><b>Шкала заряда</b>: заявленный запас хода модели на&nbsp;одной шкале от&nbsp;0 до&nbsp;150&nbsp;км.</span></p>
+      <ul class="hero-facts"><li><b>Доставка</b>по&nbsp;всей Беларуси</li><li><b>Сборка</b>на&nbsp;своём складе перед отправкой</li><li><b>Оплата</b>наличными при получении, в&nbsp;рассрочку или кредит</li></ul>
     </div>
     <div class="cats">
-      <a class="cat cat-xl" href="catalog.html"><span class="cat-n">Скутеры</span><span class="cat-c"><b data-count="scooter"></b> моделей: двух-, трёхколёсные, грузовые</span><span class="cat-r" data-range="scooter"></span><span class="cat-im"><img src="../assets/p/ps-Shtenli_Model_21-pro-cut.png" alt="" width="600" height="420"></span></a>
-      <a class="cat" href="catalog.html"><span class="cat-n">Велосипеды</span><span class="cat-c"><b data-count="bike"></b> моделей</span><span class="cat-r" data-range="bike"></span><span class="cat-im"><img src="../assets/p/ps-AVM-INTRO-cut.png" alt="" width="600" height="420"></span></a>
-      <a class="cat" href="catalog.html"><span class="cat-n">Самокаты</span><span class="cat-c"><b data-count="kick"></b> моделей</span><span class="cat-r" data-range="kick"></span><span class="cat-im"><img src="../assets/p/ps-samokat-F3Pro-cut.png" alt="" width="600" height="420"></span></a>
-      <a class="cat" href="catalog.html"><span class="cat-n">Мотоциклы</span><span class="cat-c"><b data-count="moto"></b> моделей</span><span class="cat-r" data-range="moto"></span><span class="cat-im"><img src="../assets/p/ps-Kugoo_02Pro-cut.png" alt="" width="600" height="420"></span></a>
-      <a class="cat" href="catalog.html"><span class="cat-n">Квадроциклы</span><span class="cat-c"><b data-count="quad"></b> модели, детские</span><span class="cat-r" data-range="quad"></span><span class="cat-im"><img src="../assets/p/ps-FOX-800-NOVA-cut.png" alt="" width="600" height="420"></span></a>
-      <a class="cat cat-line" href="catalog.html"><span class="cat-n">Аксессуары и&nbsp;батареи</span><span class="cat-c">шлемы, кофры, тенты, запасные батареи</span><span class="cat-im"><img src="../assets/p/ps-Lion-cut.png" alt="" width="300" height="300"></span></a>
+      <a class="cat cat-xl" href="catalog.html"><span class="cat-n">Скутеры</span><span class="cat-c"><b data-count="scooter"></b> моделей<span class="cat-p" data-from="scooter"></span><span class="cat-k">двух- и&nbsp;трёхколёсные, грузовые</span></span><span class="cat-r" data-range="scooter"></span><span class="cat-im"><img src="../assets/p/ps-Shtenli_Model_21-pro-cut.webp" alt="" width="600" height="420"></span></a>
+      <a class="cat" href="catalog.html"><span class="cat-n">Велосипеды</span><span class="cat-c"><b data-count="bike"></b> моделей<span class="cat-p" data-from="bike"></span></span><span class="cat-r" data-range="bike"></span><span class="cat-im"><img src="../assets/p/ps-avm_intro-cut.webp" alt="" width="600" height="420"></span></a>
+      <a class="cat" href="catalog.html"><span class="cat-n">Самокаты</span><span class="cat-c"><b data-count="kick"></b> моделей<span class="cat-p" data-from="kick"></span></span><span class="cat-r" data-range="kick"></span><span class="cat-im"><img src="../assets/p/ps-samokat-F3Pro-cut.webp" alt="" width="600" height="420"></span></a>
+      <a class="cat" href="catalog.html"><span class="cat-n">Мотоциклы</span><span class="cat-c"><b data-count="moto"></b> моделей<span class="cat-p" data-from="moto"></span></span><span class="cat-r" data-range="moto"></span><span class="cat-im"><img src="../assets/p/ps-Kugoo_02Pro-cut.webp" alt="" width="600" height="420"></span></a>
+      <a class="cat" href="catalog.html"><span class="cat-n">Квадроциклы</span><span class="cat-c"><b data-count="quad"></b> модели, детские<span class="cat-p" data-from="quad"></span></span><span class="cat-r" data-range="quad"></span><span class="cat-im"><img src="../assets/p/ps-FOX-800-NOVA-cut.webp" alt="" width="600" height="420"></span></a>
+      <a class="cat cat-line" href="catalog.html"><span class="cat-n">Аксессуары и&nbsp;батареи</span><span class="cat-c">шлемы, кофры, тенты, запасные батареи<span class="cat-p" data-from="acc"></span></span><span class="cat-im"><img src="../assets/p/ps-Lion-cut.webp" alt="" width="300" height="300"></span></a>
     </div>
   </section>
 
-  <section class="sec">
-    <div class="sec-h"><h2>С&nbsp;чего начать</h2><p class="mk-note">Подборку ставит администратор. В&nbsp;макете цены взяты из&nbsp;розницы поставщика на&nbsp;08.11.2026 для примера, наши цены не&nbsp;утверждены.</p></div>
-    <div class="grid4" data-list="ids:ps-Shtenli_Model_21-pro,ps-AVM-Travel,ps-samokat-F3Plus,ps-Model031_Li" data-tpl="card"></div>
+  <section class="sec tasks" aria-labelledby="tk-h">
+    <div class="sec-h"><h2 id="tk-h">С&nbsp;чего начать</h2></div>
+    <div class="tabs" role="tablist" aria-label="Подборки">
+      <button role="tab" aria-selected="true" data-task="pop">Популярное</button>
+      <button role="tab" aria-selected="false" data-task="city">По&nbsp;городу</button>
+      <button role="tab" aria-selected="false" data-task="out">За&nbsp;город</button>
+      <button role="tab" aria-selected="false" data-task="cargo">Возить груз</button>
+      <button role="tab" aria-selected="false" data-task="two">Вдвоём</button>
+    </div>
+    <div class="grid4" data-tasklist data-pop="ps-Shtenli_Model_21-pro,ps-AVM-Travel,ps-samokat-F3Plus,ps-Model031_Li"></div>
+    <p class="mk-note">Подборки в&nbsp;рабочем сайте ставит администратор. В&nbsp;макете цены взяты из&nbsp;розницы поставщика на&nbsp;08.11.2026 для примера, наши цены не&nbsp;утверждены.</p>
   </section>
 
   <section class="range" data-dark aria-labelledby="rg-h">
@@ -58,7 +67,7 @@
         <div class="bsl bsl-big">
           <p class="bsl-v"><b>45</b> км</p>
           <div class="bsl-t"><div class="chg" style="--v:.3"><i></i></div><input type="range" min="15" max="150" step="5" value="45" aria-label="Нужный запас хода, км" data-rr></div>
-          <div class="bsl-sc"><span>0</span><span>75</span><span>150 км</span></div>
+          <div class="bsl-sc"><span>0</span><span>75</span><span>150 км</span></div>
         </div>
         <p class="range-n" data-rn></p>
         <a class="btn btn-main" href="catalog.html" data-rlink>Показать все</a>
@@ -67,59 +76,62 @@
     </div>
   </section>
 
-  <section class="sec tasks" aria-labelledby="tk-h">
-    <div class="sec-h"><h2 id="tk-h">Под задачу</h2></div>
-    <div class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-task="city">По&nbsp;городу на&nbsp;работу</button>
-      <button role="tab" aria-selected="false" data-task="out">За&nbsp;город и&nbsp;по&nbsp;грунту</button>
-      <button role="tab" aria-selected="false" data-task="cargo">Возить груз</button>
-      <button role="tab" aria-selected="false" data-task="two">Вдвоём</button>
+  <section class="probe" aria-labelledby="pb-h">
+    <div class="probe-h">
+      <h2 id="pb-h">Что стоит за&nbsp;цифрами</h2>
+      <p>Shtenli GT21, городской скутер с&nbsp;корзиной и&nbsp;кофром. Те&nbsp;же четыре прибора есть у&nbsp;каждой модели в&nbsp;каталоге.</p>
     </div>
-    <div class="grid4" data-tasklist></div>
-    <p class="mk-note">В&nbsp;рабочем сайте модели в&nbsp;подборки ставит администратор после проверки характеристик. В&nbsp;макете они собраны по&nbsp;данным поставщика.</p>
+    <div class="probe-st" data-probe>
+      <div class="probe-ph">
+      <img class="probe-im" src="../assets/p/ps-Shtenli_Model_21-pro-cut.webp" alt="Электроскутер Shtenli GT21, белый, с корзиной спереди и кофром сзади" width="895" height="734" loading="lazy">
+      <svg class="probe-ln" viewBox="0 0 1500 760" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M722 497 V240 H1110" pathLength="1"/><path d="M339 600 H270" pathLength="1"/>
+        <path d="M334 388 H270" pathLength="1"/><path d="M997 584 H1230" pathLength="1"/>
+      </svg>
+      <i class="probe-dot" style="--x:722;--y:497" aria-hidden="true"></i><i class="probe-dot" style="--x:339;--y:600" aria-hidden="true"></i>
+      <i class="probe-dot" style="--x:334;--y:388" aria-hidden="true"></i><i class="probe-dot" style="--x:997;--y:584" aria-hidden="true"></i>
+      </div>
+      <dl class="probe-l">
+        <div class="probe-c pc-r pc-big" style="--y:24"><dt>Запас хода, заявлено</dt><dd><span class="pc-v"><b data-to="75">75</b> км</span><span class="chg anim" style="--v:.5" role="meter" aria-valuemin="0" aria-valuemax="150" aria-valuenow="75" aria-label="Заявленный запас хода 75 км из шкалы 150"><i></i></span><span class="pc-s">литиевая батарея 60&nbsp;В, 20&nbsp;А·ч</span></dd></div>
+        <div class="probe-c pc-l" style="--y:600"><dt>Скорость</dt><dd><span class="pc-v">до&nbsp;<b data-to="25">25</b> км/ч</span><span class="pc-s">колёса 14&nbsp;дюймов, масса 54&nbsp;кг</span></dd></div>
+        <div class="probe-c pc-l" style="--y:388"><dt>Нагрузка</dt><dd><span class="pc-v">до&nbsp;<b data-to="120">120</b> кг</span><span class="pc-s">корзина спереди, кофр сзади</span></dd></div>
+        <div class="probe-c pc-r" style="--y:584"><dt>Мотор</dt><dd><span class="pc-v"><b data-to="250">250</b> Вт</span><span class="pc-s">по&nbsp;данным производителя</span></dd></div>
+      </dl>
+    </div>
+    <div class="probe-f">
+      <p class="probe-pr"><b class="pr">2&nbsp;290<i class="byn" aria-label="руб."></i></b><span class="st" data-s="supplier"><span class="st-l">Доступен у&nbsp;поставщика</span></span></p>
+      <button class="btn btn-buy" type="button" data-add="ps-Shtenli_Model_21-pro"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><path d="M3 4h2.4l2 10.2h9.4L19 7H6.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.5" cy="18" r="1.4" fill="currentColor"/><circle cx="15.5" cy="18" r="1.4" fill="currentColor"/></svg><span>В корзину</span></button>
+      <a class="probe-more" href="#">Все характеристики</a>
+    </div>
   </section>
 
   <section class="sec buy" aria-labelledby="by-h">
-    <div class="buy-in">
-      <div class="buy-l">
-        <h2 id="by-h">Как купить</h2>
-        <ol class="steps">
-          <li><b>Выберите модель</b><span>Положите в&nbsp;корзину или нажмите «Купить в&nbsp;один клик».</span></li>
-          <li><b>Оставьте имя и&nbsp;телефон</b><span>Почта не&nbsp;нужна. Адрес спросим, когда выберете доставку.</span></li>
-          <li><b>Подтвердим по&nbsp;телефону</b><span>Сверим наличие и&nbsp;срок. Оплату не&nbsp;берём, пока заказ не&nbsp;подтверждён.</span></li>
-        </ol>
+    <div class="buy-in" data-dark>
+      <h2 id="by-h">Как купить</h2>
+      <ol class="steps">
+        <li><b>Выберите модель</b><span>Положите в&nbsp;корзину или нажмите «Купить в&nbsp;один клик».</span></li>
+        <li><b>Оставьте имя и&nbsp;телефон</b><span>Почта не&nbsp;нужна. Адрес спросим, когда выберете доставку.</span></li>
+        <li><b>Подтвердим по&nbsp;телефону</b><span>Сверим наличие и&nbsp;срок. Оплату не&nbsp;берём, пока заказ не&nbsp;подтверждён.</span></li>
+      </ol>
+      <h3 class="pay-h">Как заплатить</h3>
+      <div class="pay-g">
+        <div class="pay-x"><h4>Наличными</h4><p>При получении, после проверки техники.</p></div>
+        <div class="pay-x"><h4>По&nbsp;счёту</h4><p>Безналичный расчёт для организаций и&nbsp;ИП.</p></div>
+        <div class="pay-x"><h4>Рассрочка</h4><p>Программы банка-партнёра: взнос, срок и&nbsp;платёж пришлём после запроса.</p><a href="#">Запросить условия</a></div>
+        <div class="pay-x"><h4>Кредит</h4><p>Расчёт платежа после заявки. Паспорт на&nbsp;сайте вводить не&nbsp;нужно.</p><a href="#">Запросить условия</a></div>
       </div>
-      <div class="pay">
-        <h3 class="pay-h">Как заплатить</h3>
-        <dl class="pay-l">
-          <div><dt>Наличными</dt><dd>при получении, после проверки техники</dd></div>
-          <div><dt>По&nbsp;счёту</dt><dd>безналичный расчёт для организаций и&nbsp;ИП</dd></div>
-        </dl>
-        <div class="pay-x">
-          <div><h4>Рассрочка</h4><p>Программы банка-партнёра: взнос, срок и&nbsp;платёж пришлём после запроса.</p><a href="#">Запросить условия</a></div>
-          <div><h4>Кредит</h4><p>Расчёт платежа после заявки. Паспорт на&nbsp;сайте вводить не&nbsp;нужно.</p><a href="#">Запросить условия</a></div>
-        </div>
-      </div>
+      <p class="buy-dlv" id="delivery"><b>Доставка</b> по&nbsp;всей Беларуси, только доставкой: шоурума нет. Перед отправкой собираем технику на&nbsp;своём складе. <span class="todo">Сроки, цену доставки и&nbsp;гарантию подтвердит заказчик.</span></p>
     </div>
-  </section>
-
-  <section class="sec dlv" aria-labelledby="dl-h">
-    <div class="dlv-t"><h2 id="dl-h">Доставка и&nbsp;сервис</h2><p>Возим по&nbsp;всей Беларуси. Перед отправкой собираем технику на&nbsp;своём складе.</p></div>
-    <dl class="dlv-l">
-      <div><dt>Минск</dt><dd><span class="todo">срок и&nbsp;цену подтвердит заказчик</span></dd></div>
-      <div><dt>Беларусь</dt><dd><span class="todo">срок и&nbsp;цену подтвердит заказчик</span></dd></div>
-      <div><dt>Гарантия</dt><dd><span class="todo">на&nbsp;технику и&nbsp;отдельно на&nbsp;батарею: после документов</span></dd></div>
-      <div><dt>Самовывоз</dt><dd>нет, работаем только с&nbsp;доставкой</dd></div>
-    </dl>
   </section>
 
   <section class="sec faq" aria-labelledby="fq-h">
     <div class="sec-h"><h2 id="fq-h">Частые вопросы</h2></div>
     <div class="faq-l">
-      <details><summary>Что значит «Доступен у&nbsp;поставщика»?</summary><p>Модель есть на&nbsp;складе нашего поставщика, но&nbsp;ещё не&nbsp;у&nbsp;нас. После заказа привезём её на&nbsp;свой склад, соберём и&nbsp;отправим. Точный срок назовём при подтверждении.</p></details>
-      <details><summary>Почему запас хода «заявленный»?</summary><p>Это цифра производителя для ровной дороги и&nbsp;тёплой погоды. С&nbsp;грузом, на&nbsp;подъёмах и&nbsp;в&nbsp;холод техника проезжает меньше.</p></details>
-      <details><summary>Нужны&nbsp;ли права и&nbsp;регистрация?</summary><p>Зависит от&nbsp;мощности и&nbsp;скорости конкретной модели. Сверим по&nbsp;её документам и&nbsp;скажем при заказе.</p></details>
-      <details><summary>Можно&nbsp;ли купить в&nbsp;рассрочку?</summary><p>Да. Нажмите «Запросить условия»: пришлём программы банка с&nbsp;взносом, сроком и&nbsp;платежом.</p></details>
+      <details open><summary>Что значит «Доступен у&nbsp;поставщика»?</summary><p>Модель есть на&nbsp;складе нашего поставщика, но&nbsp;ещё не&nbsp;у&nbsp;нас. После заказа привезём её на&nbsp;свой склад, соберём и&nbsp;отправим. Точный срок назовём при подтверждении.</p></details>
+      <details><summary>Что показывает шкала заряда?</summary><p>Заявленный запас хода модели на&nbsp;одной шкале от&nbsp;0 до&nbsp;150&nbsp;км, у&nbsp;всех моделей одинаковой. Деление — 30&nbsp;км. Так видно, какая модель проедет дальше, без сравнения цифр.</p></details>
+      <details><summary>Почему запас хода «заявленный»?</summary><p>Это цифра производителя для ровной дороги и&nbsp;тёплой погоды. С&nbsp;грузом, на&nbsp;подъёмах и&nbsp;в&nbsp;холод техника проезжает меньше.</p></details>
+      <details><summary>Нужны&nbsp;ли права и&nbsp;регистрация?</summary><p>Зависит от&nbsp;мощности и&nbsp;скорости конкретной модели. Сверим по&nbsp;её документам и&nbsp;скажем при заказе.</p></details>
+      <details><summary>Можно&nbsp;ли купить в&nbsp;рассрочку?</summary><p>Да. Нажмите «Запросить условия»: пришлём программы банка с&nbsp;взносом, сроком и&nbsp;платежом.</p></details>
     </div>
   </section>
 </main>

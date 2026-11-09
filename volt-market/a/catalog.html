@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Электроскутеры с доставкой по Беларуси: ВОЛЬТ МАРКЕТ (макет А)</title>
+<title>ВОЛЬТ МАРКЕТ: электротранспорт с доставкой по Беларуси (макет А)</title>
 <meta name="description" content="Электроскутеры, электровелосипеды, электросамокаты, электромотоциклы и квадроциклы с доставкой по Беларуси. Макет направления А.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C1E20">
 <link rel="icon" href="../shared/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../shared/fonts/fonts.css">
 <link rel="stylesheet" href="../shared/base.css">
@@ -19,10 +20,10 @@
 <header class="hd">
   <a class="logo" href="index.html" aria-label="ВОЛЬТ МАРКЕТ, на главную"><svg viewBox="0 0 290.5 167.75" width="62" height="36" aria-hidden="true"><use href="#mk"/></svg><span>ВОЛЬТ<br>МАРКЕТ</span></a>
   <nav class="hd-nav" aria-label="Категории">
-    <a href="catalog.html">Скутеры</a><a href="catalog.html">Велосипеды</a><a href="catalog.html">Самокаты</a><a href="catalog.html">Мотоциклы</a><a href="catalog.html">Квадроциклы</a><a href="catalog.html">Аксессуары</a>
+    <a href="catalog.html" aria-current="page">Скутеры</a><a href="catalog.html">Велосипеды</a><a href="catalog.html">Самокаты</a><a href="catalog.html">Мотоциклы</a><a href="catalog.html">Квадроциклы</a><a href="catalog.html">Аксессуары</a>
   </nav>
   <button class="hd-cat" type="button" aria-label="Каталог"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Каталог</span></button>
-  <form class="hd-search" role="search" action="catalog.html"><label class="vh" for="q">Поиск по каталогу</label><input id="q" name="q" type="search" placeholder="Модель или бренд"><button type="submit" aria-label="Найти"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></form>
+  <form class="hd-search" role="search" action="catalog.html"><label class="vh" for="q">Поиск по каталогу</label><input id="q" name="q" type="search" placeholder="Найти модель"><button type="submit" aria-label="Найти"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></form>
   <a class="hd-ic" href="#" aria-label="Сравнение"><svg viewBox="0 0 20 20" width="22" height="22" aria-hidden="true"><path d="M5 3v14M15 3v14M2 7h6M12 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><i data-cmp-n hidden></i></a>
   <a class="hd-ic" href="#" aria-label="Корзина"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><path d="M3 4h2.4l2 10.2h9.4L19 7H6.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.5" cy="18" r="1.4" fill="currentColor"/><circle cx="15.5" cy="18" r="1.4" fill="currentColor"/></svg><i data-cart-n hidden></i></a>
 </header>
@@ -42,6 +43,7 @@
         <p class="bar-n" data-found></p>
         <label class="bar-s"><span>Сортировка</span><select name="sort"><option value="order">Как в каталоге</option><option value="cheap">Сначала дешевле</option><option value="dear">Сначала дороже</option><option value="km">Дальше проедут</option></select></label>
       </div>
+      <div class="chips" data-chips aria-label="Выбранные фильтры"></div>
       <div class="grid3" data-grid></div>
     </section>
   </div>
