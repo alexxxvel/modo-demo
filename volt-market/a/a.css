@@ -7,8 +7,8 @@ h1, h2, h3, h4, .logo span, .cat-n, .pr, .kmv b, .bsl-v, .card-t, .cr-v b { font
 /* ---- шапка ---- */
 .hd { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: clamp(14px, 2vw, 32px); height: 68px; padding: 0 var(--gx); background: var(--g); color: #fff; }
 .logo { display: flex; align-items: center; gap: 11px; text-decoration: none; flex: none; min-height: 48px; }
-.logo svg { color: #fff; }
-.logo span { font-weight: 760; font-size: 15px; line-height: .98; font-stretch: 151%; }
+.logo svg, .ft-low svg { color: var(--lime-d); } /* знак партнёра (вариант 05), обведён один в один: лого/знак.svg */
+.logo span { font-weight: 780; font-size: 16px; line-height: .94; font-stretch: 151%; letter-spacing: -.01em; }
 .hd-nav { display: flex; gap: clamp(12px, 1.6vw, 26px); flex: 1; }
 .hd-nav a { text-decoration: none; font-size: 16px; font-weight: 500; padding: 12px 0; }
 @media (hover: hover) and (pointer: fine) { .hd-nav a:hover { box-shadow: inset 0 -2px 0 var(--lime-d); } }
@@ -25,7 +25,8 @@ h1, h2, h3, h4, .logo span, .cat-n, .pr, .kmv b, .bsl-v, .card-t, .cr-v b { font
   min-height: calc(100svh - 68px); max-height: 960px; }
 .hero-t { display: flex; flex-direction: column; justify-content: flex-start; gap: 22px; padding-top: clamp(14px, 2vh, 26px); }
 .hero h1 { font-size: clamp(34px, min(3.5vw, 6.6vh), 58px); line-height: 1; font-weight: 760; font-stretch: 100%; }
-.hero-t p { font-size: clamp(17px, 1.3vw, 19px); color: var(--t2); max-width: 30em; }
+.hero-t p { font-size: clamp(17px, 1.3vw, 19px); line-height: 1.6; color: var(--t2); max-width: 30em; }
+.hero-t { justify-content: space-between; } .hero-top { display: grid; gap: 22px; } /* колонка заканчивается вместе с плитами: заголовок сверху, легенда у низа второго ряда */
 .hero-t .btn { align-self: flex-start; min-height: 54px; padding: 0 28px; font-size: 17px; }
 .legend { display: grid; grid-template-columns: 110px 1fr; align-items: center; gap: 12px; margin-top: 6px; font-size: 15px; color: var(--t2); max-width: 30em; }
 .legend b { color: var(--t); font-stretch: 132%; }
@@ -138,7 +139,7 @@ h1, h2, h3, h4, .logo span, .cat-n, .pr, .kmv b, .bsl-v, .card-t, .cr-v b { font
 .ft-cols a { text-decoration: none; min-height: 44px; display: flex; align-items: center; }
 .ft-cols .todo { color: #C9CDD1; padding: 10px 0; }
 .ft-low { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid #3A3E42; font-size: 15px; color: #AEB3B8; }
-.ft-low svg { color: #fff; flex: none; }
+.ft-low svg { flex: none; }
 
 /* ---- каталог ---- */
 .ctl { padding: 18px var(--gx) 0; }
@@ -205,7 +206,7 @@ h1, h2, h3, h4, .logo span, .cat-n, .pr, .kmv b, .bsl-v, .card-t, .cr-v b { font
 /* ---- телефон: перевод, а не столбик ---- */
 @media (max-width: 720px) {
   .hd { height: 56px; gap: 6px; }
-  .logo span { display: none; } .logo svg { width: 46px; height: 29px; }
+  .logo span { display: none; } .logo svg { width: 55px; height: 32px; }
   .hd-cat { padding: 0 10px; } .hd-cat span { display: none; }
   .hd-search input { height: 44px; font-size: 16px; }
   .hd-ic[aria-label="Сравнение"] { display: none; }

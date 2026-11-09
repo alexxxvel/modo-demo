@@ -52,7 +52,7 @@ ul, ol { padding: 0; list-style: none; }
 /* Ползунок-батарея: «сколько хотите проезжать» — тот же приём, что шкала в карточке, только крупно и рукой */
 .bsl { display: grid; gap: 8px; }
 .bsl-v { font-size: 16px; } .bsl-v b { font-variant-numeric: tabular-nums; }
-.bsl-t { position: relative; height: 44px; }
+.bsl-t { position: relative; height: 44px; margin-inline: 10px; } /* ручка у края не срезается краем колонки */
 .bsl-t .chg { position: absolute; inset: 8px 0; height: 28px; border-radius: var(--r3); background: #DDE1E4; transition: background-color var(--d-ui) var(--ease-out); }
 .bsl-t .chg::after { background: repeating-linear-gradient(90deg, transparent 0 calc(20% - 1px), #A9AFB5 calc(20% - 1px) 20%); }
 .bsl.has .bsl-t .chg { background: var(--g); } .bsl.has .bsl-t .chg::after { background: repeating-linear-gradient(90deg, transparent 0 calc(20% - 2px), var(--g) calc(20% - 2px) 20%); }
