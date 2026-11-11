@@ -48,6 +48,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Асity_650.jpg",
 "cut": "assets/p/ps-Асity_650-cut.webp",
+"gal": [
+[
+"assets/g/ps-Асity_650-1.jpg",
+false
+],
+[
+"assets/g/ps-Асity_650-2.jpg",
+false
+],
+[
+"assets/g/ps-Асity_650-3.jpg",
+false
+],
+[
+"assets/g/ps-Асity_650-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-avm/elektroskuter_trekhkolesnyy_avm_city_650/",
 "power": 600.0,
 "range": 55.0,
@@ -71,6 +95,18 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_GT_16_15.jpg",
 "cut": "assets/p/ps-Shtenli_GT_16_15-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_GT_16_15-1.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/elektroskuter_shtenli_citygo_model_16_maxi_range_li_ion_48v_12ah/",
 "power": 250.0,
 "range": 40.0,
@@ -94,6 +130,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_Model_3_Cruise2.jpg",
 "cut": "assets/p/ps-Shtenli_Model_3_Cruise2-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_Model_3_Cruise2-1.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_3_Cruise2-2.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_3_Cruise2-3.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_3_Cruise2-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/elektroskuter_shtenli_cruise_3_sla_/",
 "power": 250.0,
 "range": 40.0,
@@ -117,6 +177,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_Model_3_Cruise.jpg",
 "cut": "assets/p/ps-Shtenli_Model_3_Cruise-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_Model_3_Cruise-1.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_3_Cruise-2.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_3_Cruise-3.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_3_Cruise-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/elektroskuter_shtenli_cruise_model_3_bystrosem/",
 "power": 250.0,
 "range": 40.0,
@@ -140,6 +224,13 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli14.jpg",
 "cut": "assets/p/ps-Shtenli14-cut.webp",
+"gal": [],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/elektroskuter_shtenli_model_14/",
 "power": 250.0,
 "range": 40.0,
@@ -163,6 +254,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Model031-48.jpg",
 "cut": "assets/p/ps-Model031-48-cut.webp",
+"gal": [
+[
+"assets/g/ps-Model031-48-1.jpg",
+false
+],
+[
+"assets/g/ps-Model031-48-2.jpg",
+true
+],
+[
+"assets/g/ps-Model031-48-3.jpg",
+false
+],
+[
+"assets/g/ps-Model031-48-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/elektroskuter_trekhkolesnyy_shtenli_a031_48v_20ah_li_ion/",
 "power": 250.0,
 "range": 40.0,
@@ -186,6 +301,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Model031_Li.jpg",
 "cut": "assets/p/ps-Model031_Li-cut.webp",
+"gal": [
+[
+"assets/g/ps-Model031_Li-1.jpg",
+false
+],
+[
+"assets/g/ps-Model031_Li-2.jpg",
+false
+],
+[
+"assets/g/ps-Model031_Li-3.jpg",
+false
+],
+[
+"assets/g/ps-Model031_Li-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/elektroskuter_trekhkolesnyy_shtenli_a031_60v_20ah_li_ion/",
 "power": 250.0,
 "range": 50.0,
@@ -209,6 +348,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Model_44.jpg",
 "cut": "assets/p/ps-Model_44-cut.webp",
+"gal": [
+[
+"assets/g/ps-Model_44-1.jpg",
+true
+],
+[
+"assets/g/ps-Model_44-2.jpg",
+false
+],
+[
+"assets/g/ps-Model_44-3.jpg",
+false
+],
+[
+"assets/g/ps-Model_44-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/elektrotritsikl_s_kryshey_shtenli_model_44/",
 "power": 1500.0,
 "range": 50.0,
@@ -232,6 +395,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_Model_11.jpg",
 "cut": "assets/p/ps-Shtenli_Model_11-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_Model_11-1.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_11-2.jpg",
+true
+],
+[
+"assets/g/ps-Shtenli_Model_11-3.jpg",
+true
+],
+[
+"assets/g/ps-Shtenli_Model_11-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/eletkroskuter_shtenli_model_gt_11_li_ion/",
 "power": 250.0,
 "range": 40.0,
@@ -255,6 +442,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Model90.jpg",
 "cut": "assets/p/ps-Model90-cut.webp",
+"gal": [
+[
+"assets/g/ps-Model90-1.jpg",
+true
+],
+[
+"assets/g/ps-Model90-2.jpg",
+true
+],
+[
+"assets/g/ps-Model90-3.jpg",
+false
+],
+[
+"assets/g/ps-Model90-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/gruzovoj-jelektroskuter-shtenli-model-90-60v20ah/",
 "power": 700.0,
 "range": 50.0,
@@ -278,6 +489,26 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_Model_15.jpg",
 "cut": "assets/p/ps-Shtenli_Model_15-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_Model_15-1.jpg",
+true
+],
+[
+"assets/g/ps-Shtenli_Model_15-2.jpg",
+true
+],
+[
+"assets/g/ps-Shtenli_Model_15-3.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/jelektroskuter-shtenli-citygo-model-15-maxi-range/",
 "power": 250.0,
 "range": 60.0,
@@ -301,6 +532,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_Model_16.jpg",
 "cut": "assets/p/ps-Shtenli_Model_16-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_Model_16-1.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_16-2.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_16-3.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_16-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/jelektroskuter-shtenli-citygo-model-16-maxi-range-restajling/",
 "power": 250.0,
 "range": 60.0,
@@ -324,6 +579,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_Model_21-pro.jpg",
 "cut": "assets/p/ps-Shtenli_Model_21-pro-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_Model_21-pro-1.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_21-pro-2.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_21-pro-3.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_21-pro-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/jelektroskuter-shtenli-citygo-model-21-performance-pro/",
 "power": 250.0,
 "range": 75.0,
@@ -347,6 +626,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_Model_29.jpg",
 "cut": "assets/p/ps-Shtenli_Model_29-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_Model_29-1.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_29-2.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_29-3.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_29-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electroscooters/electroscooters-shtenli/jelektroskuter-shtenli-citygo-model-29-performance-new/",
 "power": 250.0,
 "range": 65.0,
@@ -370,6 +673,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-AVMCity.jpg",
 "cut": "assets/p/ps-AVMCity-cut.webp",
+"gal": [
+[
+"assets/g/ps-AVMCity-1.jpg",
+false
+],
+[
+"assets/g/ps-AVMCity-2.jpg",
+false
+],
+[
+"assets/g/ps-AVMCity-3.jpg",
+false
+],
+[
+"assets/g/ps-AVMCity-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeavm/elektrovelosiped_avm_city_24/",
 "power": 250.0,
 "range": 40.0,
@@ -393,6 +720,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-AVM_Fat.jpg",
 "cut": "assets/p/ps-AVM_Fat-cut.webp",
+"gal": [
+[
+"assets/g/ps-AVM_Fat-1.jpg",
+false
+],
+[
+"assets/g/ps-AVM_Fat-2.jpg",
+false
+],
+[
+"assets/g/ps-AVM_Fat-3.jpg",
+false
+],
+[
+"assets/g/ps-AVM_Fat-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeavm/elektrovelosiped_avm_e_alfa_fat/",
 "power": 240.0,
 "range": 65.0,
@@ -416,6 +767,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-AVM-INTRO.jpg",
 "cut": "assets/p/ps-AVM-INTRO-cut.webp",
+"gal": [
+[
+"assets/g/ps-AVM-INTRO-1.jpg",
+false
+],
+[
+"assets/g/ps-AVM-INTRO-2.jpg",
+false
+],
+[
+"assets/g/ps-AVM-INTRO-3.jpg",
+false
+],
+[
+"assets/g/ps-AVM-INTRO-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeavm/elektrovelosiped_avm_intro_city/",
 "power": 250.0,
 "range": 40.0,
@@ -439,6 +814,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-avm_intro.jpg",
 "cut": "assets/p/ps-avm_intro-cut.webp",
+"gal": [
+[
+"assets/g/ps-avm_intro-1.jpg",
+false
+],
+[
+"assets/g/ps-avm_intro-2.jpg",
+false
+],
+[
+"assets/g/ps-avm_intro-3.jpg",
+false
+],
+[
+"assets/g/ps-avm_intro-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeavm/elektrovelosiped_avm_intro_fat/",
 "power": 500.0,
 "range": 55.0,
@@ -462,6 +861,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-AVM20.jpg",
 "cut": "assets/p/ps-AVM20-cut.webp",
+"gal": [
+[
+"assets/g/ps-AVM20-1.jpg",
+false
+],
+[
+"assets/g/ps-AVM20-2.jpg",
+false
+],
+[
+"assets/g/ps-AVM20-3.jpg",
+false
+],
+[
+"assets/g/ps-AVM20-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeavm/jelektrovelosiped-avm-e-alfa-20/",
 "power": 250.0,
 "range": 50.0,
@@ -485,6 +908,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-AVM-Travel.jpg",
 "cut": "assets/p/ps-AVM-Travel-cut.webp",
+"gal": [
+[
+"assets/g/ps-AVM-Travel-1.jpg",
+true
+],
+[
+"assets/g/ps-AVM-Travel-2.jpg",
+true
+],
+[
+"assets/g/ps-AVM-Travel-3.jpg",
+true
+],
+[
+"assets/g/ps-AVM-Travel-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeavm/jelektrovelosiped-avm-e-alfa-travel/",
 "power": 240.0,
 "range": 75.0,
@@ -508,6 +955,22 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-AVM24.jpg",
 "cut": "assets/p/ps-AVM24-cut.webp",
+"gal": [
+[
+"assets/g/ps-AVM24-1.jpg",
+true
+],
+[
+"assets/g/ps-AVM24-2.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeavm/trekhkolesnyy_elektrovelosiped_avm_e_alfa_trike_24/",
 "power": 250.0,
 "range": 50.0,
@@ -531,6 +994,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli_Model_9st.jpg",
 "cut": "assets/p/ps-Shtenli_Model_9st-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli_Model_9st-1.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_9st-2.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_9st-3.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli_Model_9st-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeshtenli/elektroskuter_shtenli_citygo_model_9_standart_range_bystrosem_250w/",
 "power": 250.0,
 "range": 40.0,
@@ -554,6 +1041,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shtenli-Y.jpg",
 "cut": "assets/p/ps-Shtenli-Y-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shtenli-Y-1.jpg",
+true
+],
+[
+"assets/g/ps-Shtenli-Y-2.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli-Y-3.jpg",
+false
+],
+[
+"assets/g/ps-Shtenli-Y-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeshtenli/elektrovelosiped_shtenli_apache_y/",
 "power": 250.0,
 "range": 50.0,
@@ -577,6 +1088,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-ShtenliGT10.jpg",
 "cut": "assets/p/ps-ShtenliGT10-cut.webp",
+"gal": [
+[
+"assets/g/ps-ShtenliGT10-1.jpg",
+true
+],
+[
+"assets/g/ps-ShtenliGT10-2.jpg",
+true
+],
+[
+"assets/g/ps-ShtenliGT10-3.jpg",
+true
+],
+[
+"assets/g/ps-ShtenliGT10-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrovelosipedi/electrobikeshtenli/elektrovelosiped_shtenli_model_gt10/",
 "power": 250.0,
 "range": 50.0,
@@ -600,6 +1135,17 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-MOTIKO__G1.jpg",
 "cut": "assets/p/ps-MOTIKO__G1-cut.webp",
+"gal": [],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+],
+[
+"Сиденье",
+"С Сиденьем"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/elektrosamokaty_motiko/elektrosamokat_motiko_g1/",
 "power": 240.0,
 "range": 40.0,
@@ -623,6 +1169,17 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-MOTIKO__G2.jpg",
 "cut": "assets/p/ps-MOTIKO__G2-cut.webp",
+"gal": [],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+],
+[
+"Сиденье",
+"С Сиденьем"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/elektrosamokaty_motiko/elektrosamokat_motiko_g2/",
 "power": 240.0,
 "range": 40.0,
@@ -646,6 +1203,17 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-MOTIKO__G3PRO.jpg",
 "cut": "assets/p/ps-MOTIKO__G3PRO-cut.webp",
+"gal": [],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+],
+[
+"Сиденье",
+"Без Сиденья"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/elektrosamokaty_motiko/elektrosamokat_motiko_g3_pro/",
 "power": 240.0,
 "range": 45.0,
@@ -669,6 +1237,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-MOTIKO__M4.jpg",
 "cut": "assets/p/ps-MOTIKO__M4-cut.webp",
+"gal": [
+[
+"assets/g/ps-MOTIKO__M4-1.jpg",
+true
+],
+[
+"assets/g/ps-MOTIKO__M4-2.jpg",
+false
+],
+[
+"assets/g/ps-MOTIKO__M4-3.jpg",
+false
+],
+[
+"assets/g/ps-MOTIKO__M4-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+],
+[
+"Сиденье",
+"Без Сиденья"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/elektrosamokaty_motiko/elektrosamokat_motiko_m4/",
 "power": 240.0,
 "range": 35.0,
@@ -692,6 +1288,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-SMD-7.jpg",
 "cut": "assets/p/ps-SMD-7-cut.webp",
+"gal": [
+[
+"assets/g/ps-SMD-7-1.jpg",
+true
+],
+[
+"assets/g/ps-SMD-7-2.jpg",
+true
+],
+[
+"assets/g/ps-SMD-7-3.jpg",
+true
+],
+[
+"assets/g/ps-SMD-7-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Задний"
+],
+[
+"Сиденье",
+"С Сиденьем"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/elektrosamokaty_smd/elektrosamokat_smd_m7_/",
 "power": 240.0,
 "range": 40.0,
@@ -715,6 +1339,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-samokat-F2.jpg",
 "cut": "assets/p/ps-samokat-F2-cut.webp",
+"gal": [
+[
+"assets/g/ps-samokat-F2-1.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F2-2.jpg",
+false
+],
+[
+"assets/g/ps-samokat-F2-3.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F2-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние"
+],
+[
+"Сиденье",
+"Без Сиденья"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/jelektrosamokaty-kugoo/elektrosamokat_kugoo_f2_max/",
 "power": 800.0,
 "range": 55.0,
@@ -738,6 +1390,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-samokat-F3Plus.jpg",
 "cut": "assets/p/ps-samokat-F3Plus-cut.webp",
+"gal": [
+[
+"assets/g/ps-samokat-F3Plus-1.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3Plus-2.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3Plus-3.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3Plus-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние"
+],
+[
+"Сиденье",
+"Без Сиденья"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/jelektrosamokaty-kugoo/elektrosamokat_kugoo_f3_plus/",
 "power": 1000.0,
 "range": 80.0,
@@ -761,6 +1441,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-samokat-F3Pro.jpg",
 "cut": "assets/p/ps-samokat-F3Pro-cut.webp",
+"gal": [
+[
+"assets/g/ps-samokat-F3Pro-1.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3Pro-2.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3Pro-3.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3Pro-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+],
+[
+"Сиденье",
+"Без Сиденья"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/jelektrosamokaty-kugoo/elektrosamokat_kugoo_f3_pro/",
 "power": 600.0,
 "range": 60.0,
@@ -784,6 +1492,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-samokat-F3ProMax.jpg",
 "cut": "assets/p/ps-samokat-F3ProMax-cut.webp",
+"gal": [
+[
+"assets/g/ps-samokat-F3ProMax-1.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3ProMax-2.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3ProMax-3.jpg",
+true
+],
+[
+"assets/g/ps-samokat-F3ProMax-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+],
+[
+"Сиденье",
+"Без Сиденья"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/jelektrosamokaty-kugoo/elektrosamokat_kugoo_f3_pro_max/",
 "power": 2200.0,
 "range": 70.0,
@@ -807,6 +1543,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-samokat-_F4Pro.jpg",
 "cut": "assets/p/ps-samokat-_F4Pro-cut.webp",
+"gal": [
+[
+"assets/g/ps-samokat-_F4Pro-1.jpg",
+true
+],
+[
+"assets/g/ps-samokat-_F4Pro-2.jpg",
+true
+],
+[
+"assets/g/ps-samokat-_F4Pro-3.jpg",
+true
+],
+[
+"assets/g/ps-samokat-_F4Pro-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+],
+[
+"Сиденье",
+"Без Сиденья"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/jelektrosamokaty-kugoo/elektrosamokat_kugoo_f4_pro/",
 "power": 2800.0,
 "range": 60.0,
@@ -830,6 +1594,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-samokat-kugoo-l2.jpg",
 "cut": "assets/p/ps-samokat-kugoo-l2-cut.webp",
+"gal": [
+[
+"assets/g/ps-samokat-kugoo-l2-1.jpg",
+true
+],
+[
+"assets/g/ps-samokat-kugoo-l2-2.jpg",
+true
+],
+[
+"assets/g/ps-samokat-kugoo-l2-3.jpg",
+true
+],
+[
+"assets/g/ps-samokat-kugoo-l2-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние"
+],
+[
+"Сиденье",
+"Без Сиденья"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/jelektrosamokaty-kugoo/elektrosamokat_kugoo_l2_pro_plus/",
 "power": 350.0,
 "range": 30.0,
@@ -853,6 +1645,34 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-samokat-speed_pro.jpg",
 "cut": "assets/p/ps-samokat-speed_pro-cut.webp",
+"gal": [
+[
+"assets/g/ps-samokat-speed_pro-1.jpg",
+true
+],
+[
+"assets/g/ps-samokat-speed_pro-2.jpg",
+true
+],
+[
+"assets/g/ps-samokat-speed_pro-3.jpg",
+true
+],
+[
+"assets/g/ps-samokat-speed_pro-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+],
+[
+"Сиденье",
+"С Сиденьем"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electrosamokaty/jelektrosamokaty-kugoo/elektrosamokat_kugoo_max_speed_pro/",
 "power": 600.0,
 "range": 40.0,
@@ -876,6 +1696,30 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-SB-Spdr.jpg",
 "cut": "assets/p/ps-SB-Spdr-cut.webp",
+"gal": [
+[
+"assets/g/ps-SB-Spdr-1.jpg",
+true
+],
+[
+"assets/g/ps-SB-Spdr-2.jpg",
+true
+],
+[
+"assets/g/ps-SB-Spdr-3.jpg",
+true
+],
+[
+"assets/g/ps-SB-Spdr-4.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electromotorcycles/elektromototsikl_smart_balance_spyder_72v_45ah/",
 "power": 3000.0,
 "range": 75.0,
@@ -899,6 +1743,26 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Kugoo_02Pro.jpg",
 "cut": "assets/p/ps-Kugoo_02Pro-cut.webp",
+"gal": [
+[
+"assets/g/ps-Kugoo_02Pro-1.jpg",
+true
+],
+[
+"assets/g/ps-Kugoo_02Pro-2.jpg",
+true
+],
+[
+"assets/g/ps-Kugoo_02Pro-3.jpg",
+true
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/electromotorcycles/elektropitbayk_kugoo_wish_02_pro/",
 "power": 2500.0,
 "range": 60.0,
@@ -922,6 +1786,30 @@ window.VM_DATA = {
 "stock": "предзаказ",
 "img": "assets/p/ps-Blade-350.jpg",
 "cut": "assets/p/ps-Blade-350-cut.webp",
+"gal": [
+[
+"assets/g/ps-Blade-350-1.jpg",
+false
+],
+[
+"assets/g/ps-Blade-350-2.jpg",
+false
+],
+[
+"assets/g/ps-Blade-350-3.jpg",
+false
+],
+[
+"assets/g/ps-Blade-350-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/elektrokvadrotsikly/elektrokvadrotsikly_avm/elektrokvadrotsikl_avm_cybertruck/",
 "power": 350.0,
 "range": 18.0,
@@ -945,6 +1833,30 @@ window.VM_DATA = {
 "stock": "предзаказ",
 "img": "assets/p/ps-FOX-800-NOVA.jpg",
 "cut": "assets/p/ps-FOX-800-NOVA-cut.webp",
+"gal": [
+[
+"assets/g/ps-FOX-800-NOVA-1.jpg",
+true
+],
+[
+"assets/g/ps-FOX-800-NOVA-2.jpg",
+false
+],
+[
+"assets/g/ps-FOX-800-NOVA-3.jpg",
+false
+],
+[
+"assets/g/ps-FOX-800-NOVA-4.jpg",
+false
+]
+],
+"more": [
+[
+"Амортизаторы",
+"Передние и задние"
+]
+],
 "src": "https://profi-shtenli.by/shop/electrotransport/elektrokvadrotsikly/elektrokvadrotsikly_avm/elektrokvadrotsikl_avm_nova/",
 "power": 800.0,
 "range": 22.0,
@@ -968,6 +1880,13 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Lion.jpg",
 "cut": "assets/p/ps-Lion-cut.webp",
+"gal": [
+[
+"assets/g/ps-Lion-1.jpg",
+false
+]
+],
+"more": [],
 "src": "https://profi-shtenli.by/shop/komplektyyshie-k-electrotransporty/akkumuljatornaja-batareja-dlja-jelektroskutera-osnovnaja-60v-20ah/",
 "power": null,
 "range": null,
@@ -991,6 +1910,17 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-Shlem1-1.jpg",
 "cut": "assets/p/ps-Shlem1-1-cut.webp",
+"gal": [
+[
+"assets/g/ps-Shlem1-1-1.jpg",
+false
+],
+[
+"assets/g/ps-Shlem1-1-2.jpg",
+false
+]
+],
+"more": [],
 "src": "https://profi-shtenli.by/shop/komplektyyshie-k-electrotransporty/shlem-ad-otkrytogo-tipa/",
 "power": null,
 "range": null,
@@ -1014,6 +1944,13 @@ window.VM_DATA = {
 "stock": "в наличии",
 "img": "assets/p/ps-tent_avm.jpg",
 "cut": "assets/p/ps-tent_avm-cut.webp",
+"gal": [
+[
+"assets/g/ps-tent_avm-1.jpg",
+false
+]
+],
+"more": [],
 "src": "https://profi-shtenli.by/shop/komplektyyshie-k-electrotransporty/tent_avm_zakrytyy/",
 "power": null,
 "range": null,
@@ -1037,6 +1974,8 @@ window.VM_DATA = {
 "stock": "предзаказ",
 "img": "assets/p/ps-Lion-1.jpg",
 "cut": "assets/p/ps-Lion-1-cut.webp",
+"gal": [],
+"more": [],
 "src": "https://profi-shtenli.by/shop/komplektyyshie-k-electrotransporty/akkumuljatornaja-batareja-dlja-jelektroskutera-osnovnaja-kvadratnaja-60v-20ah/",
 "power": null,
 "range": null,
@@ -1060,6 +1999,13 @@ window.VM_DATA = {
 "stock": "предзаказ",
 "img": "assets/p/ps-Н_Д.jpg",
 "cut": "assets/p/ps-Н_Д-cut.webp",
+"gal": [
+[
+"assets/g/ps-Н_Д-1.jpg",
+false
+]
+],
+"more": [],
 "src": "https://profi-shtenli.by/shop/komplektyyshie-k-electrotransporty/chehol-dlja-jelektroskutera/",
 "power": null,
 "range": null,
@@ -1083,6 +2029,21 @@ window.VM_DATA = {
 "stock": "",
 "img": "assets/p/ps-Н_Д.jpg",
 "cut": "assets/p/ps-Н_Д-cut.webp",
+"gal": [
+[
+"assets/g/ps-Н_Д-1.jpg",
+false
+],
+[
+"assets/g/ps-Н_Д-2.jpg",
+true
+],
+[
+"assets/g/ps-Н_Д-3.jpg",
+false
+]
+],
+"more": [],
 "src": "https://profi-shtenli.by/shop/komplektyyshie-k-electrotransporty/kofr-bagazhnik-dlja-jelektroskutera/",
 "power": null,
 "range": null,

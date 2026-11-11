@@ -77,21 +77,38 @@
       cb.hidden = !cmpl.length;
       var list = cb.querySelector('[data-cmplist]');
       if (list) list.innerHTML = cmpl.map(function (id) { var it = byId(id); return it ? '<li><img src="' + ROOT + it.cut + '" alt="" width="56" height="40"><span>' + esc(it.model) + '</span></li>' : ''; }).join('') +
-        (cmpl.length < 4 ? '<li class="cmp-slot">ещё ' + (4 - cmpl.length) + '</li>' : '');
+        (cmpl.length < 3 ? '<li class="cmp-slot">ещё ' + (3 - cmpl.length) + '</li>' : '');
     }
   }
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-add]');
-    if (a) { var i = cart.indexOf(a.dataset.add); if (i >= 0) cart.splice(i, 1); else cart.push(a.dataset.add); save('vm-cart', cart); syncBadges(); return; }
+    if (a) { var i = cart.indexOf(a.dataset.add); if (i >= 0) cart.splice(i, 1); else { cart.push(a.dataset.add); added(a.dataset.add); } save('vm-cart', cart); syncBadges(); document.dispatchEvent(new Event('vm:cart')); return; }
     var c = e.target.closest('[data-cmp]');
     if (c) {
       var j = cmpl.indexOf(c.dataset.cmp);
-      if (j >= 0) cmpl.splice(j, 1); else if (cmpl.length < 4) cmpl.push(c.dataset.cmp);
+      if (j >= 0) cmpl.splice(j, 1); else if (cmpl.length < 3) cmpl.push(c.dataset.cmp);
       else { var cb = document.querySelector('[data-cmpbar]'); if (cb) { cb.classList.remove('shake'); void cb.offsetWidth; cb.classList.add('shake'); } }
       save('vm-cmp', cmpl); syncBadges(); return;
     }
     if (e.target.closest('[data-cmpclear]')) { cmpl = []; save('vm-cmp', cmpl); syncBadges(); }
   });
+
+  /* лист «добавлено»: что положили и куда дальше; закрывается сам через 5 с, крестиком и клавишей Esc */
+  var addT;
+  function added(id) {
+    if (V !== 'a') return;
+    var it = byId(id); if (!it) return;
+    var el = document.querySelector('[data-added]');
+    if (!el) { el = document.createElement('div'); el.className = 'added'; el.setAttribute('data-added', ''); el.setAttribute('role', 'status'); document.body.appendChild(el); }
+    el.innerHTML = '<img src="' + ROOT + it.cut + '" alt="" width="72" height="52"><p><b>В корзине</b><span>' + esc((it.brand ? it.brand + ' ' : '') + it.model) + '</span></p>' +
+      '<a class="btn btn-buy btn-sm" href="korzina.html">Оформить</a><button class="added-x" type="button" aria-label="Закрыть" data-added-x></button>';
+    el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+    clearTimeout(addT); addT = setTimeout(function () { el.classList.remove('on'); }, 5000);
+  }
+  document.addEventListener('click', function (e) { if (e.target.closest('[data-added-x]')) { var el = document.querySelector('[data-added]'); if (el) el.classList.remove('on'); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var el = document.querySelector('[data-added]'); if (el) el.classList.remove('on'); } });
+  window.VM_cart = function () { return cart; }; window.VM_cartSet = function (c) { cart = c; save('vm-cart', cart); syncBadges(); };
+  window.VM_cmp = function () { return cmpl; }; window.VM_cmpSet = function (c) { cmpl = c; save('vm-cmp', cmpl); syncBadges(); };
 
   /* ---- А: карточка ---- */
   function cardA(it) {
@@ -99,7 +116,7 @@
     var form = it.c === 'kick' || it.c === 'bike' ? 'tall' : (it.sub && it.sub !== 'Двухколёсные') || it.c === 'quad' ? 'wide' : 'mid'; // высота фото по виду: самокат выше, трицикл ниже
     return '<article class="card" data-id="' + it.id + '" data-form="' + form + '">' +
       '<div class="card-ph"><img src="' + ROOT + it.cut + '" alt="" loading="lazy" width="600" height="420"></div>' +
-      '<div class="card-b"><h3 class="card-t"><a href="#"><span class="card-brand">' + esc(it.brand || '') + '</span>' + esc(it.model) + '</a></h3>' +
+      '<div class="card-b"><h3 class="card-t"><a href="tovar.html?id=' + encodeURIComponent(it.id) + '"><span class="card-brand">' + esc(it.brand || '') + '</span>' + esc(it.model) + '</a></h3>' +
       charge(it) + (sp.length ? '<p class="card-sp">' + '<span>' + sp.join('</span><i aria-hidden="true"></i><span>') + '</span>' + '</p>' : '') + (it.c === 'acc' ? '' : cmpRow(it)) +
       '<div class="card-f"><div class="card-pr">' + price(it) + st(it) + '</div>' + buy(it) + '</div></div></article>';
   }
