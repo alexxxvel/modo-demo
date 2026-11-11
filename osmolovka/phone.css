@@ -104,7 +104,7 @@
     scroll-padding-inline: 16px; scrollbar-width: none; overscroll-behavior-x: contain; }
   .box__pair::-webkit-scrollbar { display: none; }
   .box__pair figure { scroll-snap-align: start; }
-  .box__pair img { height: min(52svh, 420px); }
+  .box__pair img { height: min(34svh, 300px); }   /* раздел «Бокс» ≤ 1,25 экрана (было 1,38 с кадрами 52svh) */
   .box__cap span { display: block !important; }
 }
 
@@ -126,4 +126,9 @@
 /* 360 px: кузов в записи — тот же кегль 14, что в ценах (правило кузова сильнее общего .seg button) */
 @media (max-width: 380px) {
   .book .pick[data-step="1"] .seg button { font-size: 14px; padding: 0 4px; letter-spacing: -.01em; }
+}
+
+/* 360×740: «Бокс» 1,29 экрана — главный кадр пены чуть ниже на низких телефонах */
+@media (max-width: 760px) and (max-height: 760px) {
+  .box__main img { height: min(70svh, 560px); }
 }
