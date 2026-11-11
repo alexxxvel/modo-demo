@@ -1,0 +1,112 @@
+/* Osmolovka — «день и ночь» (выбор разработчика 11.11.2026, вариант В: партнёр — «сайт хороший, но темноватый»).
+   Первый экран и бокс — ночь с лампами; запись, цены и «как найти» — светлый бетон: читать и выбирать легче, особенно с телефона днём.
+   Те же токены, переопределённые внутри светлых разделов; лампы на светлом — графитовые трубки, выбранное — графит с кольцом. Красный — только у главного действия. */
+.book, .price, .find {
+  --night: #E6E9EC; --wall: #FFFFFF; --wall-2: #F2F4F6; --line: #D6DBE0;
+  --lamp: #14171B; --steel: #5A616A; --dim: #6B727B; --off: #C9CED4; --busy: #D9A7AA;
+  background: #E6E9EC; color: #14171B;
+}
+.book ::selection, .price ::selection, .find ::selection { background: #14171B; color: #F4F6F7; }
+
+/* тексты, что были светло-серыми на графите */
+.book .seg button, .price .seg button, .book .svc__more, .book .card__terms .link, .book .card__rules,
+.book .confirm__alt .link, .book .line:focus-within .line__l, .book .line.is-ok .line__l, .book .done__when { color: #343A41; }
+.book .card__rows dd.is-empty { color: #6B727B; }
+.book .confirm__err, .book .line.is-bad .line__l { color: #B71F25; }
+.book .line.is-bad .line__tube { background: #D9252B; box-shadow: none; }
+
+/* выбранное — графит со светлым текстом: подписи внутри светлеют */
+.book .svc button[aria-checked="true"] .svc__dur, .book .svc button[aria-checked="true"] .svc__price small,
+.book .days button[aria-checked="true"] span, .book .days button[aria-checked="true"] .days__count,
+.book .days button[aria-checked="true"] .days__count small { color: #AEB5BC; }
+.book .days button[aria-checked="true"] .days__count b { color: #F4F6F7; }
+.book .days button[aria-checked="true"] .days__fill { background: linear-gradient(90deg, #F4F6F7 var(--f), #4B525A var(--f)); }
+.book .days__fill { background: linear-gradient(90deg, #14171B var(--f), #D6DBE0 var(--f)); }
+.book .svc__tube { background: #C9CED4; }
+.book .svc button[aria-checked="true"] .svc__tube { background: #F4F6F7; }
+.book .svc button[aria-checked="true"] { box-shadow: 0 10px 28px rgba(20, 23, 27, .18); }
+@media (hover: hover) and (pointer: fine) { .book .svc button:hover .svc__tube { background: #5A616A; } }
+
+.book .seg button[aria-checked="true"], .price .seg button[aria-checked="true"] { color: #F4F6F7; }   /* выбранный кузов: светлый текст на графите (линт: контраст 1,56) */
+/* плитки и кнопки — белые на бетоне, тонкий край вместо свечения */
+.book .seg button, .book .svc button, .book .days button, .price .seg button { box-shadow: inset 0 0 0 1px #D6DBE0; }
+.book .seg button[aria-checked="true"], .book .svc button[aria-checked="true"], .book .days button[aria-checked="true"], .price .seg button[aria-checked="true"] { box-shadow: none; }
+.book .pick.is-now .seg button:not([aria-checked="true"]), .book .pick.is-now .svc button:not([aria-checked="true"]),
+.book .pick.is-now .days button:not([aria-checked="true"]) { background: #FFFFFF; color: #14171B; box-shadow: inset 0 0 0 1px #BFC5CC, 0 2px 8px rgba(20, 23, 27, .06); }
+@media (hover: hover) and (pointer: fine) {
+  .book .seg button:hover, .book .svc button:hover, .book .days button:hover, .price .seg button:hover { background: #F7F8F9; color: #14171B; }
+}
+
+/* шаги: рамка текущего шага графитом, номер шага — графитовый кружок */
+.book .pick { isolation: isolate; }
+.book .pick::before { z-index: -1; box-shadow: 0 0 0 1px rgba(20, 23, 27, .45); }   /* подложка шага — под кнопками: белая на светлом закрывала их и всё бледнело */
+.book .pick.is-now::before { background: rgba(255, 255, 255, .55); box-shadow: 0 0 0 1.5px #14171B, 0 16px 40px rgba(20, 23, 27, .08); }
+.book .pick__n { box-shadow: inset 0 0 0 1px #B9C0C7; }
+.book .pick.is-now .pick__n { box-shadow: none; }
+.book .pick.is-done .pick__n { background: #D6DBE0; color: #14171B; }
+.book .pick.is-later { opacity: .45; filter: none; }
+.book .prog__bar i.is-now { background: #8A919A; }
+
+/* сутки лампами на светлом: стена — светлый рифлёный металл, свободный час — графитовая трубка, занятый — тонкая блёклая красная */
+.book .hours { background: linear-gradient(180deg, rgba(20, 23, 27, .06), rgba(20, 23, 27, 0) 2px) 0 30px/100% var(--th) no-repeat,
+  repeating-linear-gradient(180deg, #DCE0E4 0 6px, #D2D7DC 6px 9px) 0 30px/100% var(--th) no-repeat; }
+.book .hr.is-free .hr__tube { background: linear-gradient(90deg, #2E343B, #14171B 50%, #2E343B); box-shadow: 0 6px 14px rgba(20, 23, 27, .22); }
+.book .hr.is-span .hr__tube { background: #14171B; box-shadow: 0 6px 16px rgba(20, 23, 27, .28); }
+.book .hr.is-pick .hr__tube { background: #14171B; box-shadow: 0 0 0 2px #E6E9EC, 0 0 0 4px #14171B, 0 8px 22px rgba(20, 23, 27, .3); }
+.book .hr.is-free, .book .hr.is-free .hr__n { color: #343A41; }
+.book .hr.is-pick .hr__n { color: #14171B; }
+.book .hr.is-midnight::after { background: #B9C0C7; }
+.book .legend__free { box-shadow: none; }
+
+/* карточка «Ваша запись» — белый лист с мягкой тенью */
+.book .card { background: #FFFFFF; box-shadow: 0 24px 60px -24px rgba(20, 23, 27, .22), inset 0 0 0 1px #DDE1E5; }
+.book .card__lane { background: repeating-linear-gradient(180deg, #E3E7EA 0 4px, #DADFE3 4px 6px); }
+.book .card__lane i { background: #A9B0B7; }
+.book .card__lane i.on { background: #14171B; box-shadow: none; }
+
+/* форма: поля линией, линия загорается графитом */
+.book .line input::placeholder { color: #8A919A; }
+.book .line::after { background: #C9CED4; }
+.book .line__tube, .book .line.is-ok .line__tube { box-shadow: none; }
+.book .field input { border-color: #C9CED4; background: #FFFFFF; }
+
+/* «Записали»: знак и трубка графитом */
+.book .done { box-shadow: inset 0 0 0 1px #D6DBE0; }
+.book .done__tube { background: #14171B; box-shadow: none; }
+.book .done__box .box-lamp { fill: #14171B; filter: none; }
+.book .done__box .box-floor { stroke: #8A919A; }
+
+/* цены: линии и трубка строки графитом */
+.price .pg__h { border-bottom-color: #C9CED4; }
+.price .pg__row + .pg__row { border-top-color: #D6DBE0; }
+.price .pg__row::before { box-shadow: none; }
+
+/* как найти: фото ворот остаётся ночным кадром — окно в ночь на светлой стене */
+.find .btn--line { box-shadow: inset 0 0 0 1px #14171B; }
+.find .find__photo { box-shadow: 0 24px 60px -28px rgba(20, 23, 27, .45); }
+
+/* полоса итога на телефоне — белая */
+@media (max-width: 1080px) {
+  .book .card:not(.is-form):not(.is-done) { background: #FFFFFF; box-shadow: 0 -1px 0 #D6DBE0, 0 -14px 30px rgba(20, 23, 27, .10); }
+}
+
+/* знак рубля на выбранной (графитовой) плитке — светлый, как подпись «от» */
+.book [aria-checked="true"] .rub { color: #AEB5BC; }
+
+/* ===== круг 11 арт-директора ===== */
+/* 1. надписи на фото внутри дневных разделов — ночные: «Открыто круглосуточно» на кадре ворот была тёмной на тёмном (≈1,2:1) */
+.find .find__open { color: #EEF3F6; }
+/* лампы на свету: выбранное горит — графитовая трубка с белым светящимся сердечником, у выбранных плиток полосы светятся */
+.book .hr.is-pick .hr__tube { background: linear-gradient(90deg, #14171B 0 30%, #FFFFFF 30% 70%, #14171B 70%); box-shadow: 0 0 0 2px #E6E9EC, 0 0 0 4px #14171B, 0 8px 22px rgba(20, 23, 27, .3); }
+.book .svc button[aria-checked="true"] .svc__tube, .book .days button[aria-checked="true"] .days__fill { box-shadow: 0 0 8px rgba(255, 255, 255, .55); }
+/* занятые часы — не светлее #D9A3A5: на бетоне пропадали (≈1,5:1) */
+.book, .price, .find { --busy: #C4868B; }
+/* политика — тоже день: текст на бетоне, шапка и подвал ночные */
+html:has(.doc) { background: #E6E9EC; }
+.page .doc { --night: #E6E9EC; --wall: #FFFFFF; --wall-2: #F2F4F6; --line: #D6DBE0; --lamp: #14171B; --steel: #5A616A; --off: #C9CED4; color: #14171B; }
+body.page:has(.doc) { background: #E6E9EC; }
+.page .doc p, .page .doc li, .page .policy-table td { color: #343A41; }
+.page .doc .ph { box-shadow: inset 0 -1px 0 #8A919A; }
+.page .doc a:not(.btn) { text-decoration-color: #9AA1A9; }
+.page .policy-table th { border-bottom-color: #C9CED4; }
+.page .doc .toc a[aria-current]::before { box-shadow: none; }

@@ -116,7 +116,8 @@
   function renderSteps() {
     var n = step();
     var t = document.querySelector("[data-prog-t]");
-    t.innerHTML = n <= 4 ? "Шаг " + n + " из 4. <b>" + HINTS[n - 1] + "</b>" : "Всё выбрано. <b>Нажмите «Записаться»</b>";
+    var hint = n === 4 && innerWidth <= 760 ? "Выберите свободный час" : HINTS[n - 1];   // на телефоне часы кнопками, а не лампами
+    t.innerHTML = n <= 4 ? "Шаг " + n + " из 4. <b>" + hint + "</b>" : "Всё выбрано. <b>Нажмите «Записаться»</b>";
     document.querySelectorAll("[data-prog-bar] i").forEach(function (i, k) {
       i.className = k + 1 < n ? "is-done" : k + 1 === n ? "is-now" : "";
     });
@@ -125,7 +126,15 @@
       f.classList.toggle("is-done", k < n);
       f.classList.toggle("is-now", k === n);
       f.classList.toggle("is-later", k > n);
-      f.setAttribute("aria-disabled", k > n ? "true" : "false");   // закрытый шаг: экранный диктор слышит, что он пока недоступен
+      f.setAttribute("aria-disabled", k > n ? "true" : "false");
+      document.querySelector(".book").classList.toggle("is-early", n <= 2);   // до выбора мойки цены нет — полоса итога на телефоне не нужна   // закрытый шаг: экранный диктор слышит, что он пока недоступен
+      // выбранное — в строку шага (на телефоне сделанный шаг свёрнут в «✓ Кузов · Кроссовер · Изменить»)
+      var val = f.querySelector(".pick__val");
+      if (!val) { val = document.createElement("span"); val.className = "pick__val"; f.querySelector(".pick__q").appendChild(val); }
+      var sv = svcByKey(state.svc);
+      val.textContent = k >= n ? "" : k === 1 ? cap(BODIES[state.body]) : k === 2 ? (sv ? SHORT[sv[0]] : "") :
+        k === 3 ? cap(dayLabel(state.day)) : state.slot ? hhmm(state.slot.h) : "";
+      if (k >= n) f.classList.remove("is-open");
       f.querySelector("[data-n]").textContent = k < n ? "✓" : String(k);
     });
   }
@@ -176,6 +185,44 @@
     return out;
   }
 
+  /* телефон: часы выбранного дня сеткой по частям суток (вариант А, выбор разработчика 11.11.2026) — лента из 24 ламп на узком экране нечитаема */
+  var PHONE = matchMedia("(max-width: 760px)");
+  var PARTS = [["Ночь", 0, 6], ["Утро", 6, 12], ["День", 12, 18], ["Вечер", 18, 24]];
+  function renderHoursGrid(box, s, len, pickA) {
+    var day = state.day === null ? 0 : state.day, from = day === 0 ? nowHour + 1 : 0, first = null, count = 0, html = "";
+    var parts = PARTS.map(function (p) {
+      var hs = [], free = 0;
+      for (var h = Math.max(p[1], from); h < p[2]; h++) {
+        var ok = canStart(day, h, len);
+        if (ok) { free++; count++; if (first === null) first = { d: day, h: h }; }
+        hs.push({ h: h, ok: ok });
+      }
+      return { name: p[0], a: p[1], b: p[2], hs: hs, free: free };
+    }).filter(function (p) { return p.hs.length; });
+    var othersFree = parts.some(function (p) { return p.name !== "Ночь" && p.free; });
+    var slotNight = state.slot && state.slot.d === day && state.slot.h < 6;
+    parts.forEach(function (p) {
+      var folded = p.name === "Ночь" && othersFree && !slotNight && !state.nightOpen;
+      html += '<div class="hg__part"><p class="hg__h"><b>' + p.name + "</b><span>" + two(p.a) + "–" + two(p.b) + " · " +
+        (p.free ? "свободно " + p.free : "мест нет") + "</span></p>";
+      if (folded) {
+        html += '<button type="button" class="hg__fold" data-night>Показать ночные часы<span>' + p.free + "</span></button></div>";
+        return;
+      }
+      html += '<div class="hg__grid">';
+      p.hs.forEach(function (x) {
+        var a = abs(day, x.h), on = a === pickA, span = pickA >= 0 && a > pickA && a < pickA + len;
+        html += '<button type="button" role="radio" class="hc' + (x.ok ? "" : " is-busy") + (on ? " is-pick" : "") + (span ? " is-span" : "") +
+          '" data-d="' + day + '" data-hour="' + x.h + '"' + (x.ok ? "" : " disabled") + ' aria-checked="' + on + '" aria-label="' +
+          dayLabel(day) + " " + hhmm(x.h) + (x.ok ? ", свободно" : ", занято") + '">' + hhmm(x.h) + "</button>";
+      });
+      html += "</div></div>";
+    });
+    box.innerHTML = html;
+    box.classList.add("hours--grid");
+    return { first: first, count: count };
+  }
+
   /* часы: лампа + подпись у каждого часа, вся ячейка нажимается */
   function renderHours(keepScroll) {
     var s = svcByKey(state.svc), min = s ? s[2] : 60, len = hoursOf(min);
@@ -183,6 +230,16 @@
     var lost = null;
     if (state.slot && !canStart(state.slot.d, state.slot.h, len)) { lost = state.slot; state.slot = null; }
     var pickA = state.slot ? abs(state.slot.d, state.slot.h) : -1;
+    if (PHONE.matches) {
+      var g = renderHoursGrid(box, s, len, pickA);
+      document.querySelector("[data-slot-note]").textContent = lost && s
+        ? s[1] + " длится " + dur(s[2]) + ", с " + hhmm(lost.h) + " не помещается. Выберите другой час."
+        : g.first === null ? "В этот день свободного времени нет. Выберите другой день."
+        : state.slot ? "Бокс ваш " + dayLabel(state.slot.d) + " с " + hhmm(state.slot.h) + " до " + endOf(state.slot.h, min) + "."
+        : "Нажмите на свободный час" + (s ? ": " + s[1].toLowerCase() + " займёт " + dur(s[2]) : "") + ".";
+      return;
+    }
+    box.classList.remove("hours--grid");
     laneHours().forEach(function (x) {
       var a = abs(x.d, x.h), ok = canStart(x.d, x.h, len), midnight = x.h === 0 && x.i > 0;
       if (ok) { count++; if (first === null) first = x; }
@@ -301,6 +358,20 @@
     var b = now.querySelector("button:not([disabled])");
     if (b) b.focus({ preventScroll: true });
   }
+
+  // телефон: нажали на свёрнутый сделанный шаг — он раскрывается, чтобы поменять выбор
+  document.addEventListener("click", function (e) {
+    var q = e.target.closest(".pick.is-done .pick__q");
+    if (!q || !PHONE.matches) return;
+    var f = q.parentNode;
+    document.querySelectorAll(".pick.is-open").forEach(function (o) { if (o !== f) o.classList.remove("is-open"); });
+    f.classList.toggle("is-open");
+  });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("[data-night]")) return;
+    state.nightOpen = true; renderHours(true);
+  });
+  if (PHONE.addEventListener) PHONE.addEventListener("change", function () { renderHours(); });
 
   function renderBooking(keepScroll) { renderSteps(); renderBody(); renderServices(); renderDays(); renderHours(keepScroll); renderSum(); }
 

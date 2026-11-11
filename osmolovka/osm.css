@@ -503,6 +503,7 @@ html{background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 .mo .done:not([hidden]) .done__box .box-lamp{animation:strikeOn .5s steps(1,end)}
 
 /* ===== шаги записи: закрытые и текущий (слово разработчика 11.11.2026) ===== */
+.pick__val{display:none}   /* выбранное в строке шага — только на телефоне, где сделанный шаг свёрнут; на компьютере выбор виден в карточке справа */
 .pick.is-later{opacity:.28;filter:saturate(0)}
 .pick.is-later button{cursor:not-allowed}
 @media (hover:hover) and (pointer:fine){ .pick.is-later button:hover{background:var(--wall)} }

@@ -54,3 +54,76 @@
   .book .pick[data-step="1"] .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
   .book .pick[data-step="1"] .seg button { min-width: 0; min-height: 52px; padding: 0 6px; font-size: 15px; }
 }
+
+/* 360 px: «Внедорожник» вылезал из кнопки (device_sweep 11.11) — на самых узких телефонах кегль кнопок кузова 14, поля уже */
+@media (max-width: 380px) {
+  .seg button { font-size: 14px; padding: 0 4px; letter-spacing: -.01em; }
+}
+
+/* время на телефоне — весь день сеткой (вариант А, 11.11.2026): часы выбранного дня кнопками по четыре по частям суток, ночь свёрнута */
+@media (max-width: 760px) {
+  .hours.hours--grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 0; background: none; overflow: visible; margin: 0; }   /* одна колонка: компьютерная лента задаёт 24, кнопки сжимались до нуля */
+  .hg__h { display: flex; justify-content: space-between; align-items: baseline; margin: 14px 0 8px; font-size: 14px; color: var(--steel); }
+  .hg__h b { font-size: 15px; font-weight: 600; color: var(--lamp); }
+  .hg__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .hc { position: relative; display: flex; align-items: center; justify-content: center; gap: 7px; height: 50px; padding: 0; border: 0; border-radius: var(--r-s);
+    background: var(--wall); color: var(--lamp); font: 600 16px/1 inherit; font-family: inherit; font-variation-settings: "wdth" 125; font-feature-settings: "tnum";
+    box-shadow: inset 0 0 0 1px #BFC5CC; cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none;
+    transition: background-color .16s, color .16s, transform .12s cubic-bezier(.23, 1, .32, 1); }
+  .hc::before { content: ""; width: 3px; height: 16px; border-radius: 2px; background: var(--lamp); }
+  .hc:active { transform: scale(.96); }
+  .hc.is-busy { background: transparent; color: #9AA1A9; box-shadow: inset 0 0 0 1px #D6DBE0; text-decoration: line-through; text-decoration-color: #C98F93; cursor: default; }
+  .hc.is-busy::before { width: 2px; background: #D9A7AA; }
+  .hc.is-span { background: #3A4047; color: #F4F6F7; box-shadow: none; }
+  .hc.is-span::before { background: #F4F6F7; }
+  .hc.is-pick { background: var(--lamp); color: #F4F6F7; box-shadow: 0 0 0 2px var(--night), 0 0 0 4px var(--lamp); animation: strikeOn .24s steps(1, end); }
+  .hc.is-pick::before { background: #F4F6F7; }
+  .hg__fold { display: flex; justify-content: space-between; align-items: center; width: 100%; min-height: 48px; padding: 0 14px; border: 0; border-radius: var(--r-s);
+    background: var(--wall-2); color: var(--lamp); font: 500 15px/1 inherit; font-family: inherit; box-shadow: inset 0 0 0 1px #D6DBE0; cursor: pointer; }
+  .hg__fold span { font-size: 13px; color: var(--steel); }
+  .pick[data-step="4"] .legend { display: none; }
+}
+
+/* телефон: сделанный шаг — строкой, будущие — тусклой строкой, видна только текущая работа (разбор телефона 11.11.2026) */
+@media (max-width: 760px) {
+  .pick__val { display: inline; margin-left: auto; font-weight: 600; color: var(--lamp); max-width: 55%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pick.is-done:not(.is-open) > :not(.pick__q) { display: none; }
+  .pick.is-done .pick__q { min-height: 44px; margin-bottom: 0; cursor: pointer; }
+  .pick.is-done:not(.is-open) .pick__q::after { content: "Изменить"; margin-left: 12px; font-size: 14px; font-weight: 500; color: var(--steel); text-decoration: underline; text-underline-offset: 3px; }
+  .pick.is-done.is-open .pick__q { margin-bottom: 12px; }
+  .pick.is-later > :not(.pick__q) { display: none; }
+  .pick.is-later .pick__q { margin-bottom: 0; }
+  .pick.is-later { opacity: .55; }
+  .book__col { gap: 10px; }
+  .pick.is-done:not(.is-open), .pick.is-later { padding-top: 2px; padding-bottom: 2px; }
+  /* полоса итога: серую кнопку «Записаться» не показываем, пока записаться нельзя — строка шага на всю ширину */
+  .card:not(.is-form):not(.is-done) [data-go]:disabled { display: none; }
+  .card:not(.is-form):not(.is-done):has([data-go]:disabled) { grid-template-columns: 1fr; }
+  /* фото бокса — лентой крупных кадров вбок, подпись с описанием снова видна */
+  .box__pair { display: grid; grid-auto-flow: column; grid-auto-columns: 84%; grid-template-columns: none; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-padding-inline: 16px; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .box__pair::-webkit-scrollbar { display: none; }
+  .box__pair figure { scroll-snap-align: start; }
+  .box__pair img { height: min(52svh, 420px); }
+  .box__cap span { display: block !important; }
+}
+
+/* ===== круг 11 арт-директора, телефон ===== */
+@media (max-width: 760px) {
+  /* 2. рамка текущего шага — в отступах экрана, а не по краям (компьютерное inset:-16px выводило её на x=0) */
+  .pick.is-now::before { inset: 0; }
+  /* 4. полоса итога — только когда есть цена (мойка выбрана); до этого она дублирует заголовок шага; без пустого светлого хвоста под ней */
+  .book.is-early .card:not(.is-form):not(.is-done) { display: none; }
+  .book { padding-bottom: 24px; }
+  .hc.is-pick::before { box-shadow: 0 0 8px rgba(255, 255, 255, .8); }
+}
+
+/* запись на телефоне стала короче (шаги свёрнуты) — раздел не ниже экрана, иначе внизу выглядывает фото бокса (жалоба разработчика 08.11, робот простоты) */
+@media (max-width: 760px) {
+  .book { min-height: 100vh; min-height: 100svh; }
+}
+
+/* 360 px: кузов в записи — тот же кегль 14, что в ценах (правило кузова сильнее общего .seg button) */
+@media (max-width: 380px) {
+  .book .pick[data-step="1"] .seg button { font-size: 14px; padding: 0 4px; letter-spacing: -.01em; }
+}
