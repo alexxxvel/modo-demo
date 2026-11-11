@@ -502,6 +502,21 @@ html{background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3
 .done__box{width:34px;height:34px;flex:none;overflow:visible}
 .mo .done:not([hidden]) .done__box .box-lamp{animation:strikeOn .5s steps(1,end)}
 
+/* ===== шаги записи: закрытые и текущий (слово разработчика 11.11.2026) ===== */
+.pick.is-later{opacity:.28;filter:saturate(0)}
+.pick.is-later button{cursor:not-allowed}
+@media (hover:hover) and (pointer:fine){ .pick.is-later button:hover{background:var(--wall)} }
+.pick.is-now::before{inset:-16px;border-radius:14px;background:rgba(238,243,246,.035);box-shadow:0 0 0 1.5px rgba(238,243,246,.85),0 0 34px rgba(238,243,246,.14),inset 0 1px 0 rgba(255,255,255,.06)}
+.pick.is-now .pick__n{box-shadow:0 0 14px rgba(238,243,246,.75)}
+.pick.is-now .pick__q{font-size:17px}
+.pick.is-nudge::before{animation:pickNudge .9s steps(1,end)}
+@keyframes pickNudge{0%{opacity:.3}20%{opacity:1}35%{opacity:.35}55%{opacity:1}100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){ .pick.is-nudge::before{animation:none} }
+/* кузов — первый и главный выбор: кнопки крупнее, у текущего шага кнопки светлее — видно, куда нажимать */
+.book .pick[data-step="1"] .seg{gap:10px}
+.book .pick[data-step="1"] .seg button{min-height:60px;min-width:150px;padding:0 26px;font-size:17px}
+.pick.is-now .seg button:not([aria-checked="true"]),.pick.is-now .svc button:not([aria-checked="true"]),.pick.is-now .days button:not([aria-checked="true"]){background:var(--wall-2);color:var(--lamp);box-shadow:inset 0 0 0 1px #3A4047}
+
 /* планшет */
 @media (max-width:1080px){
   .bar__nav{display:none}

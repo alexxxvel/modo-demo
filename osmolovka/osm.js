@@ -125,6 +125,7 @@
       f.classList.toggle("is-done", k < n);
       f.classList.toggle("is-now", k === n);
       f.classList.toggle("is-later", k > n);
+      f.setAttribute("aria-disabled", k > n ? "true" : "false");   // закрытый шаг: экранный диктор слышит, что он пока недоступен
       f.querySelector("[data-n]").textContent = k < n ? "✓" : String(k);
     });
   }
@@ -292,11 +293,22 @@
     document.querySelector("[data-done]").hidden = true;
     document.querySelector("[data-sum]").classList.remove("is-done", "is-form");
   }
+  function nudgeNow() {
+    var now = document.querySelector(".pick.is-now");
+    if (!now) return;
+    now.classList.remove("is-nudge"); void now.offsetWidth; now.classList.add("is-nudge");
+    reveal(now);
+    var b = now.querySelector("button:not([disabled])");
+    if (b) b.focus({ preventScroll: true });
+  }
+
   function renderBooking(keepScroll) { renderSteps(); renderBody(); renderServices(); renderDays(); renderHours(keepScroll); renderSum(); }
 
   document.addEventListener("click", function (e) {
     var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick],[data-pre-h]");
     if (!t) return;
+    // шаг ещё закрыт (предыдущий не выбран): выбор не меняем, подсвечиваем текущий шаг и подводим к нему
+    if (t.closest(".pick.is-later")) { nudgeNow(); return; }
     if (t.hasAttribute("data-pre-h")) {
       var pd = +t.getAttribute("data-pre-d"), ph = +t.getAttribute("data-pre-h");
       state.day = pd; state.slot = { d: pd, h: ph };

@@ -48,3 +48,9 @@
   .box__cap span { display: none; }   /* фото на телефоне шириной ~170 px: описание закрывало кадр, остаётся название */
   .box__img::before { height: 50%; }
 }
+
+/* кузов на телефоне: три кнопки в ряд по ширине экрана (крупные кнопки компьютера, 150 px, уводили страницу вбок до 498 px — 11.11) */
+@media (max-width: 760px) {
+  .book .pick[data-step="1"] .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .book .pick[data-step="1"] .seg button { min-width: 0; min-height: 52px; padding: 0 6px; font-size: 15px; }
+}
