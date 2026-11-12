@@ -34,7 +34,8 @@
 .book .pick.is-now .seg button:not([aria-checked="true"]), .book .pick.is-now .svc button:not([aria-checked="true"]),
 .book .pick.is-now .days button:not([aria-checked="true"]) { background: #FFFFFF; color: #14171B; box-shadow: inset 0 0 0 1px #BFC5CC, 0 2px 8px rgba(20, 23, 27, .06); }
 @media (hover: hover) and (pointer: fine) {
-  .book .seg button:hover, .book .svc button:hover, .book .days button:hover, .price .seg button:hover { background: #F7F8F9; color: #14171B; }
+  .book .seg button:not([aria-checked="true"]):hover, .book .svc button:not([aria-checked="true"]):hover, .book .days button:not([aria-checked="true"]):hover,
+  .price .seg button:not([aria-checked="true"]):hover { background: #F7F8F9; color: #14171B; }
 }
 
 /* шаги: рамка текущего шага графитом, номер шага — графитовый кружок */
@@ -97,7 +98,7 @@
 /* 1. надписи на фото внутри дневных разделов — ночные: «Открыто круглосуточно» на кадре ворот была тёмной на тёмном (≈1,2:1) */
 .find .find__open { color: #EEF3F6; }
 /* лампы на свету: выбранное горит — графитовая трубка с белым светящимся сердечником, у выбранных плиток полосы светятся */
-.book .hr.is-pick .hr__tube { background: linear-gradient(90deg, #14171B 0 30%, #FFFFFF 30% 70%, #14171B 70%); box-shadow: 0 0 0 2px #E6E9EC, 0 0 0 4px #14171B, 0 8px 22px rgba(20, 23, 27, .3); }
+.book .hr.is-pick .hr__tube { background: linear-gradient(90deg, #E9EEF2, #FFFFFF 50%, #E9EEF2); box-shadow: inset 0 0 0 3px #14171B, 0 0 0 3px #E6E9EC, 0 0 0 5px #14171B, 0 10px 24px rgba(20, 23, 27, .28); }
 .book .svc button[aria-checked="true"] .svc__tube, .book .days button[aria-checked="true"] .days__fill { box-shadow: 0 0 8px rgba(255, 255, 255, .55); }
 /* занятые часы — не светлее #D9A3A5: на бетоне пропадали (≈1,5:1) */
 .book, .price, .find { --busy: #C4868B; }
@@ -110,3 +111,10 @@ body.page:has(.doc) { background: #E6E9EC; }
 .page .doc a:not(.btn) { text-decoration-color: #9AA1A9; }
 .page .policy-table th { border-bottom-color: #C9CED4; }
 .page .doc .toc a[aria-current]::before { box-shadow: none; }
+
+/* переход «ночь → день» (12.11.2026: «слишком контрастный»): верх раздела записи — рассвет, свет ламп первого экрана растекается в бетон;
+   полоса укладывается в верхний отступ раздела, текст начинается уже на светлом */
+.book { background: linear-gradient(180deg, #121417 0, #2B3036 calc(var(--dawn) * .22), #8C949C calc(var(--dawn) * .55), #D4D9DE calc(var(--dawn) * .82), #E6E9EC var(--dawn)) #E6E9EC;
+  --dawn: clamp(72px, 11vh, 132px); }
+/* обратный переход «день → ночь» перед боксом — тем же приёмом, снизу цен нет: бокс начинается своим кадром пены */
+.book + .box { box-shadow: 0 -1px 0 #121417; }
