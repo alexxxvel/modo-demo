@@ -114,12 +114,13 @@
 
   /* шаги: «Шаг N из 4», рамка на текущем, сделанные с галочкой, дальние в тумане */
   function renderSteps() {
-    var n = step();
+    var n = step(), merged = isMerged();
     var t = document.querySelector("[data-prog-t]");
-    var hint = n === 4 && innerWidth <= 760 ? "Выберите свободный час" : HINTS[n - 1];   // на телефоне часы кнопками, а не лампами
-    t.innerHTML = n <= 4 ? "Шаг " + n + " из 4. <b>" + hint + "</b>" : "Всё выбрано. <b>Нажмите «Записаться»</b>";
+    var tot = merged ? 3 : 4, shown = merged ? (n <= 2 ? n : n === 5 ? 4 : 3) : n;   // телефон: день и время — один шаг «Когда»
+    var hint = merged && n >= 3 ? "Выберите день и время" : HINTS[n - 1];
+    t.innerHTML = shown <= tot ? "Шаг " + shown + " из " + tot + ". <b>" + hint + "</b>" : "Всё выбрано. <b>Нажмите «Записаться»</b>";
     document.querySelectorAll("[data-prog-bar] i").forEach(function (i, k) {
-      i.className = k + 1 < n ? "is-done" : k + 1 === n ? "is-now" : "";
+      i.className = k + 1 < shown ? "is-done" : k + 1 === shown ? "is-now" : "";
     });
     document.querySelectorAll(".pick[data-step]").forEach(function (f) {
       var k = +f.getAttribute("data-step");
@@ -127,15 +128,17 @@
       f.classList.toggle("is-now", k === n);
       f.classList.toggle("is-later", k > n);
       f.setAttribute("aria-disabled", k > n ? "true" : "false");
-      document.querySelector(".book").classList.toggle("is-early", n <= 2);   // до выбора мойки цены нет — полоса итога на телефоне не нужна   // закрытый шаг: экранный диктор слышит, что он пока недоступен
+      document.querySelector(".book").classList.toggle("is-early", n <= (merged ? 4 : 2));   // до выбора мойки цены нет — полоса итога на телефоне не нужна   // закрытый шаг: экранный диктор слышит, что он пока недоступен
       // выбранное — в строку шага (на телефоне сделанный шаг свёрнут в «✓ Кузов · Кроссовер · Изменить»)
       var val = f.querySelector(".pick__val");
       if (!val) { val = document.createElement("span"); val.className = "pick__val"; f.querySelector(".pick__q").appendChild(val); }
       var sv = svcByKey(state.svc);
       val.textContent = k >= n ? "" : k === 1 ? cap(BODIES[state.body]) : k === 2 ? (sv ? SHORT[sv[0]] : "") :
-        k === 3 ? cap(dayLabel(state.day)) : state.slot ? hhmm(state.slot.h) : "";
+        k === 3 ? cap(dayLabel(state.day)) : state.slot ? (merged ? cap(dayLabel(state.slot.d)) + ", " : "") + hhmm(state.slot.h) : "";
       if (k >= n) f.classList.remove("is-open");
-      f.querySelector("[data-n]").textContent = k < n ? "✓" : String(k);
+      if (merged && k === 4 && n === 5 && !f.__keptOpen) { f.classList.add("is-open"); f.__keptOpen = true; }   // после выбора часа сетка не схлопывается
+      if (k === 4 && n < 5) f.__keptOpen = false;
+      f.querySelector("[data-n]").textContent = k < n ? "✓" : String(merged && k === 4 ? 3 : k);
     });
   }
 
@@ -286,6 +289,7 @@
     // строка итога (липкая снизу на телефоне и планшете): время — первой строкой, выбранное — второй
     var la = document.querySelector("[data-line-a]"), lb = document.querySelector("[data-line-b]");
     la.textContent = state.slot ? cap(dayLabel(state.slot.d)) + " " + hhmm(state.slot.h) + "–" + endOf(state.slot.h, s ? s[2] : 60)
+      : isMerged() ? "Шаг " + Math.min(step(), 3) + " из 3: " + ["кузов", "мойка", "день и время"][Math.min(step(), 3) - 1]
       : "Шаг " + Math.min(step(), 4) + " из 4: " + ["кузов", "мойка", "день", "время"][Math.min(step(), 4) - 1];
     lb.textContent = [state.body ? cap(BODIES[state.body]) : "", s ? SHORT[s[0]] : ""].filter(Boolean).join(" · ");
     var lane = document.querySelector("[data-card-lane]");
@@ -373,7 +377,24 @@
   });
   if (PHONE.addEventListener) PHONE.addEventListener("change", function () { renderHours(); });
 
-  function renderBooking(keepScroll) { renderSteps(); renderBody(); renderServices(); renderDays(); renderHours(keepScroll); renderSum(); }
+  // телефон: лента дней — в шаге «Время» над сеткой часов, шаг «День» скрыт; на компьютере — на своём месте
+  function isMerged() { return PHONE.matches; }
+  function firstFreeDay() {
+    var s = svcByKey(state.svc), len = hoursOf(s ? s[2] : 60);
+    for (var d = 0; d < 7; d++) for (var h = d === 0 ? nowHour + 1 : 0; h < 24; h++) if (canStart(d, h, len)) return d;
+    return 0;
+  }
+  function placeDays() {
+    var days = document.querySelector("[data-days]"), p3 = document.querySelector('.pick[data-step="3"]'), p4 = document.querySelector('.pick[data-step="4"]');
+    var lbl = [].filter.call(p4.querySelector(".pick__q").childNodes, function (x) { return x.nodeType === 3 && x.textContent.trim(); })[0];
+    if (isMerged()) { if (days.parentNode !== p4) p4.insertBefore(days, p4.querySelector("[data-hours]")); if (lbl) lbl.textContent = "Когда"; }
+    else { if (days.parentNode !== p3) p3.appendChild(days); if (lbl) lbl.textContent = "Время"; }
+    document.querySelector(".book").classList.toggle("is-merged", isMerged());
+  }
+  if (PHONE.addEventListener) PHONE.addEventListener("change", function () { placeDays(); renderBooking(true); });
+
+  function renderBooking(keepScroll) {
+    placeDays(); renderSteps(); renderBody(); renderServices(); renderDays(); renderHours(keepScroll); renderSum(); }
 
   document.addEventListener("click", function (e) {
     var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick],[data-pre-h]");
@@ -392,7 +413,7 @@
       if (t.closest(".price")) { state.pbody = t.getAttribute("data-body"); renderPrices(); return; }
       state.body = t.getAttribute("data-body"); state.pbody = state.body; hideFlow(); renderBooking(); renderPrices(); bringNext(); return;
     }
-    if (t.hasAttribute("data-svc")) { state.svc = t.getAttribute("data-svc"); hideFlow(); renderBooking(); bringNext(); return; }
+    if (t.hasAttribute("data-svc")) { state.svc = t.getAttribute("data-svc"); if (isMerged() && state.day === null) state.day = firstFreeDay(); hideFlow(); renderBooking(); bringNext(); return; }
     if (t.hasAttribute("data-svc-more")) { document.querySelector("[data-svc-list]").classList.add("is-open"); t.setAttribute("aria-expanded", "true"); return; }
     if (t.hasAttribute("data-day")) { state.day = +t.getAttribute("data-day"); state.slot = null; hideFlow(); renderBooking(); bringNext(); return; }
     if (t.hasAttribute("data-hour")) {

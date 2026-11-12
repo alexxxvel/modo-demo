@@ -132,3 +132,35 @@
 @media (max-width: 760px) and (max-height: 760px) {
   .box__main img { height: min(70svh, 560px); }
 }
+
+/* ленты мойки и дней — внутри рамки шага: края карточек срезаются в 4 px от линии рамки, а не вылезают за неё (замечание разработчика 12.11 по фото с айфона) */
+@media (max-width: 760px) {
+  .pick .svc, .pick .days { margin: 0 -8px; padding: 0 8px 2px; scroll-padding-inline: 8px; }
+}
+
+/* телефон: «День и время» одним шагом — шаг «День» скрыт (его лента в шаге «Время»), полоса прогресса из трёх частей */
+@media (max-width: 760px) {
+  .book.is-merged .pick[data-step="3"] { display: none; }
+  .book.is-merged .prog__bar { grid-template-columns: repeat(3, 1fr); }
+  .book.is-merged .prog__bar i:nth-child(4) { display: none; }
+  .book.is-merged .pick[data-step="4"] .days { margin-bottom: 4px; }
+}
+
+/* полоса итога прижата к низу раздела записи (раздел не ниже экрана) — без пустого бетона под ней, когда шаги свёрнуты */
+@media (max-width: 760px) {
+  .book { display: flex; flex-direction: column; }
+  .book__grid { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .book__col { flex: 1 0 auto; align-content: start; }   /* шаги по содержимому: растягивается пустое место под ними, а не рамки */
+  .book__grid > .card { align-self: stretch; }
+}
+
+/* подёргивания при прокрутке на айфоне (слово разработчика 12.11.2026): замер сдвигов вёрстки — 0, значит дёргает движение.
+   На телефоне убираем то, что Safari пересчитывает вместе с адресной строкой: уход первого экрана по прокрутке (scroll-driven translate/scale),
+   наезд фото 1,2 → 1 при появлении; появление фото — только шторкой, короче. Плюс основа «как приложение»: без серой вспышки при касании, без задержки касания. */
+@media (max-width: 760px) {
+  .mo .hero picture, .mo .hero__body { animation: none !important; }
+  .mo [data-clip] img { transform: none !important; transition: none !important; }
+  .mo [data-clip] { transition-duration: .8s; }
+  html { -webkit-tap-highlight-color: transparent; }
+  button, a, [role="button"], [role="radio"] { touch-action: manipulation; }
+}

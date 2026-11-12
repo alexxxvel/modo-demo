@@ -111,10 +111,3 @@ body.page:has(.doc) { background: #E6E9EC; }
 .page .doc a:not(.btn) { text-decoration-color: #9AA1A9; }
 .page .policy-table th { border-bottom-color: #C9CED4; }
 .page .doc .toc a[aria-current]::before { box-shadow: none; }
-
-/* переход «ночь → день» (12.11.2026: «слишком контрастный»): верх раздела записи — рассвет, свет ламп первого экрана растекается в бетон;
-   полоса укладывается в верхний отступ раздела, текст начинается уже на светлом */
-.book { background: linear-gradient(180deg, #121417 0, #2B3036 calc(var(--dawn) * .22), #8C949C calc(var(--dawn) * .55), #D4D9DE calc(var(--dawn) * .82), #E6E9EC var(--dawn)) #E6E9EC;
-  --dawn: clamp(72px, 11vh, 132px); }
-/* обратный переход «день → ночь» перед боксом — тем же приёмом, снизу цен нет: бокс начинается своим кадром пены */
-.book + .box { box-shadow: 0 -1px 0 #121417; }
