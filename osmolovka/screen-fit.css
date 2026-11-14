@@ -1,0 +1,97 @@
+/* №3–4: один раздел в одном окне, все состояния записи доступны без обрезания. */
+.hg__tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:0 0 10px}
+.hg__tabs button{min-height:44px;padding:0 6px;background:#ffffff0d;border:1px solid #ffffff24;border-radius:12px;color:#cbd0d8;font:500 14px "Roboto Flex",sans-serif;cursor:pointer}
+.hg__tabs button[aria-selected="true"]{background:#f4f5f7;color:#15161a;border-color:#f4f5f7}
+.hero .hg__grid{grid-template-columns:repeat(6,minmax(0,1fr));min-height:44px}
+.hero .hc.is-pick{background:#e12730;border-color:#e12730;color:#fff}
+.hero .btn--red{color:#fff}
+.hero .line input::placeholder{color:#959ba6}
+.hero .book:has(.card.is-form) .book__col,.hero .book:has(.card.is-form) .prog,.hero .book:has(.card.is-form) .book__intro .soft{display:none}
+.hero .book:has(.card.is-form) .card{border-top:0;padding-top:0}
+.hero .book:has(.card.is-form) .card__go{display:none}
+.hero .confirm{display:grid;gap:10px}
+.hero .confirm__back{justify-self:start;min-height:44px;border:0;background:none;color:#cbd0d8;font-size:14px;cursor:pointer}
+.hero .confirm__go{margin-top:4px}
+.hero .card.is-done .card__go{display:none}
+@media(min-width:1101px){
+ html{scroll-padding-top:64px}
+ .bar{height:64px}
+ main>section{scroll-margin-top:64px}
+ .hero{height:100svh;min-height:0;padding:80px var(--gut) 16px;gap:36px;overflow:visible}
+ .hero__body{padding:0 0 20px;justify-content:flex-end;min-width:0}
+ .hero__title{font-size:min(4.5vw,9svh);line-height:1.03}
+ .hero__lead{font-size:clamp(16px,1.2vw,20px);max-width:29em;margin-top:20px}
+ .hero .book{padding:20px 24px;align-self:center}
+ .hero .book__intro{margin-bottom:12px;gap:4px}
+ .hero .book__intro .h2{font-size:28px}
+ .hero .book__intro .soft{font-size:14px}
+ .hero .prog{margin-bottom:12px;gap:7px}
+ .hero .prog__t{font-size:14px}
+ .hero .book__grid{gap:10px}
+ .hero .book__col{gap:6px}
+ .hero .pick{padding:7px 0}
+ .hero .pick__q{margin-bottom:8px;min-height:24px}
+ .hero .svc button{grid-template-columns:minmax(0,1fr) auto;align-items:center;align-content:center;min-height:68px;padding:8px 10px;gap:8px}
+ .hero .pick.is-later{display:none}
+ .hero .svc__more{margin-top:2px;min-height:44px}
+ .hero .svc__name{font-size:13px;min-height:0}.hero .svc__dur{font-size:12px}
+ .hero .svc__price{font-size:22px;margin:0}
+ .hero .book.is-scheduled .book__intro .soft{display:none}
+ .hero .book.is-scheduled .book__col{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px}
+ .hero .book.is-scheduled .pick[data-step="4"]{grid-column:1/-1}
+ .hero .pick.is-done:not(.is-open) .pick__q{font-size:12px;gap:5px;min-height:28px}
+ .hero .pick.is-done:not(.is-open) .pick__q::after{content:"Изменить";font-size:11px;margin-left:0}
+ .hero .pick__val{font-size:12px;max-width:58%}
+ .hero .pick.is-open{grid-column:1/-1}
+ .hero .days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;overflow:visible;padding:0!important;margin-bottom:8px!important}
+ .hero .days button{min-width:0;padding:8px 5px;min-height:54px}
+ .hero .days b,.hero .days span{font-size:12px}
+ .hero .slot__note{line-height:1.4;min-height:17px}
+ .hero .card:not(.is-form):not(.is-done){padding-top:12px}
+ .hero .card:not(.is-form):not(.is-done) [data-go]{min-height:44px}
+ .hero .card.is-form{padding:0}
+ .hero .line input{height:44px}
+ .hero .confirm__alt{font-size:13px}
+ .hero .confirm__law{font-size:12px;line-height:1.4}
+ .hero .book:has(.card.is-form) .book__intro{margin-bottom:12px}
+ .hero .book:has(.card.is-done) .book__col,.hero .book:has(.card.is-done) .prog{display:none}
+ .price,.box,.find{height:calc(100svh - 64px);min-height:0;padding:32px var(--gut);box-sizing:border-box}
+ .price{display:flex;flex-direction:column;justify-content:center}
+ .price__head{margin-bottom:24px;flex:none}
+ .price .h2{font-size:44px}
+ .price .pg__row{min-height:52px;padding:12px 0}
+ .box{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px}
+ .box__stage{min-width:0;height:100%;position:relative;overflow:hidden;border-radius:12px}
+ .box__main{height:100%}
+ .box__main img{width:100%;height:100%!important;min-height:0;object-fit:cover}
+ .box__over{left:24px;right:24px;bottom:24px;gap:10px}
+ .box__title{font-size:clamp(32px,3.6vw,54px);max-width:12em}
+ .box__lead{font-size:17px;line-height:1.45}
+ .box__pair{display:grid;grid-template-columns:1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:16px;padding:0;min-height:0}
+ .box__side,.box__img{height:100%;min-height:0;overflow:hidden;border-radius:12px}
+ .box__pair img{height:100%!important;width:100%;object-fit:cover}
+ .box .box__cap{left:16px;right:16px;bottom:16px;padding:10px 12px;gap:5px 10px}
+ .box__cap b{font-size:17px}.box__cap span{font-size:13px}
+ .find{align-items:center;gap:40px}
+ .find__photo{height:100%;min-height:0}
+ .find__photo img{height:100%;aspect-ratio:auto;object-fit:cover}
+ .find__row{align-content:center;gap:24px}
+ .find__row .h2{font-size:clamp(36px,4.5vw,64px)}
+ .find__addr{font-size:19px}
+ .find__acts{gap:18px;align-items:flex-start;flex-direction:column}
+ .foot{padding:22px var(--gut)}
+}
+@media(min-width:1101px) and (max-height:680px){
+ .hero .book{padding:16px 20px}.hero .book__intro .h2{font-size:25px}.hero .book__intro{margin-bottom:8px}.hero .prog{margin-bottom:8px}
+ .hero .book.is-scheduled .book__col{gap:2px 12px}.hero .pick{padding:4px 0}.hero .pick.is-done:not(.is-open) .pick__q{min-height:24px}
+ .hero .days button{min-height:48px;padding:5px}.hero .hg__tabs{margin-bottom:6px}.hero .slot__foot{margin-top:6px}
+ .price,.box,.find{padding-top:24px;padding-bottom:24px}.price__head{margin-bottom:20px}.price .h2{font-size:36px}.price .pg__row{min-height:46px;padding:9px 0}.price .pg__p{font-size:25px}
+ .hero .confirm{gap:7px}.hero .confirm__t{font-size:15px}.hero .confirm__alt{font-size:12px}.hero .confirm__law{font-size:11px}
+}
+@media(max-width:1100px){
+ .hero .hg__tabs{grid-template-columns:repeat(4,minmax(0,1fr))}.hg__tabs button{font-size:13px}
+ .hero .hg__grid{grid-template-columns:repeat(3,minmax(0,1fr));min-height:99px}
+ .hero .hg__grid .hc{height:46px}
+ .hero .svc__more{font-size:13px}
+ .hero .book:has(.card.is-form){scroll-margin-top:76px}
+}

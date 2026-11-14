@@ -178,25 +178,22 @@
       }
       return { name: p[0], a: p[1], b: p[2], hs: hs, free: free };
     }).filter(function (p) { return p.hs.length; });
-    var othersFree = parts.some(function (p) { return p.name !== "Ночь" && p.free; });
-    var slotNight = state.slot && state.slot.d === day && state.slot.h < 6;
-    parts.forEach(function (p) {
-      var folded = p.name === "Ночь" && othersFree && !slotNight && !state.nightOpen;
-      html += '<div class="hg__part"><p class="hg__h"><b>' + p.name + "</b><span>" + two(p.a) + "–" + two(p.b) + " · " +
-        (p.free ? "свободно " + p.free : "мест нет") + "</span></p>";
-      if (folded) {
-        html += '<button type="button" class="hg__fold" data-night>Показать ночные часы<span>' + p.free + "</span></button></div>";
-        return;
-      }
-      html += '<div class="hg__grid">';
-      p.hs.forEach(function (x) {
+    var active = parts.filter(function (p) { return p.a === state.part; })[0];
+    if (!active) active = parts.filter(function (p) { return p.a >= 6 && p.free; })[0] || parts.filter(function (p) { return p.free; })[0] || parts[0];
+    state.part = active ? active.a : null;
+    html = '<div class="hg__tabs" role="tablist" aria-label="Часть суток">' + parts.map(function (p) {
+      return '<button type="button" role="tab" aria-selected="' + (p === active) + '" data-part="' + p.a + '">' + p.name + '</button>';
+    }).join('') + '</div>';
+    if (active) {
+      html += '<div class="hg__grid" role="group" aria-label="' + active.name + '">';
+      active.hs.forEach(function (x) {
         var a = abs(day, x.h), on = a === pickA, span = pickA >= 0 && a > pickA && a < pickA + len;
         html += '<button type="button" role="radio" class="hc' + (x.ok ? "" : " is-busy") + (on ? " is-pick" : "") + (span ? " is-span" : "") +
           '" data-d="' + day + '" data-hour="' + x.h + '"' + (x.ok ? "" : " disabled") + ' aria-checked="' + on + '" aria-label="' +
           dayLabel(day) + " " + hhmm(x.h) + (x.ok ? ", свободно" : ", занято") + '">' + hhmm(x.h) + "</button>";
       });
-      html += "</div></div>";
-    });
+      html += '</div>';
+    }
     box.innerHTML = html;
     box.classList.add("hours--grid");
     return { first: first, count: count };
@@ -377,11 +374,13 @@
 
   function renderBooking(keepScroll) {
     if (state.svc && state.day === null && isMerged()) state.day = firstFreeDay();
-    placeDays(); renderHours(keepScroll); renderSteps(); renderBody(); renderServices(); renderDays(); renderSum(); }
+    placeDays(); renderHours(keepScroll); renderSteps(); renderBody(); renderServices(); renderDays(); renderSum();
+    document.querySelector(".book").classList.toggle("is-scheduled", !!state.svc); }
 
   document.addEventListener("click", function (e) {
-    var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick],[data-pre-h]");
+    var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick],[data-pre-h],[data-part],[data-back-booking]");
     if (!t) return;
+    if (t.hasAttribute("data-back-booking")) { hideFlow(); renderBooking(true); reveal(document.querySelector("[data-sum]")); return; }
     // шаг ещё закрыт (предыдущий не выбран): выбор не меняем, подсвечиваем текущий шаг и подводим к нему
     if (t.closest(".pick.is-later")) { nudgeNow(); return; }
     if (t.hasAttribute("data-pre-h")) {
@@ -399,7 +398,8 @@
     }
     if (t.hasAttribute("data-svc")) { t.closest(".pick").classList.remove("is-open"); state.svc = t.getAttribute("data-svc"); if (isMerged() && state.day === null) state.day = firstFreeDay(); hideFlow(); renderBooking(); bringNext(); return; }
     if (t.hasAttribute("data-svc-more")) { document.querySelector("[data-svc-list]").classList.add("is-open"); t.setAttribute("aria-expanded", "true"); return; }
-    if (t.hasAttribute("data-day")) { state.day = +t.getAttribute("data-day"); state.slot = null; hideFlow(); renderBooking(); bringNext(); return; }
+    if (t.hasAttribute("data-part")) { state.part = +t.getAttribute("data-part"); renderHours(true); if (!e.detail) document.querySelector('[data-part="' + state.part + '"]').focus({ preventScroll: true }); return; }
+    if (t.hasAttribute("data-day")) { state.part = null; state.day = +t.getAttribute("data-day"); state.slot = null; hideFlow(); renderBooking(); bringNext(); return; }
     if (t.hasAttribute("data-hour")) {
       state.slot = { d: +t.getAttribute("data-d"), h: +t.getAttribute("data-hour") };
       if (state.day === null) state.day = 0;
@@ -423,6 +423,20 @@
       return;
     }
     if (t.hasAttribute("data-tg")) { e.preventDefault(); }
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest('a[href="#zapis"]') || innerWidth <= 1100) return;
+    e.preventDefault();
+    scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  document.addEventListener("keydown", function (e) {
+    var t = e.target.closest("[data-part]");
+    if (!t || ["ArrowLeft", "ArrowRight", "Home", "End"].indexOf(e.key) < 0) return;
+    var tabs = [].slice.call(document.querySelectorAll("[data-part]")), i = tabs.indexOf(t);
+    e.preventDefault();
+    i = e.key === "Home" ? 0 : e.key === "End" ? tabs.length - 1 : (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+    tabs[i].click();
   });
 
   /* форма: телефон оформляется сам (+375 29 123-45-67, можно начать с 8029 или 29), трубка под полем горит белым, когда верно, и красным с подсказкой, когда нет */
