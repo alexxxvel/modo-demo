@@ -6,13 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Osmolovka Car Spa: ручная мойка в центре Минска, круглосуточно</title>
 <meta name="description" content="Ручная мойка и детейлинг на Чичерина, 21 в Минске. Круглосуточно. Цены для седана, кроссовера и внедорожника, запись на свободное время онлайн.">
-<meta name="theme-color" content="#121417">
+<meta name="theme-color" content="#522412">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/roboto-flex-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="osm.css">
 <link rel="stylesheet" href="day.css">
 <link rel="stylesheet" href="phone.css">
+<link rel="stylesheet" href="sunset.css?v=edit2">
 </head>
 <body>
 
@@ -31,9 +32,9 @@
 
 <main id="top">
 
-  <section class="hero" data-m="hero" aria-labelledby="hero-title">
+  <section class="hero" data-m="hero" data-phone-long aria-labelledby="hero-title">
     <picture>
-      <source media="(max-width: 760px)" srcset="img/bay-white-dark.jpg" width="1280" height="960">
+      <source media="(max-width: 760px)" srcset="img/bmw-matte.jpg" width="1000" height="964">
       <img class="hero__photo" src="img/bmw-matte.jpg" alt="Чёрный BMW после мойки в боксе Osmolovka Car Spa, по стенам белые лампы" width="1000" height="964" fetchpriority="high">
     </picture>
     <div class="hero__shade" aria-hidden="true"></div>
@@ -45,20 +46,10 @@
         <a class="link" href="#ceny">Посмотреть цены</a>
       </div>
     </div>
-    <div class="day" role="group" aria-label="Свободное время на ближайшие сутки: нажмите на белую лампу, чтобы записаться на этот час">
-      <div class="day__head">
-        <span class="day__free"><b data-free-count>14</b>&nbsp;<span data-free-word>часов</span> свободно за&nbsp;ближайшие сутки</span>
-        <button type="button" class="day__next" data-next-btn>Ближайшее свободное: <b data-next>22:00</b><span class="day__go">записаться</span></button>
-      </div>
-      <div class="lamps lamps--hero" data-lamps="hero"></div>
-      <span class="day__scale" data-day-scale aria-hidden="true"></span>
-    </div>
-  </section>
-
-  <section class="book" id="zapis" aria-labelledby="book-title" data-phone-long>
+  <section class="book" id="zapis" data-compact-booking aria-labelledby="book-title" data-phone-long>
     <div class="book__intro">
-      <h2 id="book-title" class="h2" data-words>Запишитесь за&nbsp;минуту</h2>
-      <p class="soft">Кузов, услуга и время. Цена считается сразу, без звонка администратору.</p>
+      <h2 id="book-title" class="h2">Онлайн-запись</h2>
+      <p class="soft">Выберите кузов, мойку и удобное время.</p>
     </div>
 
     <div class="prog" aria-live="polite">
@@ -133,6 +124,20 @@
       </aside>
     </div>
   </section>
+  </section>
+
+  <section class="price" id="ceny" aria-labelledby="price-title">
+    <div class="price__head">
+      <h2 id="price-title" class="h2" data-words>Цены</h2>
+      <div class="seg seg--small" data-body-seg role="radiogroup" aria-label="Кузов">
+        <button type="button" role="radio" aria-checked="true" data-body="sedan">Седан</button>
+        <button type="button" role="radio" aria-checked="false" data-body="cross">Кроссовер</button>
+        <button type="button" role="radio" aria-checked="false" data-body="suv">Внедорожник</button>
+      </div>
+    </div>
+    <div class="seg price__tabs" data-price-tabs role="tablist" aria-label="Группа услуг"></div>
+    <div class="price__groups" data-price></div>
+  </section>
 
   <section class="box" id="boks" aria-labelledby="box-title">
     <div class="box__stage">
@@ -154,19 +159,6 @@
         <figcaption class="box__cap"><i class="box__tube" aria-hidden="true"></i><b>Пока моем</b><span>Диван, кулер с водой, стойка администратора</span></figcaption>
       </figure>
     </div>
-  </section>
-
-  <section class="price" id="ceny" aria-labelledby="price-title">
-    <div class="price__head">
-      <h2 id="price-title" class="h2" data-words>Цены</h2>
-      <div class="seg seg--small" data-body-seg role="radiogroup" aria-label="Кузов">
-        <button type="button" role="radio" aria-checked="true" data-body="sedan">Седан</button>
-        <button type="button" role="radio" aria-checked="false" data-body="cross">Кроссовер</button>
-        <button type="button" role="radio" aria-checked="false" data-body="suv">Внедорожник</button>
-      </div>
-    </div>
-    <div class="seg price__tabs" data-price-tabs role="tablist" aria-label="Группа услуг"></div>
-    <div class="price__groups" data-price></div>
   </section>
 
   <section class="find" id="kak-najti" aria-labelledby="find-title">
@@ -200,6 +192,6 @@
 
 <div class="mock" role="note">Макет для согласования: цены и занятость условные</div>
 
-<script src="osm.js"></script>
+<script src="osm.js?v=edit2"></script>
 </body>
 </html>

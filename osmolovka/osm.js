@@ -28,7 +28,7 @@
   var DAY_NAMES = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
   var MONTHS = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
   // подсказка над шагами — как в конструкторе календари.бел: «Шаг N из 4. Что сделать»
-  var HINTS = ["Выберите кузов", "Выберите мойку", "Выберите день", "Нажмите на белую лампу: это свободный час"];
+  var HINTS = ["Выберите кузов", "Выберите мойку", "Выберите день", "Выберите свободное время"];
 
   // «Сейчас» можно задать адресом ?now=21:40 — для одинаковых кадров макета
   var now = new Date();
@@ -78,40 +78,6 @@
   function bi() { return BODY_INDEX[state.body || "sedan"]; }
   function step() { return !state.body ? 1 : !state.svc ? 2 : state.day === null ? 3 : !state.slot ? 4 : 5; }
 
-  /* лампы первого экрана: ближайшие 24 часа от «сейчас»; белая — свободно, красная — занято */
-  function dayLamps() {
-    var free = 0, next = null, nextD = 0, html = "", scale = "";
-    for (var i = 0; i < 24; i++) {
-      var h = (nowHour + i) % 24, d = nowHour + i > 23 ? 1 : 0;
-      var isNow = i === 0, ok = !isNow && !busy(d, h);
-      if (ok) { free++; if (next === null) { next = h; nextD = d; } }
-      var real = !busy(d, h);   // «сейчас» показываем по настоящему состоянию, с белой чертой под ней
-      var tip = '<span class="lamp__tip" aria-hidden="true">' + hhmm(h) + (isNow ? " · сейчас" : ok ? " · свободно" : " · занято") + "</span>";
-      html += ok
-        ? '<button type="button" class="lamp is-free" style="--i:' + i + '" data-pre-d="' + d + '" data-pre-h="' + h + '" aria-label="' + dayLabel(d) + " " + hhmm(h) + ', свободно — записаться">' + tip + "</button>"
-        : '<span class="lamp' + (isNow && real ? " is-free" : " is-busy") + (isNow ? " is-now" : "") + '" style="--i:' + i + '">' + tip + "</span>";
-      scale += "<i>" + (isNow ? "сейчас" : i % 4 === 0 ? hhmm(h) : "") + "</i>";
-    }
-    document.querySelector('[data-lamps="hero"]').innerHTML = html;
-    document.querySelector("[data-day-scale]").innerHTML = scale;
-    document.querySelectorAll("[data-free-count]").forEach(function (el) { el.textContent = free; });
-    document.querySelectorAll("[data-free-word]").forEach(function (el) { el.textContent = plural(free, "час", "часа", "часов"); });
-    document.querySelector("[data-next]").textContent = next === null ? "завтра" : hhmm(next);
-    var firstLamp = document.querySelector(".lamps--hero button.lamp");
-    if (firstLamp) {
-      firstLamp.querySelector(".lamp__tip").textContent += ", нажмите";
-      setTimeout(function () { firstLamp.classList.add("is-hint"); }, 1200);
-      setTimeout(function () { firstLamp.classList.remove("is-hint"); }, 4700);
-    }
-    var nb = document.querySelector("[data-next-btn]");
-    if (next !== null) { nb.setAttribute("data-pre-d", nextD); nb.setAttribute("data-pre-h", next); } else nb.hidden = true;
-    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      var hero = document.querySelector('[data-lamps="hero"]');
-      hero.classList.add("is-starting");
-      setTimeout(function () { hero.classList.remove("is-starting"); }, 2200);
-    }
-  }
-
   /* шаги: «Шаг N из 4», рамка на текущем, сделанные с галочкой, дальние в тумане */
   function renderSteps() {
     var n = step(), merged = isMerged();
@@ -139,6 +105,16 @@
       if (merged && k === 4 && n === 5 && !f.__keptOpen) { f.classList.add("is-open"); f.__keptOpen = true; }   // после выбора часа сетка не схлопывается
       if (k === 4 && n < 5) f.__keptOpen = false;
       f.querySelector("[data-n]").textContent = k < n ? "✓" : String(merged && k === 4 ? 3 : k);
+      var question = f.querySelector(".pick__q");
+      if (k < n) {
+        question.setAttribute("role", "button");
+        question.setAttribute("tabindex", "0");
+        question.setAttribute("aria-expanded", String(f.classList.contains("is-open")));
+      } else {
+        question.removeAttribute("role");
+        question.removeAttribute("tabindex");
+        question.removeAttribute("aria-expanded");
+      }
     });
   }
 
@@ -233,7 +209,7 @@
     var lost = null;
     if (state.slot && !canStart(state.slot.d, state.slot.h, len)) { lost = state.slot; state.slot = null; }
     var pickA = state.slot ? abs(state.slot.d, state.slot.h) : -1;
-    if (PHONE.matches) {
+    if (isMerged()) {
       var g = renderHoursGrid(box, s, len, pickA);
       document.querySelector("[data-slot-note]").textContent = lost && s
         ? s[1] + " длится " + dur(s[2]) + ", с " + hhmm(lost.h) + " не помещается. Выберите другой час."
@@ -366,10 +342,16 @@
   // телефон: нажали на свёрнутый сделанный шаг — он раскрывается, чтобы поменять выбор
   document.addEventListener("click", function (e) {
     var q = e.target.closest(".pick.is-done .pick__q");
-    if (!q || !PHONE.matches) return;
+    if (!q) return;
     var f = q.parentNode;
     document.querySelectorAll(".pick.is-open").forEach(function (o) { if (o !== f) o.classList.remove("is-open"); });
     f.classList.toggle("is-open");
+    q.setAttribute("aria-expanded", String(f.classList.contains("is-open")));
+  });
+  document.addEventListener("keydown", function (e) {
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches('.pick__q[role="button"]')) {
+      e.preventDefault(); e.target.click();
+    }
   });
   document.addEventListener("click", function (e) {
     if (!e.target.closest("[data-night]")) return;
@@ -378,7 +360,7 @@
   if (PHONE.addEventListener) PHONE.addEventListener("change", function () { renderHours(); });
 
   // телефон: лента дней — в шаге «Время» над сеткой часов, шаг «День» скрыт; на компьютере — на своём месте
-  function isMerged() { return PHONE.matches; }
+  function isMerged() { return true; }
   function firstFreeDay() {
     var s = svcByKey(state.svc), len = hoursOf(s ? s[2] : 60);
     for (var d = 0; d < 7; d++) for (var h = d === 0 ? nowHour + 1 : 0; h < 24; h++) if (canStart(d, h, len)) return d;
@@ -394,7 +376,8 @@
   if (PHONE.addEventListener) PHONE.addEventListener("change", function () { placeDays(); renderBooking(true); });
 
   function renderBooking(keepScroll) {
-    placeDays(); renderSteps(); renderBody(); renderServices(); renderDays(); renderHours(keepScroll); renderSum(); }
+    if (state.svc && state.day === null && isMerged()) state.day = firstFreeDay();
+    placeDays(); renderHours(keepScroll); renderSteps(); renderBody(); renderServices(); renderDays(); renderSum(); }
 
   document.addEventListener("click", function (e) {
     var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick],[data-pre-h]");
@@ -411,9 +394,10 @@
     }
     if (t.hasAttribute("data-body")) {
       if (t.closest(".price")) { state.pbody = t.getAttribute("data-body"); renderPrices(); return; }
+      t.closest(".pick").classList.remove("is-open");
       state.body = t.getAttribute("data-body"); state.pbody = state.body; hideFlow(); renderBooking(); renderPrices(); bringNext(); return;
     }
-    if (t.hasAttribute("data-svc")) { state.svc = t.getAttribute("data-svc"); if (isMerged() && state.day === null) state.day = firstFreeDay(); hideFlow(); renderBooking(); bringNext(); return; }
+    if (t.hasAttribute("data-svc")) { t.closest(".pick").classList.remove("is-open"); state.svc = t.getAttribute("data-svc"); if (isMerged() && state.day === null) state.day = firstFreeDay(); hideFlow(); renderBooking(); bringNext(); return; }
     if (t.hasAttribute("data-svc-more")) { document.querySelector("[data-svc-list]").classList.add("is-open"); t.setAttribute("aria-expanded", "true"); return; }
     if (t.hasAttribute("data-day")) { state.day = +t.getAttribute("data-day"); state.slot = null; hideFlow(); renderBooking(); bringNext(); return; }
     if (t.hasAttribute("data-hour")) {
@@ -425,6 +409,7 @@
     if (t.hasAttribute("data-pick")) {
       state.body = state.pbody;
       var key = t.getAttribute("data-pick");
+      if (!key) { state.svc = null; state.day = null; state.slot = null; }
       if (key) { state.svc = key; var sv = svcByKey(key); if (!sv[4]) document.querySelector("[data-svc-list]").classList.add("is-open"); }
       hideFlow(); renderBooking(); return;
     }
@@ -535,6 +520,5 @@
     setTimeout(function () { title.classList.add("is-sheen"); }, 1400);
     setTimeout(function () { title.classList.remove("is-sheen"); }, 3300);
   }
-  dayLamps();
   renderBooking(); renderPrices();
 })();
