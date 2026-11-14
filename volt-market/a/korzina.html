@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Корзина и оформление заказа: ВОЛЬТ МАРКЕТ (макет А)</title>
+<title>Корзина и оформление заказа: VoltGo (макет А)</title>
 <meta name="description" content="Электроскутеры, электровелосипеды, электросамокаты, электромотоциклы и квадроциклы с доставкой по Беларуси. Макет направления А.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#1C1E20">
@@ -18,7 +18,7 @@
 </defs></svg>
 
 <header class="hd">
-  <a class="logo" href="index.html" aria-label="ВОЛЬТ МАРКЕТ, на главную"><svg viewBox="0 0 290.5 167.75" width="62" height="36" aria-hidden="true"><use href="#mk"/></svg><span>ВОЛЬТ<br>МАРКЕТ</span></a>
+  <a class="logo" href="index.html" aria-label="VoltGo, на главную"><svg viewBox="0 0 290.5 167.75" width="62" height="36" aria-hidden="true"><use href="#mk"/></svg><span>VoltGo</span></a>
   <nav class="hd-nav" aria-label="Категории">
     <a href="catalog.html">Скутеры</a><a href="catalog.html">Велосипеды</a><a href="catalog.html">Самокаты</a><a href="catalog.html">Мотоциклы</a><a href="catalog.html">Квадроциклы</a><a href="catalog.html">Аксессуары</a>
   </nav>
@@ -53,14 +53,15 @@
 
     <form class="order" id="o-form" data-order novalidate>
       <h2>Оформление</h2>
-      <p class="order-lead">Почта не&nbsp;нужна. Позвоним и&nbsp;подтвердим наличие, срок и&nbsp;цену доставки.</p>
+      <p class="order-lead">Почта не&nbsp;нужна. Заказы принимаем круглосуточно, звоним с&nbsp;8:00 до&nbsp;20:00: подтвердим наличие, срок и&nbsp;цену доставки.</p>
       <div class="order-two">
         <div class="fld"><label for="o-name">Имя</label><input id="o-name" name="name" autocomplete="name" required><p class="fld-e">Напишите, как к&nbsp;вам обращаться</p></div>
         <div class="fld"><label for="o-phone">Телефон</label><input id="o-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 29 123-45-67" required><p class="fld-e">Нужен номер, чтобы подтвердить заказ</p></div>
       </div>
       <fieldset class="opts opts-dlv" data-need="dlv"><legend>Доставка</legend>
-        <label class="opt"><input type="radio" name="dlv" value="minsk"><span><b>Курьер по&nbsp;Минску</b><em>1–2 дня</em><small class="todo">срок для примера, уточнит заказчик</small></span></label>
-        <label class="opt"><input type="radio" name="dlv" value="by"><span><b>По&nbsp;Беларуси</b><em>2–5 дней</em><small class="todo">срок для примера, уточнит заказчик</small></span></label>
+        <label class="opt"><input type="radio" name="dlv" value="minsk"><span><b>По&nbsp;Минску</b><em>бесплатно</em><small>курьером</small></span></label>
+        <label class="opt"><input type="radio" name="dlv" value="region"><span><b>Минская область</b><em>1&nbsp;руб./км</em><small>от&nbsp;Минска</small></span></label>
+        <label class="opt"><input type="radio" name="dlv" value="by"><span><b>По&nbsp;Беларуси</b><em>по&nbsp;тарифу</em><small>транспортной компанией</small></span></label>
         <p class="fld-e opts-e">Выберите, куда привезти</p>
       </fieldset>
       <div class="fld" data-addr hidden><label for="o-addr">Адрес доставки</label><input id="o-addr" name="addr" autocomplete="street-address"><p class="fld-e">Укажите адрес, куда привезти</p></div>
@@ -85,10 +86,10 @@
   <div class="ft-cols">
     <div><h3>Каталог</h3><a href="catalog.html">Электроскутеры</a><a href="catalog.html">Электровелосипеды</a><a href="catalog.html">Электросамокаты</a><a href="catalog.html">Электромотоциклы</a><a href="catalog.html">Квадроциклы</a></div>
     <div><h3>Покупателям</h3><a href="#">Доставка</a><a href="#">Оплата и&nbsp;рассрочка</a><a href="#">Гарантия</a><a href="#">Возврат и&nbsp;обмен</a><a href="sravnenie.html">Сравнение</a></div>
-    <div><h3>Связаться</h3><span class="todo">телефон и&nbsp;часы: от&nbsp;заказчика</span><a href="#">Telegram</a></div>
+    <div><h3>Связаться</h3><a class="ft-2" href="tel:+375293498436"><span data-set="phone">+375 29 349-84-36</span><small>звонки с&nbsp;8:00 до&nbsp;20:00</small></a><a class="ft-2" href="#"><span>Telegram</span><small>заявки круглосуточно</small></a></div>
     <div><h3>Продавец</h3><span class="todo">наименование, УНП, адрес: от&nbsp;заказчика</span><a href="#">Условия продажи (публичная оферта)</a><a href="#">Политика обработки данных</a></div>
   </div>
-  <p class="ft-low"><svg viewBox="0 0 290.5 167.75" width="52" height="30" aria-hidden="true"><use href="#mk"/></svg>Макет. Название рабочее. Данные о&nbsp;товарах с&nbsp;сайта поставщика на&nbsp;08.11.2026. Тексты оферты и&nbsp;возврата заполнит заказчик.</p>
+  <p class="ft-low"><svg viewBox="0 0 290.5 167.75" width="52" height="30" aria-hidden="true"><use href="#mk"/></svg>Макет. Данные о&nbsp;товарах с&nbsp;сайта поставщика на&nbsp;08.11.2026, цены условные. Тексты оферты и&nbsp;возврата заполнит заказчик.</p>
 </footer>
 
 <script src="../shared/data.js"></script>

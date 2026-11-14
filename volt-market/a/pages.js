@@ -172,6 +172,9 @@
     if (q.get('demo') && window.VM_cart && !window.VM_cart().length) window.VM_cartSet([GT21, 'ps-samokat-F3Plus']); // показ корзины на снимках
     var list = function () { return one ? [one] : (window.VM_cart ? window.VM_cart() : []); };
     var hd = document.querySelector('[data-cart-h]'); if (hd && one) hd.textContent = 'Купить в один клик';
+    // доставка по зонам заказчика (14.11.2026): Минск бесплатно, область 1 руб./км, Беларусь по тарифу перевозчика
+    var dlvText = function () { var v = K.querySelector('input[name="dlv"]:checked'); v = v && v.value;
+      return v === 'minsk' ? 'бесплатно' : v === 'region' ? '1&nbsp;руб./км, назовём при звонке' : v === 'by' ? 'по&nbsp;тарифу перевозчика' : '<span class="nd">выберите способ</span>'; };
     var drawCart = function () {
       var its = list().map(VM.byId).filter(Boolean);
       var box = K.querySelector('[data-lines]'), sum = K.querySelector('[data-sum]');
@@ -190,7 +193,7 @@
           (one ? '' : '<button class="ln-x" type="button" data-rm="' + x.id + '" aria-label="Убрать из корзины: ' + esc(title(x)) + '"></button>') + '</li>';
       }).join('');
       sum.innerHTML = '<div><dt>' + n + ' ' + plural(n, 'товар', 'товара', 'товаров') + '</dt><dd>' + (total ? money(total) + '<i class="byn" aria-label="руб."></i>' : '—') + '</dd></div>' +
-        '<div><dt>Доставка</dt><dd><span class="todo">назовём при звонке</span></dd></div>' +
+        '<div><dt>Доставка</dt><dd data-dlv-sum>' + dlvText() + '</dd></div>' +
         '<div class="sum-t"><dt>Итого' + (ask ? ', без моделей с ценой «уточним»' : '') + '</dt><dd><b class="pr">' + money(total) + '<i class="byn" aria-label="руб."></i></b></dd></div>';
       VM.watch(box);
     };
@@ -203,8 +206,8 @@
     document.addEventListener('vm:cart', drawCart);
     // доставка: адрес спрашиваем только когда выбран способ доставки
     var f = K.querySelector('[data-order]'), go = K.querySelector('.cart-go');
-    var dl = function () { var v = f.querySelector('input[name="dlv"]:checked'); var ad = f.querySelector('[data-addr]'); ad.hidden = !v; var inp = ad.querySelector('input'); inp.required = !!v; if (v) inp.placeholder = v.value === 'minsk' ? 'Улица, дом, квартира' : 'Город, улица, дом'; };
-    f.addEventListener('change', function (e) { if (e.target.name === 'dlv') { dl(); e.target.closest('.opts').classList.remove('err'); } });
+    var dl = function () { var v = f.querySelector('input[name="dlv"]:checked'); var ad = f.querySelector('[data-addr]'); ad.hidden = !v; var inp = ad.querySelector('input'); inp.required = !!v; if (v) inp.placeholder = v.value === 'minsk' ? 'Улица, дом, квартира' : v.value === 'region' ? 'Населённый пункт, улица, дом' : 'Город, улица, дом'; };
+    f.addEventListener('change', function (e) { if (e.target.name === 'dlv') { dl(); e.target.closest('.opts').classList.remove('err'); var ds = K.querySelector('[data-dlv-sum]'); if (ds) ds.innerHTML = dlvText(); } });
     go.addEventListener('change', function (e) { if (e.target.name === 'ok' && e.target.checked) e.target.closest('.cons').classList.remove('err'); });
     // ошибку снимаем во время набора, а не при уходе из поля: иначе текст ошибки исчезает в момент нажатия «Оформить», кнопка прыгает вверх и нажатие уходит мимо
     f.addEventListener('input', function (e) { var fl = e.target.closest('.fld'); if (fl) fl.classList.remove('err'); });
