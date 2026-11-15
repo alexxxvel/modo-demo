@@ -13,9 +13,10 @@
 <link rel="stylesheet" href="osm.css">
 <link rel="stylesheet" href="day.css">
 <link rel="stylesheet" href="phone.css">
-<link rel="stylesheet" href="sunset.css?v=edit5">
-<link rel="stylesheet" href="screen-fit.css?v=edit5">
-<link rel="stylesheet" href="three-screens.css?v=edit5">
+<link rel="stylesheet" href="sunset.css?v=edit6">
+<link rel="stylesheet" href="screen-fit.css?v=edit6">
+<link rel="stylesheet" href="three-screens.css?v=edit6">
+<link rel="stylesheet" href="confirmation.css?v=edit6">
 </head>
 <body>
 
@@ -115,14 +116,23 @@
             <i class="line__tube" aria-hidden="true"></i></label>
           <p class="confirm__err" data-err hidden role="alert"></p>
           <button class="btn btn--red confirm__go" type="submit">Подтвердить запись</button>
-          <p class="confirm__alt">Удобнее в Telegram? <a class="link" href="#zapis" data-tg>Запишитесь через бота</a>, там же напомним о записи.</p>
+          <p class="confirm__alt">Сценарий в Telegram: <a class="link" href="#zapis" data-tg>показать подтверждение и напоминание</a>.</p>
           <p class="confirm__law">Нажимая «Подтвердить запись», вы соглашаетесь с <a class="link" href="privacy.html">политикой обработки персональных данных</a>.</p>
         </form>
         <div class="done" data-done hidden role="status">
-          <p class="done__title"><svg class="done__box" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path class="box-door" d="M15 80V36Q15 24 27 24H73Q85 24 85 36V80"/><rect class="box-lamp" x="27" y="34" width="46" height="9" rx="4.5"/><path class="box-floor" d="M6 80H94"/></svg>Записали</p>
+          <p class="done__title"><span class="done__check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span>Запись готова</p>
           <p class="done__time num" data-done-time></p>
           <p class="done__when" data-done-when></p>
-          <p class="soft">Напомним за час. Перенести или отменить можно по ссылке из сообщения.</p>
+          <div class="done__actions">
+            <button type="button" class="btn btn--red tg-launch" data-tg-preview aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-6 18-4-8-8-4 18-6Z"/><path d="m11 13 10-10"/></svg><span data-tg-button-text>Показать сообщение в Telegram</span></button>
+            <button type="button" class="link done__edit" data-done-edit>Изменить выбор</button>
+          </div>
+          <div class="tg-demo" data-tg-demo hidden data-flow="idle" aria-live="polite">
+            <div class="tg-demo__head"><span class="tg-demo__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-6 18-4-8-8-4 18-6Z"/><path d="m11 13 10-10"/></svg></span><b>Osmolovka Car Spa</b><span>Telegram</span></div>
+            <div class="tg-demo__message"><p class="tg-demo__label">Подтверждение записи</p><p data-tg-appointment></p></div>
+            <div class="tg-demo__reminder"><p class="tg-demo__label" data-reminder-label>Напоминание за 2 часа</p><p data-reminder-time></p><span>Ждём вас на Чичерина, 21. Въезд со двора.</span></div>
+          </div>
+          <p class="done__demo-note">Демонстрация работы бота. Сообщения не отправляются.</p>
         </div>
       </aside>
     </div>
@@ -203,6 +213,6 @@
 
 <div class="mock" role="note">Макет для согласования: цены и занятость условные</div>
 
-<script src="osm.js?v=edit5"></script>
+<script src="osm.js?v=edit6"></script>
 </body>
 </html>

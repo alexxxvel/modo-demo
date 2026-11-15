@@ -322,7 +322,43 @@
     });
   }
 
+  var telegramTimer = null, telegramFlight = null;
+  function resetTelegramPreview() {
+    clearTimeout(telegramTimer);
+    if (telegramFlight) telegramFlight.cancel();
+    var panel = document.querySelector("[data-tg-demo]"), button = document.querySelector("[data-tg-preview]");
+    panel.hidden = true; panel.setAttribute("data-flow", "idle"); panel.classList.remove("is-ready", "is-instant");
+    button.disabled = false; button.setAttribute("aria-expanded", "false");
+    document.querySelector("[data-tg-button-text]").textContent = "Показать сообщение в Telegram";
+  }
+  function showTelegramPreview(instant) {
+    resetTelegramPreview();
+    var panel = document.querySelector("[data-tg-demo]"), button = document.querySelector("[data-tg-preview]");
+    var appointment = dateOf(state.slot.d); appointment.setHours(state.slot.h, 0, 0, 0);
+    var reminder = new Date(appointment.getTime() - 2 * 60 * 60 * 1000);
+    var immediate = reminder.getTime() < now.getTime();
+    var showTime = immediate ? new Date(now) : reminder;
+    document.querySelector("[data-tg-appointment]").textContent = document.querySelector("[data-done-time]").textContent;
+    document.querySelector("[data-reminder-label]").textContent = immediate ? "Напоминание сразу: до записи меньше 2 часов" : "Напоминание за 2 часа";
+    document.querySelector("[data-reminder-time]").textContent = showTime.getDate() + " " + MONTHS[showTime.getMonth()] + ", " + two(showTime.getHours()) + ":" + two(showTime.getMinutes());
+    panel.setAttribute("data-appointment-at", appointment.toISOString());
+    panel.setAttribute("data-reminder-at", showTime.toISOString());
+    panel.setAttribute("data-immediate", String(immediate));
+    panel.hidden = false; panel.setAttribute("data-flow", "sending"); button.disabled = true; button.setAttribute("aria-expanded", "true");
+    panel.classList.toggle("is-instant", instant);
+    if (!instant) telegramFlight = button.querySelector("svg").animate([
+      { transform: "translate(0,0) scale(1)", opacity: 1 },
+      { transform: "translate(80px,-40px) scale(.75)", opacity: 0 }
+    ], { duration: 300, easing: "ease-out" });
+    telegramTimer = setTimeout(function () {
+      panel.classList.add("is-ready"); panel.setAttribute("data-flow", "ready"); button.disabled = false;
+      if (innerWidth <= 1100) reveal(document.querySelector("[data-done]"));
+      document.querySelector("[data-tg-button-text]").textContent = "Повторить показ Telegram";
+    }, instant ? 0 : 300);
+  }
+
   function hideFlow() {
+    resetTelegramPreview();
     document.querySelector("[data-confirm]").hidden = true;
     document.querySelector("[data-done]").hidden = true;
     document.querySelector("[data-sum]").classList.remove("is-done", "is-form");
@@ -378,8 +414,10 @@
     document.querySelector(".book").classList.toggle("is-scheduled", !!state.svc); }
 
   document.addEventListener("click", function (e) {
-    var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick],[data-pre-h],[data-part],[data-back-booking]");
+    var t = e.target.closest("[data-body],[data-svc],[data-svc-more],[data-day],[data-hour],[data-ptab],[data-go],[data-tg],[data-pick],[data-pre-h],[data-part],[data-back-booking],[data-tg-preview],[data-done-edit]");
     if (!t) return;
+    if (t.hasAttribute("data-tg-preview")) { showTelegramPreview(!e.detail || matchMedia("(prefers-reduced-motion: reduce)").matches); return; }
+    if (t.hasAttribute("data-done-edit")) { hideFlow(); renderBooking(true); return; }
     if (t.hasAttribute("data-back-booking")) { hideFlow(); renderBooking(true); reveal(document.querySelector("[data-sum]")); return; }
     // шаг ещё закрыт (предыдущий не выбран): выбор не меняем, подсвечиваем текущий шаг и подводим к нему
     if (t.closest(".pick.is-later")) { nudgeNow(); return; }
@@ -422,7 +460,7 @@
       reveal(f);
       return;
     }
-    if (t.hasAttribute("data-tg")) { e.preventDefault(); }
+    if (t.hasAttribute("data-tg")) { e.preventDefault(); showBookingConfirmation(); showTelegramPreview(!e.detail || matchMedia("(prefers-reduced-motion: reduce)").matches); }
   });
 
   document.addEventListener("click", function (e) {
@@ -493,6 +531,18 @@
   form.phone.addEventListener("blur", function () { if (form.phone.value) form.phone.value = phoneText(phoneDigits(form.phone.value)); });
   form.name.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); form.phone.focus(); } });
 
+  function showBookingConfirmation() {
+    resetTelegramPreview();
+    form.hidden = true;
+    var s = svcByKey(state.svc);
+    document.querySelector("[data-done-time]").textContent = cap(dayLabel(state.slot.d)) + ", " + hhmm(state.slot.h) + "–" + endOf(state.slot.h, s[2]);
+    document.querySelector("[data-done-when]").textContent = s[1] + ", " + BODIES[state.body] + ". Ул. Чичерина, 21, въезд со двора.";
+    document.querySelector("[data-done]").hidden = false;
+    document.querySelector("[data-sum]").classList.add("is-done");   // записано: в карточке итог, без кнопки и условий
+    document.querySelector("[data-sum]").classList.remove("is-form");
+    reveal(document.querySelector("[data-done]"));
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var f = e.currentTarget, okN = lineState("name", true), okP = lineState("phone", true), err = f.querySelector("[data-err]");
@@ -500,13 +550,7 @@
     err.textContent = !okN ? "Как к вам обращаться? Имя нужно, чтобы администратор узнал вас." : "Проверьте телефон: нужно 9 цифр после +375, по нему подтвердим запись.";
     if (!okN) { f.name.focus(); return; }
     if (!okP) { f.phone.focus(); return; }
-    f.hidden = true;
-    var s = svcByKey(state.svc);
-    document.querySelector("[data-done-time]").textContent = cap(dayLabel(state.slot.d)) + ", " + hhmm(state.slot.h) + "–" + endOf(state.slot.h, s[2]);
-    document.querySelector("[data-done-when]").textContent = s[1] + ", " + BODIES[state.body] + ". Ул. Чичерина, 21, въезд со двора.";
-    document.querySelector("[data-done]").hidden = false;
-    document.querySelector("[data-sum]").classList.add("is-done");   // записано: в карточке итог, без кнопки и условий
-    document.querySelector("[data-sum]").classList.remove("is-form");
+    showBookingConfirmation();
   });
 
   /* шапка: сплошная после первого экрана; «Выбрать время» прячется, пока на экране сама запись */
