@@ -13,8 +13,9 @@
 <link rel="stylesheet" href="osm.css">
 <link rel="stylesheet" href="day.css">
 <link rel="stylesheet" href="phone.css">
-<link rel="stylesheet" href="sunset.css?v=edit34">
-<link rel="stylesheet" href="screen-fit.css?v=edit34">
+<link rel="stylesheet" href="sunset.css?v=edit5">
+<link rel="stylesheet" href="screen-fit.css?v=edit5">
+<link rel="stylesheet" href="three-screens.css?v=edit5">
 </head>
 <body>
 
@@ -23,7 +24,7 @@
   <nav class="bar__nav" aria-label="Разделы">
     <a href="#zapis">Запись</a>
     <a href="#ceny">Цены</a>
-    <a href="#boks">Бокс</a>
+    <a href="#boks">Галерея</a>
     <a href="#kak-najti">Как найти</a>
   </nav>
   <a class="bar__phone" href="tel:+375291910007">+375 29 191-00-07</a>
@@ -126,8 +127,6 @@
       </aside>
     </div>
   </section>
-  </section>
-
   <section class="price" id="ceny" aria-labelledby="price-title">
     <div class="price__head">
       <h2 id="price-title" class="h2" data-words>Цены</h2>
@@ -139,6 +138,8 @@
     </div>
     <div class="seg price__tabs" data-price-tabs role="tablist" aria-label="Группа услуг"></div>
     <div class="price__groups" data-price></div>
+  </section>
+
   </section>
 
   <section class="box" id="boks" aria-labelledby="box-title">
@@ -164,10 +165,18 @@
   </section>
 
   <section class="find" id="kak-najti" aria-labelledby="find-title">
-    <figure class="find__photo" data-clip>
-      <img src="img/entrance.jpg" alt="Ворота мойки во дворе, над ними вывеска «Автомойка 24/7»" width="1280" height="720" loading="lazy">
-      <figcaption class="find__open"><i aria-hidden="true"></i>Открыто круглосуточно</figcaption>
-    </figure>
+    <div class="find__map" data-map>
+      <div class="map__preview" data-map-preview>
+        <img src="img/entrance.jpg" alt="Въезд в Osmolovka Car Spa со двора на Чичерина, 21" width="1280" height="720" loading="lazy">
+        <div class="map__cover">
+          <p class="map__title">Osmolovka Car Spa на карте</p>
+          <button type="button" class="btn btn--red" data-map-load>Разрешить и показать карту</button>
+          <p class="map__notice">Нажимая кнопку, вы разрешаете загрузку Яндекс Карт. <a href="privacy.html#karta">Подробнее</a></p>
+        </div>
+      </div>
+      <div class="map__frame" data-map-frame hidden></div>
+      <button type="button" class="map__close" data-map-close hidden>Скрыть карту</button>
+    </div>
     <div class="find__row">
       <h2 id="find-title" class="h2" data-words>Въезд со&nbsp;двора</h2>
       <div class="find__text">
@@ -186,7 +195,7 @@
 <footer class="foot">
   <div class="foot__legal">
     <span>Osmolovka Car Spa, Минск. Круглосуточно</span>
-    <nav class="foot__nav" aria-label="Разделы внизу"><a href="#zapis">Запись</a><a href="#ceny">Цены</a><a href="#boks">Бокс</a><a href="#kak-najti">Как найти</a></nav>
+    <nav class="foot__nav" aria-label="Разделы внизу"><a href="#zapis">Запись</a><a href="#ceny">Цены</a><a href="#boks">Галерея</a><a href="#kak-najti">Как найти</a></nav>
     <a href="privacy.html">Политика конфиденциальности</a>
     <a href="#top">Наверх</a>
   </div>
@@ -194,6 +203,6 @@
 
 <div class="mock" role="note">Макет для согласования: цены и занятость условные</div>
 
-<script src="osm.js?v=edit34"></script>
+<script src="osm.js?v=edit5"></script>
 </body>
 </html>

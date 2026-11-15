@@ -426,7 +426,7 @@
   });
 
   document.addEventListener("click", function (e) {
-    if (!e.target.closest('a[href="#zapis"]') || innerWidth <= 1100) return;
+    if (!e.target.closest('a[href="#zapis"],a[href="#ceny"]') || innerWidth <= 1100) return;
     e.preventDefault();
     scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   });
@@ -437,6 +437,27 @@
     e.preventDefault();
     i = e.key === "Home" ? 0 : e.key === "End" ? tabs.length - 1 : (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
     tabs[i].click();
+  });
+
+  // Карта — только после отдельного разрешения посетителя, без API-ключа.
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("[data-map-load]")) {
+      var frame = document.createElement("iframe");
+      frame.src = "https://yandex.ru/map-widget/v1/?ol=biz&oid=172242024426&z=17";
+      frame.title = "Osmolovka Car Spa, Чичерина, 21 — Яндекс Карты";
+      frame.referrerPolicy = "no-referrer";
+      document.querySelector("[data-map-frame]").replaceChildren(frame);
+      document.querySelector("[data-map-frame]").hidden = false;
+      document.querySelector("[data-map-preview]").hidden = true;
+      document.querySelector("[data-map-close]").hidden = false;
+    }
+    if (e.target.closest("[data-map-close]")) {
+      document.querySelector("[data-map-frame]").replaceChildren();
+      document.querySelector("[data-map-frame]").hidden = true;
+      document.querySelector("[data-map-preview]").hidden = false;
+      document.querySelector("[data-map-close]").hidden = true;
+      document.querySelector("[data-map-load]").focus({ preventScroll: true });
+    }
   });
 
   /* форма: телефон оформляется сам (+375 29 123-45-67, можно начать с 8029 или 29), трубка под полем горит белым, когда верно, и красным с подсказкой, когда нет */
