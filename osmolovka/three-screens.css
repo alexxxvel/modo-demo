@@ -1,4 +1,4 @@
-/* №5: главный (текст / запись / цены), галерея, адрес / карта. */
+/* №5/7: главный (текст и запись слева / цены справа), галерея, адрес / карта. */
 .hero__acts{display:none}
 .hero .price{background:transparent;border:0;min-width:0;height:auto;min-height:0;padding:0;display:block;color:#f5f6f8}
 .hero .price__head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 6px;flex-wrap:nowrap}
@@ -26,7 +26,7 @@
 .map__frame iframe{display:block;border:0;width:100%;height:100%}
 .map__close{position:absolute;right:12px;top:12px;z-index:2;min-height:44px;padding:0 14px;border:1px solid #ffffff55;border-radius:12px;background:#101114ed;color:#fff;font:500 14px "Roboto Flex",sans-serif;cursor:pointer}
 @media(min-width:1101px){
- .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.95fr);grid-template-rows:auto auto;grid-template-areas:"intro booking" "prices booking";align-content:center;align-items:start;row-gap:14px;column-gap:36px;padding-top:80px;padding-bottom:20px}
+ .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.95fr);grid-template-rows:auto auto;grid-template-areas:"intro prices" "booking prices";align-content:center;align-items:start;row-gap:14px;column-gap:36px;padding-top:80px;padding-bottom:20px}
  .hero__body{grid-area:intro;align-self:start;max-width:none;display:block;padding:0;margin:0}
  .hero__title{font-size:clamp(36px,3.6vw,58px);line-height:1.03}
  .hero__lead{font-size:16px;line-height:1.4;max-width:32em;margin-top:14px}
@@ -58,4 +58,13 @@
  .find__row{order:1;width:100%}.find__map{order:2;width:100%;height:360px;flex:none}
  .map__cover{padding:24px 18px;gap:16px}.map__title{font-size:24px}
  .map__cover .btn{font-size:14px;padding:0 14px;white-space:normal}
+}
+
+/* compact-edit7: текст и раскрытая запись остаются в левой колонке низкого окна. */
+@media(min-width:1101px) and (max-height:800px){
+ .hero__title{font-size:30px;line-height:1.1}
+ .hero__title .ln{display:inline}
+ .hero__lead{font-size:14px;line-height:1.35;margin-top:8px;max-width:36em}
+ .hero .book:has(.pick[data-step="1"].is-done) .book__intro{display:none}
+ .hero:has(.pick[data-step="1"].is-done) .hero__lead{display:none}
 }
